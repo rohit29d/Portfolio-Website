@@ -6,80 +6,103 @@ import AboutContact from './components/AboutContact';
 import BottomNav from './components/BottomNav';
 import TerminalModal from './components/TerminalModal';
 
+const SECTIONS = ['home', 'projects', 'about', 'contact'];
+
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [transitionState, setTransitionState] = useState(null); // 'entering' | null
+  const [scrubbedSection, setScrubbedSection] = useState('home');
+  const [isNavHovered, setIsNavHovered] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-  const [hoveredNav, setHoveredNav] = useState(null);
 
-  // Nav Click Handler: Animate 3D Plane Transition (Recede out + Unfold target plane)
-  const handleNavClick = (targetSection) => {
-    if (targetSection === activeSection) return;
-    
-    setTransitionState('entering');
-    setActiveSection(targetSection);
-
-    setTimeout(() => {
-      setTransitionState(null);
-    }, 550);
+  // Trigger: Cursor enters top nav bar
+  const handleNavMouseEnter = () => {
+    setIsNavHovered(true);
+    setScrubbedSection(activeSection);
   };
 
-  // Preview tilt transform on nav hover (2 to 5 degrees only, transform/opacity GPU accelerated)
-  const getContainerTransform = () => {
-    if (!hoveredNav) return 'perspective(1200px) rotateY(0deg) rotateX(0deg)';
-    
-    switch (hoveredNav) {
-      case 'home':
-        return 'perspective(1200px) rotateY(-3.5deg) rotateX(2deg)';
-      case 'projects':
-        return 'perspective(1200px) rotateY(4deg) rotateX(-3deg)';
-      case 'about':
-        return 'perspective(1200px) rotateY(-4.5deg) rotateX(-2deg)';
-      case 'contact':
-        return 'perspective(1200px) rotateY(5deg) rotateX(2.5deg)';
-      default:
-        return 'perspective(1200px) rotateY(0deg) rotateX(0deg)';
+  // Commit: Cursor leaves top nav bar entirely
+  const handleNavMouseLeave = () => {
+    setIsNavHovered(false);
+    if (scrubbedSection) {
+      setActiveSection(scrubbedSection);
     }
   };
 
+  // Scrub: Cursor moves over specific nav item
+  const handleItemHover = (sectionId) => {
+    setScrubbedSection(sectionId);
+  };
+
+  // Direct Click on nav item
+  const handleNavClick = (sectionId) => {
+    setActiveSection(sectionId);
+    setScrubbedSection(sectionId);
+    setIsNavHovered(false);
+  };
+
+  // Calculate position class for each section in the carousel
+  const getCardClass = (sectionId) => {
+    if (!isNavHovered) {
+      return sectionId === activeSection ? 'card-full' : 'card-carousel-far-right';
+    }
+
+    const currentCenter = scrubbedSection || activeSection;
+    const targetIdx = SECTIONS.indexOf(currentCenter);
+    const itemIdx = SECTIONS.indexOf(sectionId);
+    const offset = itemIdx - targetIdx;
+
+    if (offset === 0) return 'card-carousel-center';
+    if (offset === -1) return 'card-carousel-left';
+    if (offset === 1) return 'card-carousel-right';
+    if (offset < -1) return 'card-carousel-far-left';
+    if (offset > 1) return 'card-carousel-far-right';
+
+    return 'card-carousel-center';
+  };
+
+  const focusedSection = isNavHovered ? (scrubbedSection || activeSection) : activeSection;
+
   return (
-    <div className="plane-viewport">
-      {/* Top Header Navigation - Typography First */}
+    <div className={`carousel-stage ${isNavHovered ? 'nav-active' : ''}`}>
+      {/* Top Header Navigation */}
       <Header 
         activeSection={activeSection}
-        onNavHover={setHoveredNav} 
-        onNavClick={handleNavClick} 
+        scrubbedSection={isNavHovered ? scrubbedSection : null}
+        onNavMouseEnter={handleNavMouseEnter}
+        onNavMouseLeave={handleNavMouseLeave}
+        onItemHover={handleItemHover}
+        onNavClick={handleNavClick}
       />
 
-      {/* 3D Perspective Plane Container */}
-      <div 
-        className="plane-container"
-        style={{
-          transform: getContainerTransform()
-        }}
-      >
-        {/* Render Active Section Plane */}
-        <div className={`section-plane ${transitionState === 'entering' ? 'plane-enter' : ''}`}>
-          {activeSection === 'home' && (
-            <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
-          )}
-
-          {activeSection === 'projects' && (
-            <Projects activeCategory={activeCategory} />
-          )}
-
-          {(activeSection === 'about' || activeSection === 'contact') && (
-            <AboutContact />
-          )}
+      {/* Carousel Viewport Container */}
+      <main className="carousel-viewport">
+        {/* Card 0: Home Section */}
+        <div className={`carousel-card ${getCardClass('home')}`}>
+          <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
         </div>
-      </div>
 
-      {/* Projects-Specific Bottom Capsule Filter Bar (Only Visible on Projects Plane) */}
+        {/* Card 1: Projects Section */}
+        <div className={`carousel-card ${getCardClass('projects')}`}>
+          <Projects activeCategory={activeCategory} />
+        </div>
+
+        {/* Card 2: About Section */}
+        <div className={`carousel-card ${getCardClass('about')}`}>
+          <AboutContact />
+        </div>
+
+        {/* Card 3: Contact Section */}
+        <div className={`carousel-card ${getCardClass('contact')}`}>
+          <AboutContact />
+        </div>
+      </main>
+
+      {/* Projects-Specific Bottom Capsule Filter (Only Visible when Projects Plane is Focused) */}
       <BottomNav 
         activeCategory={activeCategory} 
         setActiveCategory={setActiveCategory} 
-        isProjectsVisible={activeSection === 'projects'}
+        isProjectsVisible={focusedSection === 'projects'}
       />
 
       {/* Terminal CLI Modal Simulator */}

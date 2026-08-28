@@ -4,7 +4,7 @@
   --bg-card-hover: #171d2b;
   --bg-elevated: #1a2130;
   
-  /* Matte Slate-Blue Accent (Desaturated, No Glow, No Bloom) */
+  /* Matte Slate-Blue Accent (Desaturated, No Glow) */
   --accent-slate: #7dabc4;
   --accent-slate-hover: #96bdd4;
   --accent-slate-soft: rgba(125, 171, 196, 0.12);
@@ -27,6 +27,8 @@
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 10px;
+
+  --ease-carousel: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -70,79 +72,109 @@ body {
 }
 
 /* -------------------------------------------------- */
-/* 3D PERSPECTIVE PLANE STAGE & TRANSITIONS           */
+/* HOVER-SCRUB SECTION CAROUSEL STAGE                */
 /* -------------------------------------------------- */
-.plane-viewport {
-  perspective: 1200px;
-  perspective-origin: 50% 40%;
-  width: 100%;
-  min-height: 100vh;
+.carousel-stage {
   position: relative;
-  overflow-x: hidden;
-}
-
-.plane-container {
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.4s var(--ease-carousel);
 }
 
-/* 3D Plane Section Styling */
-.section-plane {
+/* Dark Space Backdrop Vignette when Nav Hovered */
+.carousel-stage.nav-active {
+  background: radial-gradient(circle at 50% 30%, #111622 0%, #06070a 80%);
+}
+
+.carousel-viewport {
+  position: relative;
   width: 100%;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.plane-enter {
-  animation: planeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Individual Carousel Card Container */
+.carousel-card {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  transform-origin: center 10%;
+  transition: transform 0.35s var(--ease-carousel), opacity 0.35s var(--ease-carousel);
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 
-.plane-exit {
-  animation: planeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Full-scale active card outside of nav hover */
+.carousel-card.card-full {
+  transform: translateX(0) translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
 }
 
-@keyframes planeIn {
-  0% {
-    opacity: 0;
-    transform: perspective(1200px) rotateY(-12deg) scale(0.95) translateZ(-60px);
-  }
-  100% {
-    opacity: 1;
-    transform: perspective(1200px) rotateY(0deg) scale(1) translateZ(0px);
-  }
+/* Zoomed-out cards during nav hover */
+.carousel-card.card-carousel-center {
+  transform: translateX(0) translateY(-14px) scale(0.68);
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--accent-slate-border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-dark);
 }
 
-@keyframes planeOut {
-  0% {
-    opacity: 1;
-    transform: perspective(1200px) rotateY(0deg) scale(1) translateZ(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: perspective(1200px) rotateY(10deg) scale(0.96) translateZ(-40px);
-  }
+.carousel-card.card-carousel-left {
+  transform: translateX(-68vw) translateY(-5px) scale(0.54);
+  opacity: 0.35;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-dark);
+}
+
+.carousel-card.card-carousel-right {
+  transform: translateX(68vw) translateY(-5px) scale(0.54);
+  opacity: 0.35;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-dark);
+}
+
+.carousel-card.card-carousel-far-left {
+  transform: translateX(-130vw) translateY(0) scale(0.42);
+  opacity: 0;
+}
+
+.carousel-card.card-carousel-far-right {
+  transform: translateX(130vw) translateY(0) scale(0.42);
+  opacity: 0;
 }
 
 /* Prefers Reduced Motion Fallback */
 @media (prefers-reduced-motion: reduce) {
-  .plane-container {
-    transform: none !important;
+  .carousel-card {
     transition: none !important;
   }
-  .plane-enter {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-  .plane-exit {
-    animation: none !important;
+  .carousel-card.card-carousel-left,
+  .carousel-card.card-carousel-right,
+  .carousel-card.card-carousel-far-left,
+  .carousel-card.card-carousel-far-right {
     opacity: 0 !important;
+    display: none !important;
+  }
+  .carousel-card.card-carousel-center {
+    transform: none !important;
   }
 }
 
-/* PCB Trace Divider Line (Matte Slate) */
+/* PCB Trace Divider Line */
 .pcb-divider {
   position: relative;
   height: 1px;
@@ -211,7 +243,7 @@ body {
   color: var(--accent-slate);
 }
 
-/* Matte Slate Tag (No Glow) */
+/* Matte Slate Tag */
 .tech-tag {
   display: inline-flex;
   align-items: center;
@@ -230,7 +262,7 @@ body {
   border-color: var(--accent-slate);
 }
 
-/* Static Matte LED Indicator (No Pulsing Keyframes) */
+/* Static Matte LED Indicator */
 .led-indicator {
   display: inline-block;
   width: 7px;
@@ -256,7 +288,7 @@ body {
   fill: var(--accent-slate);
 }
 
-/* Terminal CLI Copy Box (Matte Slate) */
+/* Terminal CLI Copy Box */
 .terminal-copy-box {
   display: inline-flex;
   align-items: center;

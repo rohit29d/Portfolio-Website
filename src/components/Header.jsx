@@ -1,7 +1,14 @@
 import React from 'react';
 import { Cpu } from 'lucide-react';
 
-export default function Header({ activeSection, onNavHover, onNavClick }) {
+export default function Header({ 
+  activeSection, 
+  scrubbedSection,
+  onNavMouseEnter, 
+  onNavMouseLeave, 
+  onItemHover, 
+  onNavClick 
+}) {
   const navItems = [
     { id: 'home', label: 'home' },
     { id: 'projects', label: 'projects' },
@@ -9,16 +16,24 @@ export default function Header({ activeSection, onNavHover, onNavClick }) {
     { id: 'contact', label: 'contact' }
   ];
 
+  // Currently focused item is either the live scrubbed item or active section
+  const currentFocused = scrubbedSection || activeSection;
+
   return (
-    <header style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 90,
-      background: 'rgba(11, 13, 18, 0.85)',
-      backdropFilter: 'blur(8px)',
-      WebkitBackdropFilter: 'blur(8px)',
-      padding: '18px 28px'
-    }}>
+    <header 
+      onMouseEnter={onNavMouseEnter}
+      onMouseLeave={onNavMouseLeave}
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 90,
+        background: 'rgba(11, 13, 18, 0.88)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        padding: '18px 28px',
+        borderBottom: '1px solid var(--border-subtle)'
+      }}
+    >
       <div style={{
         maxWidth: '1000px',
         margin: '0 auto',
@@ -26,12 +41,11 @@ export default function Header({ activeSection, onNavHover, onNavClick }) {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        {/* Brand / Logo (Understated Typography-First Mark) */}
+        {/* Brand / Logo */}
         <a 
           href="#home" 
           onClick={(e) => { e.preventDefault(); onNavClick('home'); }}
-          onMouseEnter={() => onNavHover('home')}
-          onMouseLeave={() => onNavHover(null)}
+          onMouseEnter={() => onItemHover('home')}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -49,34 +63,21 @@ export default function Header({ activeSection, onNavHover, onNavClick }) {
         {/* Minimal Typography Navigation */}
         <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
           {navItems.map(item => {
-            const isActive = activeSection === item.id;
+            const isFocused = currentFocused === item.id;
             return (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 className="font-mono"
                 onClick={(e) => { e.preventDefault(); onNavClick(item.id); }}
-                onMouseEnter={() => onNavHover(item.id)}
-                onMouseLeave={() => onNavHover(null)}
+                onMouseEnter={() => onItemHover(item.id)}
                 style={{
-                  color: isActive ? 'var(--accent-slate)' : 'var(--text-secondary)',
+                  color: isFocused ? 'var(--accent-slate)' : 'var(--text-secondary)',
                   textDecoration: 'none',
                   fontSize: '0.85rem',
                   paddingBottom: '2px',
-                  borderBottom: isActive ? '1.5px solid var(--accent-slate)' : '1.5px solid transparent',
+                  borderBottom: isFocused ? '1.5px solid var(--accent-slate)' : '1.5px solid transparent',
                   transition: 'color 0.2s ease, border-color 0.2s ease'
-                }}
-                onMouseOver={e => {
-                  if (!isActive) {
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                    e.currentTarget.style.borderColor = 'var(--accent-slate)';
-                  }
-                }}
-                onMouseOut={e => {
-                  if (!isActive) {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                    e.currentTarget.style.borderColor = 'transparent';
-                  }
                 }}
               >
                 {item.label}
@@ -85,7 +86,7 @@ export default function Header({ activeSection, onNavHover, onNavClick }) {
           })}
         </nav>
 
-        {/* Understated Status Badge */}
+        {/* Status Badge */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span className="led-indicator"></span>
           <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
