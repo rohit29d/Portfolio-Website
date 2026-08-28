@@ -1,17 +1,23 @@
 import React from 'react';
 import { Cpu } from 'lucide-react';
 
-export default function Header({ onNavHover, onNavClick }) {
+export default function Header({ activeSection, onNavHover, onNavClick }) {
+  const navItems = [
+    { id: 'home', label: 'home' },
+    { id: 'projects', label: 'projects' },
+    { id: 'about', label: 'about' },
+    { id: 'contact', label: 'contact' }
+  ];
+
   return (
     <header style={{
       position: 'sticky',
       top: 0,
       zIndex: 90,
-      background: 'rgba(11, 13, 18, 0.88)',
-      backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)',
-      borderBottom: '1px solid var(--border-subtle)',
-      padding: '14px 24px'
+      background: 'rgba(11, 13, 18, 0.85)',
+      backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)',
+      padding: '18px 28px'
     }}>
       <div style={{
         maxWidth: '1000px',
@@ -20,113 +26,69 @@ export default function Header({ onNavHover, onNavClick }) {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        {/* Brand / Logo */}
+        {/* Brand / Logo (Understated Typography-First Mark) */}
         <a 
           href="#home" 
-          onClick={() => onNavClick('home')}
+          onClick={(e) => { e.preventDefault(); onNavClick('home'); }}
           onMouseEnter={() => onNavHover('home')}
           onMouseLeave={() => onNavHover(null)}
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '8px',
             textDecoration: 'none',
             color: 'var(--text-primary)'
           }}
         >
-          <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '4px',
-            background: 'var(--accent-blue-soft)',
-            border: '1px solid var(--accent-blue-border)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <Cpu size={18} color="var(--accent-blue)" />
-          </div>
-          <span className="font-mono" style={{ fontSize: '0.95rem', fontWeight: 600, letterSpacing: '-0.02em' }}>
-            rohit<span style={{ color: 'var(--accent-blue)' }}>.dubbaka</span>
+          <Cpu size={16} color="var(--accent-slate)" />
+          <span className="font-mono" style={{ fontSize: '0.9rem', fontWeight: 600, letterSpacing: '-0.02em' }}>
+            rohit<span style={{ color: 'var(--accent-slate)' }}>.dubbaka</span>
           </span>
         </a>
 
-        {/* Top Nav Links */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <a 
-            href="#home" 
-            className="font-mono"
-            onClick={() => onNavClick('home')}
-            onMouseEnter={() => onNavHover('home')}
-            onMouseLeave={() => onNavHover(null)}
-            style={{
-              color: 'var(--text-secondary)',
-              textDecoration: 'none',
-              fontSize: '0.85rem',
-              transition: 'color 0.2s'
-            }} 
-            onMouseOver={e => e.target.style.color = 'var(--accent-blue)'} 
-            onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}
-          >
-            home
-          </a>
-          <a 
-            href="#projects" 
-            className="font-mono"
-            onClick={() => onNavClick('projects')}
-            onMouseEnter={() => onNavHover('projects')}
-            onMouseLeave={() => onNavHover(null)}
-            style={{
-              color: 'var(--text-secondary)',
-              textDecoration: 'none',
-              fontSize: '0.85rem',
-              transition: 'color 0.2s'
-            }} 
-            onMouseOver={e => e.target.style.color = 'var(--accent-blue)'} 
-            onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}
-          >
-            projects
-          </a>
-          <a 
-            href="#about" 
-            className="font-mono"
-            onClick={() => onNavClick('about')}
-            onMouseEnter={() => onNavHover('about')}
-            onMouseLeave={() => onNavHover(null)}
-            style={{
-              color: 'var(--text-secondary)',
-              textDecoration: 'none',
-              fontSize: '0.85rem',
-              transition: 'color 0.2s'
-            }} 
-            onMouseOver={e => e.target.style.color = 'var(--accent-blue)'} 
-            onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}
-          >
-            about
-          </a>
-          <a 
-            href="#contact" 
-            className="font-mono"
-            onClick={() => onNavClick('contact')}
-            onMouseEnter={() => onNavHover('contact')}
-            onMouseLeave={() => onNavHover(null)}
-            style={{
-              color: 'var(--text-secondary)',
-              textDecoration: 'none',
-              fontSize: '0.85rem',
-              transition: 'color 0.2s'
-            }} 
-            onMouseOver={e => e.target.style.color = 'var(--accent-blue)'} 
-            onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}
-          >
-            contact
-          </a>
+        {/* Minimal Typography Navigation */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+          {navItems.map(item => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="font-mono"
+                onClick={(e) => { e.preventDefault(); onNavClick(item.id); }}
+                onMouseEnter={() => onNavHover(item.id)}
+                onMouseLeave={() => onNavHover(null)}
+                style={{
+                  color: isActive ? 'var(--accent-slate)' : 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  fontSize: '0.85rem',
+                  paddingBottom: '2px',
+                  borderBottom: isActive ? '1.5px solid var(--accent-slate)' : '1.5px solid transparent',
+                  transition: 'color 0.2s ease, border-color 0.2s ease'
+                }}
+                onMouseOver={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                    e.currentTarget.style.borderColor = 'var(--accent-slate)';
+                  }
+                }}
+                onMouseOut={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.borderColor = 'transparent';
+                  }
+                }}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
-        {/* System Online Status Badge */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Understated Status Badge */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span className="led-indicator"></span>
-          <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
             SYS_ONLINE
           </span>
         </div>

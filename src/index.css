@@ -1,24 +1,24 @@
 :root {
   --bg-dark: #0b0d12;
   --bg-card: #131722;
-  --bg-card-hover: #191f2e;
-  --bg-elevated: #1e2536;
+  --bg-card-hover: #171d2b;
+  --bg-elevated: #1a2130;
   
-  /* Refined Matte Light Blue Accent (No Flashy Neon) */
-  --accent-blue: #5b9ef7;
-  --accent-blue-light: #7cb3f9;
-  --accent-blue-soft: rgba(91, 158, 247, 0.12);
-  --accent-blue-border: rgba(91, 158, 247, 0.28);
+  /* Matte Slate-Blue Accent (Desaturated, No Glow, No Bloom) */
+  --accent-slate: #7dabc4;
+  --accent-slate-hover: #96bdd4;
+  --accent-slate-soft: rgba(125, 171, 196, 0.12);
+  --accent-slate-border: rgba(125, 171, 196, 0.25);
   
-  --copper-gold: #c5a059;
-  --led-green: #34d399;
+  --copper-gold: #b0955d;
+  --led-status: #7dabc4;
 
-  --text-primary: #f8fafc;
+  --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
   --border-subtle: #1e293b;
-  --border-accent: rgba(91, 158, 247, 0.3);
+  --border-accent: rgba(125, 171, 196, 0.25);
   
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -47,16 +47,16 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  /* Matte Subtle PCB Dot Grid */
+  /* Subtle PCB Dot Grid Texture */
   background-image: 
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0),
-    linear-gradient(to bottom, rgba(11, 13, 18, 0.9), rgba(11, 13, 18, 0.98));
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0),
+    linear-gradient(to bottom, rgba(11, 13, 18, 0.92), rgba(11, 13, 18, 0.98));
   background-size: 24px 24px, 100% 100%;
 }
 
 /* Custom Selection */
 ::selection {
-  background: var(--accent-blue);
+  background: var(--accent-slate);
   color: #0b0d12;
 }
 
@@ -70,55 +70,89 @@ body {
 }
 
 /* -------------------------------------------------- */
-/* 3D GLOBE SPATIAL ENGINE (ROCK-SOLID & GLITCH-FREE)  */
+/* 3D PERSPECTIVE PLANE STAGE & TRANSITIONS           */
 /* -------------------------------------------------- */
-.globe-stage {
-  perspective: 1400px;
-  perspective-origin: 50% 30%;
+.plane-viewport {
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
   position: relative;
+  overflow-x: hidden;
 }
 
-.globe-surface {
+.plane-container {
   transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
-  transition: transform 0.1s cubic-bezier(0.1, 1, 0.1, 1);
-  transform-origin: center center;
+  width: 100%;
+  min-height: 100vh;
 }
 
-/* Smooth 3D Globe Spin Transition on Click */
-.globe-spin-active {
-  animation: globe3DSpin 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* 3D Plane Section Styling */
+.section-plane {
+  width: 100%;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-@keyframes globe3DSpin {
+.plane-enter {
+  animation: planeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.plane-exit {
+  animation: planeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes planeIn {
   0% {
-    transform: perspective(1400px) rotateY(-120deg) rotateX(20deg) translateZ(-250px) scale(0.82);
-    opacity: 0.2;
-  }
-  50% {
-    transform: perspective(1400px) rotateY(-45deg) rotateX(-10deg) translateZ(-100px) scale(0.92);
-    opacity: 0.7;
+    opacity: 0;
+    transform: perspective(1200px) rotateY(-12deg) scale(0.95) translateZ(-60px);
   }
   100% {
-    transform: perspective(1400px) rotateY(0deg) rotateX(0deg) translateZ(0px) scale(1);
     opacity: 1;
+    transform: perspective(1200px) rotateY(0deg) scale(1) translateZ(0px);
   }
 }
 
-/* PCB Trace Divider Line (Matte Blue) */
+@keyframes planeOut {
+  0% {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(0deg) scale(1) translateZ(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(10deg) scale(0.96) translateZ(-40px);
+  }
+}
+
+/* Prefers Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .plane-container {
+    transform: none !important;
+    transition: none !important;
+  }
+  .plane-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .plane-exit {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* PCB Trace Divider Line (Matte Slate) */
 .pcb-divider {
   position: relative;
-  height: 1.5px;
+  height: 1px;
   width: 100%;
   max-width: 800px;
   margin: 40px auto;
   background: linear-gradient(90deg, 
     transparent 0%, 
     var(--border-subtle) 20%, 
-    var(--accent-blue-border) 50%, 
+    var(--accent-slate-border) 50%, 
     var(--border-subtle) 80%, 
     transparent 100%
   );
@@ -130,11 +164,10 @@ body {
   top: -3px;
   left: 50%;
   transform: translateX(-50%);
-  width: 7px;
-  height: 7px;
-  background: var(--accent-blue);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-slate);
   border-radius: 50%;
-  box-shadow: 0 0 6px var(--accent-blue-soft);
 }
 
 /* Component Footprint Corner Brackets */
@@ -143,13 +176,12 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
 .corner-bracket-card:hover {
   border-color: var(--border-accent);
   background: var(--bg-card-hover);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
 }
 
@@ -161,7 +193,7 @@ body {
   font-size: 11px;
   color: var(--text-muted);
   pointer-events: none;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 .corner-bracket-card::before {
@@ -176,10 +208,10 @@ body {
 
 .corner-bracket-card:hover::before,
 .corner-bracket-card:hover::after {
-  color: var(--accent-blue);
+  color: var(--accent-slate);
 }
 
-/* Tech Tag */
+/* Matte Slate Tag (No Glow) */
 .tech-tag {
   display: inline-flex;
   align-items: center;
@@ -188,31 +220,23 @@ body {
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
-  background: var(--accent-blue-soft);
-  border: 1px solid var(--accent-blue-border);
-  color: var(--accent-blue-light);
-  transition: all 0.2s ease;
+  background: var(--accent-slate-soft);
+  border: 1px solid var(--accent-slate-border);
+  color: var(--accent-slate);
+  transition: border-color 0.2s ease;
 }
 
 .tech-tag:hover {
-  background: rgba(91, 158, 247, 0.22);
-  border-color: var(--accent-blue);
+  border-color: var(--accent-slate);
 }
 
-/* LED Indicator Light */
+/* Static Matte LED Indicator (No Pulsing Keyframes) */
 .led-indicator {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background-color: var(--led-green);
-  box-shadow: 0 0 6px rgba(52, 211, 153, 0.4);
-  animation: ledPulse 2s infinite ease-in-out;
-}
-
-@keyframes ledPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
+  background-color: var(--accent-slate);
 }
 
 /* Curved Text Header Styling */
@@ -225,14 +249,14 @@ body {
   font-size: 42px;
   fill: var(--text-primary);
   letter-spacing: -0.04em;
-  transition: fill 0.3s ease;
+  transition: fill 0.2s ease;
 }
 
 .hero-curve-text:hover {
-  fill: var(--accent-blue);
+  fill: var(--accent-slate);
 }
 
-/* Terminal CLI Copy Box */
+/* Terminal CLI Copy Box (Matte Slate) */
 .terminal-copy-box {
   display: inline-flex;
   align-items: center;
@@ -243,12 +267,11 @@ body {
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .terminal-copy-box:hover {
-  border-color: var(--accent-blue);
+  border-color: var(--accent-slate);
   background: #0d111a;
 }
 
@@ -264,10 +287,10 @@ body {
 }
 
 .copy-btn:hover {
-  color: var(--accent-blue);
+  color: var(--accent-slate);
 }
 
-/* Floating Bottom Capsule Nav */
+/* Floating Bottom Capsule Nav (Projects Specific Filter) */
 .bottom-capsule-nav {
   position: fixed;
   bottom: 24px;
@@ -276,35 +299,41 @@ body {
   z-index: 100;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background: rgba(19, 23, 34, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--accent-blue-border);
+  gap: 4px;
+  padding: 5px 10px;
+  background: rgba(19, 23, 34, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--accent-slate-border);
   border-radius: 9999px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.bottom-capsule-nav.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 15px);
 }
 
 .capsule-item {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  padding: 6px 14px;
+  font-size: 0.78rem;
+  padding: 5px 12px;
   border-radius: 9999px;
   color: var(--text-secondary);
   text-decoration: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .capsule-item:hover {
-  color: var(--accent-blue);
+  color: var(--accent-slate);
 }
 
 .capsule-item.active {
-  background: var(--accent-blue);
+  background: var(--accent-slate);
   color: #080a0f;
   font-weight: 600;
 }
@@ -318,8 +347,8 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(5, 7, 12, 0.88);
-  backdrop-filter: blur(8px);
+  background: rgba(5, 7, 12, 0.85);
+  backdrop-filter: blur(6px);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -330,7 +359,6 @@ body {
 .modal-content {
   background: var(--bg-card);
   border: 1px solid var(--border-accent);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.7);
   border-radius: var(--radius-md);
   max-width: 640px;
   width: 100%;
@@ -342,7 +370,7 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -355,5 +383,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-blue);
+  background: var(--accent-slate);
 }

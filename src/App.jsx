@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -7,105 +7,79 @@ import BottomNav from './components/BottomNav';
 import TerminalModal from './components/TerminalModal';
 
 export default function App() {
+  const [activeSection, setActiveSection] = useState('home');
+  const [transitionState, setTransitionState] = useState(null); // 'entering' | null
   const [activeCategory, setActiveCategory] = useState('all');
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-  const [isGlobeSpinning, setIsGlobeSpinning] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState(null);
 
-  // 3D Globe Rotation State & Physics Engine
-  const [rot, setRot] = useState({ x: 0, y: 0 });
-  const targetRot = useRef({ x: 0, y: 0 });
-  const currentRot = useRef({ x: 0, y: 0 });
-  const animFrameId = useRef(null);
+  // Nav Click Handler: Animate 3D Plane Transition (Recede out + Unfold target plane)
+  const handleNavClick = (targetSection) => {
+    if (targetSection === activeSection) return;
+    
+    setTransitionState('entering');
+    setActiveSection(targetSection);
 
-  // Mouse Move 3D Globe Rotation Controller
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { innerWidth, innerHeight } = window;
-      // Normalize mouse coordinates to [-0.5, 0.5]
-      const nx = (e.clientX / innerWidth) - 0.5;
-      const ny = (e.clientY / innerHeight) - 0.5;
+    setTimeout(() => {
+      setTransitionState(null);
+    }, 550);
+  };
 
-      // Rotate globe around X and Y axes smoothly
-      targetRot.current.y = nx * 22; // -11deg to +11deg Y rotation
-      targetRot.current.x = ny * -16; // -8deg to +8deg X rotation
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    // Physics Animation Loop (Lerp for silky smooth 60fps movement)
-    const updateGlobeRotation = () => {
-      currentRot.current.x += (targetRot.current.x - currentRot.current.x) * 0.08;
-      currentRot.current.y += (targetRot.current.y - currentRot.current.y) * 0.08;
-
-      setRot({
-        x: parseFloat(currentRot.current.x.toFixed(2)),
-        y: parseFloat(currentRot.current.y.toFixed(2))
-      });
-
-      animFrameId.current = requestAnimationFrame(updateGlobeRotation);
-    };
-
-    animFrameId.current = requestAnimationFrame(updateGlobeRotation);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
-    };
-  }, []);
-
-  // Top Nav Hover handlers setting 3D Globe target coordinates
-  const handleNavHover = (section) => {
-    if (!section) return;
-    if (section === 'home') {
-      targetRot.current = { x: 4, y: -12 };
-    } else if (section === 'projects') {
-      targetRot.current = { x: -6, y: 14 };
-    } else if (section === 'about') {
-      targetRot.current = { x: 6, y: -14 };
-    } else if (section === 'contact') {
-      targetRot.current = { x: -8, y: 10 };
+  // Preview tilt transform on nav hover (2 to 5 degrees only, transform/opacity GPU accelerated)
+  const getContainerTransform = () => {
+    if (!hoveredNav) return 'perspective(1200px) rotateY(0deg) rotateX(0deg)';
+    
+    switch (hoveredNav) {
+      case 'home':
+        return 'perspective(1200px) rotateY(-3.5deg) rotateX(2deg)';
+      case 'projects':
+        return 'perspective(1200px) rotateY(4deg) rotateX(-3deg)';
+      case 'about':
+        return 'perspective(1200px) rotateY(-4.5deg) rotateX(-2deg)';
+      case 'contact':
+        return 'perspective(1200px) rotateY(5deg) rotateX(2.5deg)';
+      default:
+        return 'perspective(1200px) rotateY(0deg) rotateX(0deg)';
     }
   };
 
-  // Nav Click Handler triggering 3D Globe Spherical Spin
-  const handleNavClick = (sectionOrCategory) => {
-    setIsGlobeSpinning(true);
-    setTimeout(() => {
-      setIsGlobeSpinning(false);
-    }, 750);
-  };
-
   return (
-    <div className="globe-stage">
-      {/* Top Header - Fixed & Stable */}
+    <div className="plane-viewport">
+      {/* Top Header Navigation - Typography First */}
       <Header 
-        onNavHover={handleNavHover} 
+        activeSection={activeSection}
+        onNavHover={setHoveredNav} 
         onNavClick={handleNavClick} 
       />
 
-      {/* 3D Globe Surface (Smooth Lerp Rotated Plane) */}
+      {/* 3D Perspective Plane Container */}
       <div 
-        className={`globe-surface ${isGlobeSpinning ? 'globe-spin-active' : ''}`}
+        className="plane-container"
         style={{
-          transform: isGlobeSpinning
-            ? undefined
-            : `perspective(1400px) rotateX(${rot.x}deg) rotateY(${rot.y}deg) translateZ(0px)`
+          transform: getContainerTransform()
         }}
       >
-        {/* Main Content Area */}
-        <main style={{ minHeight: '100vh', paddingBottom: '100px' }}>
-          <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
-          <Projects activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-          <AboutContact />
-        </main>
+        {/* Render Active Section Plane */}
+        <div className={`section-plane ${transitionState === 'entering' ? 'plane-enter' : ''}`}>
+          {activeSection === 'home' && (
+            <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
+          )}
+
+          {activeSection === 'projects' && (
+            <Projects activeCategory={activeCategory} />
+          )}
+
+          {(activeSection === 'about' || activeSection === 'contact') && (
+            <AboutContact />
+          )}
+        </div>
       </div>
 
-      {/* Floating Bottom Capsule Nav - Fixed & Stable */}
+      {/* Projects-Specific Bottom Capsule Filter Bar (Only Visible on Projects Plane) */}
       <BottomNav 
         activeCategory={activeCategory} 
         setActiveCategory={setActiveCategory} 
-        onNavHover={handleNavHover}
-        onNavClick={handleNavClick}
+        isProjectsVisible={activeSection === 'projects'}
       />
 
       {/* Terminal CLI Modal Simulator */}

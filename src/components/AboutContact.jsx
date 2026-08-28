@@ -22,20 +22,20 @@ export default function AboutContact() {
   ];
 
   return (
-    <section id="about" style={{
-      padding: '40px 20px 80px',
+    <section style={{
+      padding: '30px 20px 80px',
       maxWidth: '900px',
       margin: '0 auto'
     }}>
       {/* Bio / Intro Block */}
-      <div style={{ marginBottom: '50px' }}>
+      <div id="about-section" style={{ marginBottom: '50px' }}>
         <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '16px' }}>
-          who am i<span style={{ color: 'var(--accent-blue)' }}>?</span>
+          who am i<span style={{ color: 'var(--accent-slate)' }}>?</span>
         </h2>
 
         <div className="corner-bracket-card" style={{ padding: '24px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
           <p style={{ marginBottom: '14px' }}>
-            ece grad, 2026. currently working as an embedded systems intern at <span style={{ color: 'var(--accent-blue)', fontWeight: 500 }}>DeltaIOT</span>. 
+            ece grad, 2026. currently working as an embedded systems intern at <span style={{ color: 'var(--accent-slate)', fontWeight: 500 }}>DeltaIOT</span>. 
             i care deeply about schematic-to-silicon design, robust low-level C firmware, fpga rtl architecture, and system-level hardware ownership.
           </p>
           <p>
@@ -55,8 +55,8 @@ export default function AboutContact() {
         {/* Experience */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <Briefcase size={16} color="var(--accent-blue)" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-blue)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <Briefcase size={16} color="var(--accent-slate)" />
+            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-slate)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               // Experience
             </h3>
           </div>
@@ -66,7 +66,7 @@ export default function AboutContact() {
               <h4 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                 Embedded Systems Intern
               </h4>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-blue)' }}>
+              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-slate)' }}>
                 2025 – Present
               </span>
             </div>
@@ -110,8 +110,8 @@ export default function AboutContact() {
       {/* Technical Skills Matrix */}
       <div style={{ marginBottom: '60px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
-          <Code size={16} color="var(--accent-blue)" />
-          <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-blue)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <Code size={16} color="var(--accent-slate)" />
+          <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-slate)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             // Hardware & Software Stack
           </h3>
         </div>
@@ -123,7 +123,7 @@ export default function AboutContact() {
         }}>
           {skills.map((group, idx) => (
             <div key={idx} className="corner-bracket-card" style={{ padding: '16px' }}>
-              <h4 className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--accent-blue)', marginBottom: '12px' }}>
+              <h4 className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--accent-slate)', marginBottom: '12px' }}>
                 {group.category}
               </h4>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -137,7 +137,7 @@ export default function AboutContact() {
       </div>
 
       {/* Contact Section */}
-      <div id="contact" style={{
+      <div id="contact-section" style={{
         textAlign: 'center',
         padding: '40px 24px',
         background: 'var(--bg-card)',
@@ -145,7 +145,7 @@ export default function AboutContact() {
         borderRadius: 'var(--radius-md)'
       }}>
         <h3 style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
-          wanna connect<span style={{ color: 'var(--accent-blue)' }}>?</span>
+          wanna connect<span style={{ color: 'var(--accent-slate)' }}>?</span>
         </h3>
         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '24px' }}>
           feel free to reach out for embedded hardware collabs, firmware discussions, or cool project ideas :)
@@ -170,7 +170,7 @@ export default function AboutContact() {
               fontSize: '0.88rem',
               transition: 'all 0.2s'
             }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-blue)'; e.currentTarget.style.color = 'var(--accent-blue)'; }}
+            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-slate)'; e.currentTarget.style.color = 'var(--accent-slate)'; }}
             onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
           >
             <Github size={16} />
@@ -196,7 +196,7 @@ export default function AboutContact() {
               fontSize: '0.88rem',
               transition: 'all 0.2s'
             }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-blue)'; e.currentTarget.style.color = 'var(--accent-blue)'; }}
+            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-slate)'; e.currentTarget.style.color = 'var(--accent-slate)'; }}
             onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
           >
             <Linkedin size={16} />
@@ -213,7 +213,7 @@ export default function AboutContact() {
               gap: '8px',
               padding: '10px 18px',
               borderRadius: 'var(--radius-sm)',
-              background: 'var(--accent-blue)',
+              background: 'var(--accent-slate)',
               color: '#080a0f',
               fontWeight: 600,
               textDecoration: 'none',

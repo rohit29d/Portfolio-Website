@@ -1,18 +1,20 @@
 import React from 'react';
 
-export default function BottomNav({ activeCategory, setActiveCategory, onNavHover, onNavClick }) {
+export default function BottomNav({ activeCategory, setActiveCategory, isProjectsVisible }) {
   const tabs = [
     { id: 'all', label: 'all', enabled: true },
     { id: 'firmware', label: 'firmware', enabled: true },
     { id: 'pcb', label: 'pcb', enabled: true },
     { id: 'fpga', label: 'fpga', enabled: true },
     { id: 'dsp', label: 'dsp', enabled: true },
-    { id: 'writing', label: 'writing', enabled: false },
-    { id: 'misc', label: 'misc', enabled: false }
+    { id: 'blogs', label: 'blogs', enabled: false }
   ];
 
   return (
-    <nav className="bottom-capsule-nav" aria-label="Project Category Navigation">
+    <nav 
+      className={`bottom-capsule-nav ${!isProjectsVisible ? 'hidden' : ''}`} 
+      aria-label="Projects Filter Navigation"
+    >
       {tabs.map((tab) => {
         const isActive = activeCategory === tab.id;
 
@@ -32,16 +34,7 @@ export default function BottomNav({ activeCategory, setActiveCategory, onNavHove
         return (
           <button
             key={tab.id}
-            onMouseEnter={() => onNavHover && onNavHover('projects')}
-            onMouseLeave={() => onNavHover && onNavHover(null)}
-            onClick={() => {
-              setActiveCategory(tab.id);
-              if (onNavClick) onNavClick(tab.id);
-              const projSec = document.getElementById('projects');
-              if (projSec) {
-                projSec.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+            onClick={() => setActiveCategory(tab.id)}
             className={`capsule-item ${isActive ? 'active' : ''}`}
           >
             {tab.label}

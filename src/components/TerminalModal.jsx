@@ -7,11 +7,11 @@ export default function TerminalModal({ isOpen, onClose }) {
   const [copied, setCopied] = useState(false);
 
   const fullSequence = [
-    { text: '- checking hardware curiosity...', color: 'var(--accent-blue)' },
-    { text: '✔ hardware curiosity confirmed.', color: '#34d399' },
+    { text: '- checking hardware curiosity...', color: 'var(--accent-slate)' },
+    { text: '✔ hardware curiosity confirmed.', color: 'var(--accent-slate)' },
     { text: ' ', color: '' },
     { text: 'name? Rohit Kumar Dubbaka', color: '#ffffff' },
-    { text: 'embedded systems engineer @ deltaiot', color: 'var(--accent-blue)' },
+    { text: 'embedded systems engineer @ deltaiot', color: 'var(--accent-slate)' },
     { text: ' ', color: '' },
     { text: 'strengths?', color: 'var(--copper-gold)' },
     { text: '• pcb schematic-to-silicon design', color: 'var(--text-secondary)' },
@@ -27,11 +27,11 @@ export default function TerminalModal({ isOpen, onClose }) {
     { text: '• priority arbiter VHDL logic synthesized on basys-3 FPGA', color: 'var(--text-secondary)' },
     { text: '• aeromesh edge AI turbulence detection nodes', color: 'var(--text-secondary)' },
     { text: ' ', color: '' },
-    { text: 'links & contact', color: 'var(--accent-blue)' },
+    { text: 'links & contact', color: 'var(--accent-slate)' },
     { text: 'github: https://github.com/rohit29d', color: '#ffffff' },
     { text: 'email: rohit.dubbaka@example.com', color: '#ffffff' },
     { text: ' ', color: '' },
-    { text: 'status: 0 errors, system operational. what do you want to build next?', color: '#34d399' }
+    { text: 'status: 0 errors, system operational. what do you want to build next?', color: 'var(--accent-slate)' }
   ];
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function TerminalModal({ isOpen, onClose }) {
         setIsTyping(false);
         clearInterval(interval);
       }
-    }, 110);
+    }, 100);
 
     return () => clearInterval(interval);
   }, [isOpen]);
@@ -71,7 +71,7 @@ export default function TerminalModal({ isOpen, onClose }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{
         background: '#07090e',
-        border: '1px solid var(--accent-blue-border)',
+        border: '1px solid var(--accent-slate-border)',
         padding: '0',
         overflow: 'hidden'
       }}>
@@ -85,7 +85,7 @@ export default function TerminalModal({ isOpen, onClose }) {
           borderBottom: '1px solid var(--border-subtle)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <TerminalIcon size={16} color="var(--accent-blue)" />
+            <TerminalIcon size={16} color="var(--accent-slate)" />
             <span className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 600 }}>
               bash — npx rohitdubbaka
             </span>
@@ -106,7 +106,7 @@ export default function TerminalModal({ isOpen, onClose }) {
               }}
               className="font-mono"
             >
-              {copied ? <Check size={14} color="var(--accent-blue)" /> : <Copy size={14} />}
+              {copied ? <Check size={14} color="var(--accent-slate)" /> : <Copy size={14} />}
               <span>{copied ? 'copied' : 'copy'}</span>
             </button>
 
@@ -135,7 +135,7 @@ export default function TerminalModal({ isOpen, onClose }) {
           color: 'var(--text-primary)'
         }}>
           <div style={{ marginBottom: '14px', color: 'var(--text-muted)' }}>
-            <span style={{ color: 'var(--accent-blue)' }}>rohit@embedded-node</span>:<span style={{ color: '#ffffff' }}>~</span>$ npx rohitdubbaka
+            <span style={{ color: 'var(--accent-slate)' }}>rohit@embedded-node</span>:<span style={{ color: '#ffffff' }}>~</span>$ npx rohitdubbaka
           </div>
 
           {outputLines.map((line, idx) => (
@@ -145,7 +145,7 @@ export default function TerminalModal({ isOpen, onClose }) {
           ))}
 
           {isTyping && (
-            <div style={{ display: 'inline-block', width: '8px', height: '15px', background: 'var(--accent-blue)', marginLeft: '4px' }} className="led-indicator" />
+            <div style={{ display: 'inline-block', width: '8px', height: '15px', background: 'var(--accent-slate)', marginLeft: '4px' }} className="led-indicator" />
           )}
         </div>
       </div>

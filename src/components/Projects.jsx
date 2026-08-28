@@ -84,7 +84,7 @@ export const ALL_PROJECTS = [
   }
 ];
 
-export default function Projects({ activeCategory, setActiveCategory }) {
+export default function Projects({ activeCategory }) {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filteredProjects = activeCategory === 'all' 
@@ -95,8 +95,8 @@ export default function Projects({ activeCategory, setActiveCategory }) {
   const exploratoryProjects = filteredProjects.filter(p => p.type === 'exploratory');
 
   return (
-    <section id="projects" style={{
-      padding: '40px 20px 60px',
+    <section style={{
+      padding: '30px 20px 60px',
       maxWidth: '900px',
       margin: '0 auto'
     }}>
@@ -104,9 +104,9 @@ export default function Projects({ activeCategory, setActiveCategory }) {
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-            highlights<span style={{ color: 'var(--accent-blue)' }}>!</span>
+            highlights<span style={{ color: 'var(--accent-slate)' }}>!</span>
           </h2>
-          <Sparkles size={18} color="var(--accent-blue)" />
+          <Sparkles size={18} color="var(--accent-slate)" />
         </div>
         <p className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
           some things i built because i could
@@ -122,10 +122,10 @@ export default function Projects({ activeCategory, setActiveCategory }) {
             gap: '8px',
             marginBottom: '16px'
           }}>
-            <Cpu size={16} color="var(--accent-blue)" />
+            <Cpu size={16} color="var(--accent-slate)" />
             <h3 className="font-mono" style={{
               fontSize: '0.85rem',
-              color: 'var(--accent-blue)',
+              color: 'var(--accent-slate)',
               textTransform: 'uppercase',
               letterSpacing: '0.08em'
             }}>
@@ -146,7 +146,7 @@ export default function Projects({ activeCategory, setActiveCategory }) {
                 style={{
                   padding: '24px',
                   cursor: 'pointer',
-                  borderLeft: '3px solid var(--accent-blue)'
+                  borderLeft: '3px solid var(--accent-slate)'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '10px' }}>
@@ -155,8 +155,8 @@ export default function Projects({ activeCategory, setActiveCategory }) {
                   </h4>
                   <span className="font-mono" style={{
                     fontSize: '0.7rem',
-                    color: 'var(--accent-blue)',
-                    background: 'var(--accent-blue-soft)',
+                    color: 'var(--accent-slate)',
+                    background: 'var(--accent-slate-soft)',
                     padding: '2px 6px',
                     borderRadius: '3px',
                     whiteSpace: 'nowrap'
@@ -175,7 +175,7 @@ export default function Projects({ activeCategory, setActiveCategory }) {
                   ))}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem', color: 'var(--accent-blue)' }} className="font-mono">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem', color: 'var(--accent-slate)' }} className="font-mono">
                   <span>inspect schematic / details</span>
                   <ChevronRight size={14} />
                 </div>
@@ -283,7 +283,7 @@ export default function Projects({ activeCategory, setActiveCategory }) {
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-blue)', background: 'var(--accent-blue-soft)', padding: '2px 8px', borderRadius: '3px' }}>
+              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-slate)', background: 'var(--accent-slate-soft)', padding: '2px 8px', borderRadius: '3px' }}>
                 {selectedProject.type.toUpperCase()} BUILD
               </span>
               <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -322,7 +322,7 @@ export default function Projects({ activeCategory, setActiveCategory }) {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  background: 'var(--accent-blue)',
+                  background: 'var(--accent-slate)',
                   color: '#080a0f',
                   padding: '8px 16px',
                   borderRadius: 'var(--radius-sm)',
