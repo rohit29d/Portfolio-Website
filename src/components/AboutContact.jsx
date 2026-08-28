@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Mail, ArrowUpRight, GraduationCap, Briefcase, Code } from 'lucide-react';
 
-export default function AboutContact() {
+export default function AboutContact({ viewMode = 'all' }) {
   const skills = [
     {
       category: 'PCB & Hardware',
@@ -27,204 +27,213 @@ export default function AboutContact() {
       maxWidth: '900px',
       margin: '0 auto'
     }}>
-      {/* Bio / Intro Block */}
-      <div id="about-section" style={{ marginBottom: '50px' }}>
-        <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '16px' }}>
-          who am i<span style={{ color: 'var(--accent-slate)' }}>?</span>
-        </h2>
+      {/* Bio / Intro Block (Rendered in 'all' and 'about' views) */}
+      {(viewMode === 'all' || viewMode === 'about') && (
+        <div id="about-section" style={{ marginBottom: '50px' }}>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '16px' }}>
+            who am i<span style={{ color: 'var(--accent-slate)' }}>?</span>
+          </h2>
 
-        <div className="corner-bracket-card" style={{ padding: '24px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
-          <p style={{ marginBottom: '14px' }}>
-            ece grad, 2026. currently working as an embedded systems intern at <span style={{ color: 'var(--accent-slate)', fontWeight: 500 }}>DeltaIOT</span>. 
-            i care deeply about schematic-to-silicon design, robust low-level C firmware, fpga rtl architecture, and system-level hardware ownership.
-          </p>
-          <p>
-            i like taking ideas from physical circuit simulations to custom soldered boards, writing bare-metal & RTOS drivers, 
-            and optimizing signal processing algorithms at the edge.
-          </p>
-        </div>
-      </div>
-
-      {/* Experience & Education Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '24px',
-        marginBottom: '50px'
-      }}>
-        {/* Experience */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <Briefcase size={16} color="var(--accent-slate)" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-slate)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              // Experience
-            </h3>
-          </div>
-
-          <div className="corner-bracket-card" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                Embedded Systems Intern
-              </h4>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-slate)' }}>
-                2025 – Present
-              </span>
-            </div>
-            <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-              @ DeltaIOT
+          <div className="corner-bracket-card" style={{ padding: '24px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
+            <p style={{ marginBottom: '14px' }}>
+              ece grad, 2026. currently working as an embedded systems intern at <span style={{ color: 'var(--accent-slate)', fontWeight: 500 }}>DeltaIOT</span>. 
+              i care deeply about schematic-to-silicon design, robust low-level C firmware, fpga rtl architecture, and system-level hardware ownership.
             </p>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-              Engineering low-level firmware modules, sensor interfacing, and PCB prototyping for IoT hardware nodes.
+            <p>
+              i like taking ideas from physical circuit simulations to custom soldered boards, writing bare-metal & RTOS drivers, 
+              and optimizing signal processing algorithms at the edge.
             </p>
           </div>
         </div>
+      )}
 
-        {/* Education */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <GraduationCap size={16} color="var(--copper-gold)" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--copper-gold)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              // Education
-            </h3>
-          </div>
-
-          <div className="corner-bracket-card" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                B.Tech in Electronics & Communication (ECE)
-              </h4>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--copper-gold)' }}>
-                Grad 2026
-              </span>
-            </div>
-            <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-              Specialization in Embedded Hardware, RTL & Signal Processing
-            </p>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-              Focus on microprocessor architectures, analog circuit design, DSP algorithms, and digital VLSI.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Technical Skills Matrix */}
-      <div style={{ marginBottom: '60px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
-          <Code size={16} color="var(--accent-slate)" />
-          <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-slate)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            // Hardware & Software Stack
-          </h3>
-        </div>
-
+      {/* Experience & Education Grid (Rendered in 'all' and 'about' views) */}
+      {(viewMode === 'all' || viewMode === 'about') && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '16px'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '24px',
+          marginBottom: '50px'
         }}>
-          {skills.map((group, idx) => (
-            <div key={idx} className="corner-bracket-card" style={{ padding: '16px' }}>
-              <h4 className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--accent-slate)', marginBottom: '12px' }}>
-                {group.category}
-              </h4>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                {group.items.map((item, i) => (
-                  <span key={i} className="tech-tag">{item}</span>
-                ))}
-              </div>
+          {/* Experience */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <Briefcase size={16} color="var(--accent-slate)" />
+              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-slate)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                // Experience
+              </h3>
             </div>
-          ))}
+
+            <div className="corner-bracket-card" style={{ padding: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Embedded Systems Intern
+                </h4>
+                <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-slate)' }}>
+                  2025 – Present
+                </span>
+              </div>
+              <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                @ DeltaIOT
+              </p>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                Engineering low-level firmware modules, sensor interfacing, and PCB prototyping for IoT hardware nodes.
+              </p>
+            </div>
+          </div>
+
+          {/* Education */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <GraduationCap size={16} color="var(--copper-gold)" />
+              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--copper-gold)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                // Education
+              </h3>
+            </div>
+
+            <div className="corner-bracket-card" style={{ padding: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  B.Tech in Electronics & Communication (ECE)
+                </h4>
+                <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--copper-gold)' }}>
+                  Grad 2026
+                </span>
+              </div>
+              <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                Specialization in Embedded Hardware, RTL & Signal Processing
+              </p>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                Focus on microprocessor architectures, analog circuit design, DSP algorithms, and digital VLSI.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Contact Section */}
-      <div id="contact-section" style={{
-        textAlign: 'center',
-        padding: '40px 24px',
-        background: 'var(--bg-card)',
-        border: '1px solid var(--border-accent)',
-        borderRadius: 'var(--radius-md)'
-      }}>
-        <h3 style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
-          wanna connect<span style={{ color: 'var(--accent-slate)' }}>?</span>
-        </h3>
-        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '24px' }}>
-          feel free to reach out for embedded hardware collabs, firmware discussions, or cool project ideas :)
-        </p>
+      {/* Technical Skills Matrix (Rendered in 'all' and 'about' views) */}
+      {(viewMode === 'all' || viewMode === 'about') && (
+        <div style={{ marginBottom: '60px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+            <Code size={16} color="var(--accent-slate)" />
+            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--accent-slate)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              // Hardware & Software Stack
+            </h3>
+          </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '14px' }}>
-          <a 
-            href="https://github.com/rohit29d" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="font-mono"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '10px 18px',
-              borderRadius: 'var(--radius-sm)',
-              background: '#0d1117',
-              border: '1px solid var(--border-subtle)',
-              color: 'var(--text-primary)',
-              textDecoration: 'none',
-              fontSize: '0.88rem',
-              transition: 'all 0.2s'
-            }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-slate)'; e.currentTarget.style.color = 'var(--accent-slate)'; }}
-            onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
-          >
-            <Github size={16} />
-            <span>github.com/rohit29d</span>
-            <ArrowUpRight size={14} />
-          </a>
-
-          <a 
-            href="https://linkedin.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="font-mono"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '10px 18px',
-              borderRadius: 'var(--radius-sm)',
-              background: '#0d1117',
-              border: '1px solid var(--border-subtle)',
-              color: 'var(--text-primary)',
-              textDecoration: 'none',
-              fontSize: '0.88rem',
-              transition: 'all 0.2s'
-            }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-slate)'; e.currentTarget.style.color = 'var(--accent-slate)'; }}
-            onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
-          >
-            <Linkedin size={16} />
-            <span>LinkedIn</span>
-            <ArrowUpRight size={14} />
-          </a>
-
-          <a 
-            href="mailto:rohit.dubbaka@example.com" 
-            className="font-mono"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '10px 18px',
-              borderRadius: 'var(--radius-sm)',
-              background: 'var(--accent-slate)',
-              color: '#080a0f',
-              fontWeight: 600,
-              textDecoration: 'none',
-              fontSize: '0.88rem'
-            }}
-          >
-            <Mail size={16} />
-            <span>rohit.dubbaka@example.com</span>
-          </a>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '16px'
+          }}>
+            {skills.map((group, idx) => (
+              <div key={idx} className="corner-bracket-card" style={{ padding: '16px' }}>
+                <h4 className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--accent-slate)', marginBottom: '12px' }}>
+                  {group.category}
+                </h4>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {group.items.map((item, i) => (
+                    <span key={i} className="tech-tag">{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Contact Section (Rendered in 'all' and 'contact' views) */}
+      {(viewMode === 'all' || viewMode === 'contact') && (
+        <div id="contact-section" style={{
+          textAlign: 'center',
+          padding: '50px 24px',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-accent)',
+          borderRadius: 'var(--radius-md)',
+          marginTop: viewMode === 'contact' ? '20px' : '0'
+        }}>
+          <h3 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
+            wanna connect<span style={{ color: 'var(--accent-slate)' }}>?</span>
+          </h3>
+          <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto 28px' }}>
+            feel free to reach out for embedded hardware collabs, firmware discussions, or cool project ideas :)
+          </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '14px' }}>
+            <a 
+              href="https://github.com/rohit29d" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-mono"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                borderRadius: 'var(--radius-sm)',
+                background: '#0d1117',
+                border: '1px solid var(--border-subtle)',
+                color: 'var(--text-primary)',
+                textDecoration: 'none',
+                fontSize: '0.88rem',
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-slate)'; e.currentTarget.style.color = 'var(--accent-slate)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+            >
+              <Github size={16} />
+              <span>github.com/rohit29d</span>
+              <ArrowUpRight size={14} />
+            </a>
+
+            <a 
+              href="https://linkedin.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-mono"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                borderRadius: 'var(--radius-sm)',
+                background: '#0d1117',
+                border: '1px solid var(--border-subtle)',
+                color: 'var(--text-primary)',
+                textDecoration: 'none',
+                fontSize: '0.88rem',
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-slate)'; e.currentTarget.style.color = 'var(--accent-slate)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+            >
+              <Linkedin size={16} />
+              <span>LinkedIn</span>
+              <ArrowUpRight size={14} />
+            </a>
+
+            <a 
+              href="mailto:rohit.dubbaka@example.com" 
+              className="font-mono"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--accent-slate)',
+                color: '#080a0f',
+                fontWeight: 600,
+                textDecoration: 'none',
+                fontSize: '0.88rem'
+              }}
+            >
+              <Mail size={16} />
+              <span>rohit.dubbaka@example.com</span>
+            </a>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

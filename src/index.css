@@ -71,20 +71,22 @@ body {
   font-family: var(--font-serif);
 }
 
-/* -------------------------------------------------- */
-/* HOVER-SCRUB SECTION CAROUSEL STAGE                */
-/* -------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/* HOVER-SCRUB SECTION CAROUSEL STAGE (3D SPHERICAL CONCAVE DEPTH)   */
+/* ----------------------------------------------------------------- */
 .carousel-stage {
   position: relative;
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  transition: background-color 0.4s var(--ease-carousel);
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+  transition: background 0.4s var(--ease-carousel);
 }
 
 /* Dark Space Backdrop Vignette when Nav Hovered */
 .carousel-stage.nav-active {
-  background: radial-gradient(circle at 50% 30%, #111622 0%, #06070a 80%);
+  background: radial-gradient(circle at 50% 35%, #131926 0%, #06070a 82%);
 }
 
 .carousel-viewport {
@@ -94,6 +96,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  transform-style: preserve-3d;
 }
 
 /* Individual Carousel Card Container */
@@ -105,55 +108,62 @@ body {
   margin: 0 auto;
   left: 0;
   right: 0;
-  transform-origin: center 10%;
-  transition: transform 0.35s var(--ease-carousel), opacity 0.35s var(--ease-carousel);
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transition: transform 0.25s var(--ease-carousel), opacity 0.25s var(--ease-carousel), box-shadow 0.25s var(--ease-carousel);
   will-change: transform, opacity;
   pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Full-scale active card outside of nav hover */
 .carousel-card.card-full {
-  transform: translateX(0) translateY(0) scale(1);
+  transform: translateX(0) translateY(0) translateZ(0px) rotateY(0deg) scale(1);
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Zoomed-out cards during nav hover */
+/* Zoomed-out Center Card (Directly Facing Viewer) */
 .carousel-card.card-carousel-center {
-  transform: translateX(0) translateY(-14px) scale(0.68);
+  transform: translateX(0) translateY(-14px) translateZ(10px) rotateY(0deg) scale(0.72);
   opacity: 1;
   pointer-events: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75);
   border: 1px solid var(--accent-slate-border);
   border-radius: var(--radius-lg);
   background: var(--bg-dark);
 }
 
+/* Left Neighbor Card (Curving Away into 3D Spherical Dome) */
 .carousel-card.card-carousel-left {
-  transform: translateX(-68vw) translateY(-5px) scale(0.54);
-  opacity: 0.35;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateX(-56vw) translateY(-6px) translateZ(-190px) rotateY(32deg) scale(0.60);
+  opacity: 0.55;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.6);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--bg-dark);
 }
 
+/* Right Neighbor Card (Curving Away into 3D Spherical Dome) */
 .carousel-card.card-carousel-right {
-  transform: translateX(68vw) translateY(-5px) scale(0.54);
-  opacity: 0.35;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateX(56vw) translateY(-6px) translateZ(-190px) rotateY(-32deg) scale(0.60);
+  opacity: 0.55;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.6);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--bg-dark);
 }
 
+/* Far Left Card (Curved Deeply into Dome Periphery) */
 .carousel-card.card-carousel-far-left {
-  transform: translateX(-130vw) translateY(0) scale(0.42);
+  transform: translateX(-110vw) translateY(0) translateZ(-420px) rotateY(55deg) scale(0.46);
   opacity: 0;
 }
 
+/* Far Right Card (Curved Deeply into Dome Periphery) */
 .carousel-card.card-carousel-far-right {
-  transform: translateX(130vw) translateY(0) scale(0.42);
+  transform: translateX(110vw) translateY(0) translateZ(-420px) rotateY(-55deg) scale(0.46);
   opacity: 0;
 }
 
@@ -161,6 +171,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .carousel-card {
     transition: none !important;
+    transform: none !important;
   }
   .carousel-card.card-carousel-left,
   .carousel-card.card-carousel-right,
@@ -171,6 +182,7 @@ body {
   }
   .carousel-card.card-carousel-center {
     transform: none !important;
+    opacity: 1 !important;
   }
 }
 

@@ -41,7 +41,7 @@ export default function App() {
     setIsNavHovered(false);
   };
 
-  // Calculate position class for each section in the carousel
+  // Calculate 3D concave position class for each section in the carousel
   const getCardClass = (sectionId) => {
     if (!isNavHovered) {
       return sectionId === activeSection ? 'card-full' : 'card-carousel-far-right';
@@ -75,7 +75,7 @@ export default function App() {
         onNavClick={handleNavClick}
       />
 
-      {/* Carousel Viewport Container */}
+      {/* 3D Concave Carousel Viewport Container */}
       <main className="carousel-viewport">
         {/* Card 0: Home Section */}
         <div className={`carousel-card ${getCardClass('home')}`}>
@@ -89,12 +89,12 @@ export default function App() {
 
         {/* Card 2: About Section */}
         <div className={`carousel-card ${getCardClass('about')}`}>
-          <AboutContact />
+          <AboutContact viewMode="about" />
         </div>
 
         {/* Card 3: Contact Section */}
         <div className={`carousel-card ${getCardClass('contact')}`}>
-          <AboutContact />
+          <AboutContact viewMode="contact" />
         </div>
       </main>
 
