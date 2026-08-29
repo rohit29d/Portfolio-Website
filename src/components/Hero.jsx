@@ -14,16 +14,19 @@ export default function Hero({ onOpenTerminal }) {
 
   return (
     <section style={{
-      padding: '50px 20px 40px',
-      maxWidth: '800px',
+      padding: '40px 20px 50px',
+      maxWidth: '780px',
       margin: '0 auto',
       textAlign: 'center',
-      position: 'relative'
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }}>
-      {/* Curved SVG Name Header */}
-      <div style={{ width: '100%', maxWidth: '440px', margin: '0 auto -20px' }}>
-        <svg viewBox="0 0 320 120" className="hero-curve-svg" style={{ width: '100%', height: 'auto' }}>
-          <path id="name-curve" d="M 30,110 A 130,130 0 0,1 290,110" fill="transparent" />
+      {/* 1. Curved Name Arch Header (Hugs top of avatar cleanly) */}
+      <div style={{ width: '320px', height: '75px', margin: '0 auto -10px', position: 'relative', zIndex: 2 }}>
+        <svg viewBox="0 0 320 80" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
+          <path id="name-curve" d="M 35,72 A 130,85 0 0,1 285,72" fill="transparent" />
           <text textAnchor="middle" className="hero-curve-text">
             <textPath href="#name-curve" startOffset="50%">
               Rohit Kumar Dubbaka
@@ -32,16 +35,16 @@ export default function Hero({ onOpenTerminal }) {
         </svg>
       </div>
 
-      {/* Avatar Container with Matte Slate Border & Static LED */}
-      <div style={{ display: 'inline-block', position: 'relative', margin: '10px 0 24px' }}>
+      {/* 2. Avatar Container with Matte Slate Border & Static LED */}
+      <div style={{ display: 'inline-block', position: 'relative', marginBottom: '20px', zIndex: 1 }}>
         <div 
           onMouseEnter={() => setAvatarHover(true)}
           onMouseLeave={() => setAvatarHover(false)}
           onClick={onOpenTerminal}
           title="Click to run npx rohitdubbaka"
           style={{
-            width: '126px',
-            height: '126px',
+            width: '124px',
+            height: '124px',
             borderRadius: '50%',
             padding: '2px',
             background: avatarHover 
@@ -89,10 +92,10 @@ export default function Hero({ onOpenTerminal }) {
         </div>
       </div>
 
-      {/* Role Badge Line */}
+      {/* 3. Role Badge Line */}
       <div style={{ marginBottom: '14px' }}>
         <span className="font-mono" style={{
-          fontSize: '0.88rem',
+          fontSize: '0.85rem',
           color: 'var(--accent-slate)',
           background: 'var(--accent-slate-soft)',
           padding: '4px 14px',
@@ -107,30 +110,30 @@ export default function Hero({ onOpenTerminal }) {
         </span>
       </div>
 
-      {/* Tagline */}
+      {/* 4. Tagline */}
       <h1 style={{
-        fontSize: '1.8rem',
+        fontSize: '1.75rem',
         fontWeight: 600,
         letterSpacing: '-0.02em',
-        marginBottom: '16px',
+        marginBottom: '14px',
         color: 'var(--text-primary)'
       }}>
         i like build stuff <span style={{ color: 'var(--accent-slate)' }}>:)</span>
       </h1>
 
-      {/* Intro Description */}
+      {/* 5. Intro Description */}
       <p style={{
-        fontSize: '0.98rem',
+        fontSize: '0.96rem',
         lineHeight: '1.6',
         color: 'var(--text-secondary)',
-        maxWidth: '580px',
-        margin: '0 auto 28px'
+        maxWidth: '560px',
+        margin: '0 auto 24px'
       }}>
         i engineer hardware from schematic to silicon. focused on custom pcb design, 
         real-time stm32 firmware, fpga rtl in vhdl, and edge ai.
       </p>
 
-      {/* Terminal CLI Copy Box Widget */}
+      {/* 6. Terminal CLI Copy Box Widget */}
       <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div 
           className="terminal-copy-box"
@@ -158,7 +161,7 @@ export default function Hero({ onOpenTerminal }) {
       </div>
 
       {/* PCB Trace Line Divider */}
-      <div className="pcb-divider" style={{ marginTop: '50px' }}></div>
+      <div className="pcb-divider" style={{ marginTop: '40px' }}></div>
     </section>
   );
 }
