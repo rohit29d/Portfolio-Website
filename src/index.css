@@ -51,8 +51,8 @@ body {
   overflow-x: hidden;
   /* Subtle PCB Dot Grid Texture */
   background-image: 
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0),
-    linear-gradient(to bottom, rgba(11, 13, 18, 0.92), rgba(11, 13, 18, 0.98));
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0),
+    linear-gradient(to bottom, rgba(11, 13, 18, 0.94), rgba(11, 13, 18, 0.99));
   background-size: 24px 24px, 100% 100%;
 }
 
@@ -84,11 +84,6 @@ body {
   transition: background 0.4s var(--ease-carousel);
 }
 
-/* Dark Space Backdrop Vignette when Nav Hovered */
-.carousel-stage.nav-active {
-  background: radial-gradient(circle at 50% 35%, #131926 0%, #06070a 82%);
-}
-
 .carousel-viewport {
   position: relative;
   width: 100%;
@@ -97,6 +92,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   transform-style: preserve-3d;
+  z-index: 10;
 }
 
 /* Individual Carousel Card Container */
@@ -110,61 +106,70 @@ body {
   right: 0;
   transform-origin: center center;
   transform-style: preserve-3d;
-  transition: transform 0.25s var(--ease-carousel), opacity 0.25s var(--ease-carousel), box-shadow 0.25s var(--ease-carousel);
+  transition: transform 0.28s var(--ease-carousel), opacity 0.28s var(--ease-carousel), box-shadow 0.28s var(--ease-carousel);
   will-change: transform, opacity;
   pointer-events: none;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* Full-scale active card outside of nav hover */
+/* When Nav is hovered (zoomed-out carousel state), apply concave spherical lens curvature */
+.carousel-stage.nav-active .carousel-card {
+  clip-path: url(#concave-spherical-clip);
+  -webkit-clip-path: url(#concave-spherical-clip);
+}
+
+/* Full-scale active card outside of nav hover (Normal flat view) */
 .carousel-card.card-full {
   transform: translateX(0) translateY(0) translateZ(0px) rotateY(0deg) scale(1);
   opacity: 1;
   pointer-events: auto;
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+  z-index: 10;
 }
 
-/* Zoomed-out Center Card (Directly Facing Viewer) */
+/* Zoomed-out Center Card (Facing Viewer, Concave Curved Surface) */
 .carousel-card.card-carousel-center {
   transform: translateX(0) translateY(-14px) translateZ(10px) rotateY(0deg) scale(0.72);
   opacity: 1;
   pointer-events: auto;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
   border: 1px solid var(--accent-slate-border);
   border-radius: var(--radius-lg);
   background: var(--bg-dark);
+  z-index: 10;
 }
 
-/* Left Neighbor Card (Curving Away into 3D Spherical Dome) */
+/* Left Neighbor Card (Continuous Circular Ring - Curving into Dome) */
 .carousel-card.card-carousel-left {
   transform: translateX(-56vw) translateY(-6px) translateZ(-190px) rotateY(32deg) scale(0.60);
   opacity: 0.55;
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.65);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--bg-dark);
+  z-index: 5;
 }
 
-/* Right Neighbor Card (Curving Away into 3D Spherical Dome) */
+/* Right Neighbor Card (Continuous Circular Ring - Curving into Dome) */
 .carousel-card.card-carousel-right {
   transform: translateX(56vw) translateY(-6px) translateZ(-190px) rotateY(-32deg) scale(0.60);
   opacity: 0.55;
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.65);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--bg-dark);
+  z-index: 5;
 }
 
-/* Far Left Card (Curved Deeply into Dome Periphery) */
-.carousel-card.card-carousel-far-left {
-  transform: translateX(-110vw) translateY(0) translateZ(-420px) rotateY(55deg) scale(0.46);
-  opacity: 0;
-}
-
-/* Far Right Card (Curved Deeply into Dome Periphery) */
+/* Far / Opposite Card on Ring */
+.carousel-card.card-carousel-far,
+.carousel-card.card-carousel-far-left,
 .carousel-card.card-carousel-far-right {
-  transform: translateX(110vw) translateY(0) translateZ(-420px) rotateY(-55deg) scale(0.46);
+  transform: translateX(0) translateY(0) translateZ(-420px) rotateY(180deg) scale(0.44);
   opacity: 0;
+  z-index: 1;
 }
 
 /* Prefers Reduced Motion Fallback */
@@ -172,9 +177,12 @@ body {
   .carousel-card {
     transition: none !important;
     transform: none !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
   }
   .carousel-card.card-carousel-left,
   .carousel-card.card-carousel-right,
+  .carousel-card.card-carousel-far,
   .carousel-card.card-carousel-far-left,
   .carousel-card.card-carousel-far-right {
     opacity: 0 !important;
