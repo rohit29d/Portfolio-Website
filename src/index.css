@@ -72,7 +72,7 @@ body {
 }
 
 /* ----------------------------------------------------------------- */
-/* HOVER-SCRUB SECTION CAROUSEL STAGE (3D SPHERICAL CONCAVE DEPTH)   */
+/* HOVER-SCRUB SECTION CAROUSEL STAGE (UNIFIED 3D CONCAVE DOME PLANE) */
 /* ----------------------------------------------------------------- */
 .carousel-stage {
   position: relative;
@@ -80,8 +80,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   perspective: 1400px;
-  perspective-origin: 50% 40%;
-  transition: background 0.4s var(--ease-carousel);
+  perspective-origin: 50% 35%;
 }
 
 .carousel-viewport {
@@ -95,7 +94,7 @@ body {
   z-index: 10;
 }
 
-/* Individual Carousel Card Container */
+/* Individual Carousel Card Container - All sit on the same curved continuous plane */
 .carousel-card {
   position: absolute;
   top: 0;
@@ -106,7 +105,7 @@ body {
   right: 0;
   transform-origin: center center;
   transform-style: preserve-3d;
-  transition: transform 0.28s var(--ease-carousel), opacity 0.28s var(--ease-carousel), box-shadow 0.28s var(--ease-carousel);
+  transition: transform 0.28s var(--ease-carousel), opacity 0.28s var(--ease-carousel);
   will-change: transform, opacity;
   pointer-events: none;
   backface-visibility: hidden;
@@ -117,6 +116,10 @@ body {
 .carousel-stage.nav-active .carousel-card {
   clip-path: url(#concave-spherical-clip);
   -webkit-clip-path: url(#concave-spherical-clip);
+  border: 1px solid var(--accent-slate-border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-dark);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7);
 }
 
 /* Full-scale active card outside of nav hover (Normal flat view) */
@@ -126,50 +129,40 @@ body {
   pointer-events: auto;
   clip-path: none !important;
   -webkit-clip-path: none !important;
-  z-index: 10;
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 
-/* Zoomed-out Center Card (Facing Viewer, Concave Curved Surface) */
+/* All cards share identical scale (0.66) and identical vertical baseline (translateY(-14px)) */
+/* Center Card: facing viewer directly on the curved continuous surface */
 .carousel-card.card-carousel-center {
-  transform: translateX(0) translateY(-14px) translateZ(10px) rotateY(0deg) scale(0.72);
+  transform: translateX(0px) translateY(-14px) translateZ(0px) rotateY(0deg) scale(0.66);
   opacity: 1;
   pointer-events: auto;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
-  border: 1px solid var(--accent-slate-border);
-  border-radius: var(--radius-lg);
-  background: var(--bg-dark);
-  z-index: 10;
 }
 
-/* Left Neighbor Card (Continuous Circular Ring - Curving into Dome) */
+/* Left Neighbor Card: curving into dome along continuous radius */
 .carousel-card.card-carousel-left {
-  transform: translateX(-56vw) translateY(-6px) translateZ(-190px) rotateY(32deg) scale(0.60);
-  opacity: 0.55;
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.65);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--bg-dark);
-  z-index: 5;
+  transform: translateX(-54vw) translateY(-14px) translateZ(-200px) rotateY(32deg) scale(0.66);
+  opacity: 0.65;
+  pointer-events: none;
 }
 
-/* Right Neighbor Card (Continuous Circular Ring - Curving into Dome) */
+/* Right Neighbor Card: curving into dome along continuous radius */
 .carousel-card.card-carousel-right {
-  transform: translateX(56vw) translateY(-6px) translateZ(-190px) rotateY(-32deg) scale(0.60);
-  opacity: 0.55;
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.65);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--bg-dark);
-  z-index: 5;
+  transform: translateX(54vw) translateY(-14px) translateZ(-200px) rotateY(-32deg) scale(0.66);
+  opacity: 0.65;
+  pointer-events: none;
 }
 
 /* Far / Opposite Card on Ring */
 .carousel-card.card-carousel-far,
 .carousel-card.card-carousel-far-left,
 .carousel-card.card-carousel-far-right {
-  transform: translateX(0) translateY(0) translateZ(-420px) rotateY(180deg) scale(0.44);
+  transform: translateX(0px) translateY(-14px) translateZ(-550px) rotateY(180deg) scale(0.50);
   opacity: 0;
-  z-index: 1;
+  pointer-events: none;
 }
 
 /* Prefers Reduced Motion Fallback */

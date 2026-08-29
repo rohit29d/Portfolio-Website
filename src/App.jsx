@@ -13,6 +13,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrubbedSection, setScrubbedSection] = useState('home');
   const [isNavHovered, setIsNavHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeCategory, setActiveCategory] = useState('all');
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
@@ -25,9 +26,15 @@ export default function App() {
   // Commit: Cursor leaves top nav bar entirely
   const handleNavMouseLeave = () => {
     setIsNavHovered(false);
+    setMousePos({ x: 0, y: 0 });
     if (scrubbedSection) {
       setActiveSection(scrubbedSection);
     }
+  };
+
+  // Live tracking of cursor position for smooth parallax pan
+  const handleNavMouseMove = (pos) => {
+    setMousePos(pos);
   };
 
   // Scrub: Cursor moves over specific nav item
@@ -79,8 +86,8 @@ export default function App() {
         </defs>
       </svg>
 
-      {/* Deep Space Starfield & Galaxy Backdrop (Fades in during zoom-out) */}
-      <SpaceBackdrop active={isNavHovered} />
+      {/* Real Astrophotography Deep-Space Backdrop with Cursor-driven Parallax Pan */}
+      <SpaceBackdrop active={isNavHovered} mousePos={mousePos} />
 
       {/* Top Header Navigation */}
       <Header 
@@ -88,6 +95,7 @@ export default function App() {
         scrubbedSection={isNavHovered ? scrubbedSection : null}
         onNavMouseEnter={handleNavMouseEnter}
         onNavMouseLeave={handleNavMouseLeave}
+        onNavMouseMove={handleNavMouseMove}
         onItemHover={handleItemHover}
         onNavClick={handleNavClick}
       />

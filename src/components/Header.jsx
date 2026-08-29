@@ -6,6 +6,7 @@ export default function Header({
   scrubbedSection,
   onNavMouseEnter, 
   onNavMouseLeave, 
+  onNavMouseMove,
   onItemHover, 
   onNavClick 
 }) {
@@ -16,13 +17,21 @@ export default function Header({
     { id: 'contact', label: 'contact' }
   ];
 
-  // Currently focused item is either the live scrubbed item or active section
   const currentFocused = scrubbedSection || activeSection;
+
+  const handleMouseMove = (e) => {
+    if (!onNavMouseMove) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    onNavMouseMove({ x: Math.max(-1, Math.min(1, normX)), y: Math.max(-1, Math.min(1, normY)) });
+  };
 
   return (
     <header 
       onMouseEnter={onNavMouseEnter}
       onMouseLeave={onNavMouseLeave}
+      onMouseMove={handleMouseMove}
       style={{
         position: 'sticky',
         top: 0,
