@@ -9,19 +9,19 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
       return seed / 233280;
     };
 
-    const count = 75;
+    const count = 70;
     const starList = [];
     for (let i = 0; i < count; i++) {
       const x = parseFloat((random() * 100).toFixed(2));
       const y = parseFloat((random() * 100).toFixed(2));
       const r = parseFloat((random() * 1.0 + 0.5).toFixed(2));
-      const opacity = parseFloat((random() * 0.55 + 0.15).toFixed(2));
+      const opacity = parseFloat((random() * 0.5 + 0.15).toFixed(2));
       starList.push({ id: i, x, y, r, opacity });
     }
     return starList;
   }, []);
 
-  // Subtle parallax translation calculation (translates opposite to cursor)
+  // Smooth parallax translation calculation (opposite to cursor)
   const parallaxX = (mousePos.x || 0) * -28;
   const parallaxY = (mousePos.y || 0) * -16;
 
@@ -36,10 +36,10 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
         opacity: active ? 1 : 0,
         transition: 'opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
         overflow: 'hidden',
-        backgroundColor: '#05070a'
+        backgroundColor: '#000000'
       }}
     >
-      {/* 1. Real Deep-Field Astrophotography Backdrop Layer (140% viewport size for parallax pan) */}
+      {/* 1. Real NASA Hubble Ultra Deep Field Backdrop Layer (140% viewport size for parallax pan) */}
       <div
         style={{
           position: 'absolute',
@@ -53,35 +53,23 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
           transform: `translate3d(${parallaxX}px, ${parallaxY}px, 0)`,
           transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
           willChange: 'transform',
-          filter: 'brightness(0.85) contrast(1.1)'
+          filter: 'brightness(0.9) contrast(1.15)'
         }}
       />
 
-      {/* 2. Matte Slate-Blue Astrophotography Color Grade Overlay */}
+      {/* 2. Pure Black Cosmic Vignette Overlay (Eliminating bluish tint) */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background: `
-            radial-gradient(circle at 50% 35%, rgba(125, 171, 196, 0.12) 0%, rgba(11, 15, 24, 0.65) 50%, rgba(5, 7, 11, 0.92) 85%),
-            linear-gradient(to bottom, rgba(11, 13, 18, 0.55), rgba(7, 9, 14, 0.85))
+            radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.75) 60%, rgba(0, 0, 0, 0.95) 90%),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.85))
           `
         }}
       />
 
-      {/* 3. Soft Muted Galaxy / Nebulae Ambient Glows */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: `
-            radial-gradient(ellipse 600px 400px at 20% 30%, rgba(125, 171, 196, 0.09) 0%, transparent 70%),
-            radial-gradient(ellipse 650px 450px at 80% 65%, rgba(115, 95, 150, 0.07) 0%, transparent 70%)
-          `
-        }}
-      />
-
-      {/* 4. Fine Foreground Starfield SVG Overlay */}
+      {/* 3. Fine Neutral Foreground Starfield SVG Overlay */}
       <svg
         style={{
           position: 'absolute',
@@ -96,20 +84,20 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
             cx={`${star.x}%`}
             cy={`${star.y}%`}
             r={star.r}
-            fill="#dbeafe"
+            fill="#ffffff"
             opacity={star.opacity}
           />
         ))}
       </svg>
 
-      {/* 5. Thinned PCB Dot-Grid Texture */}
+      {/* 4. Thinned PCB Dot-Grid Texture */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.02) 1px, transparent 0)',
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.025) 1px, transparent 0)',
           backgroundSize: '24px 24px',
-          opacity: 0.4
+          opacity: 0.35
         }}
       />
     </div>

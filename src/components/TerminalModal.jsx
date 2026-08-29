@@ -70,14 +70,14 @@ export default function TerminalModal({ isOpen, onClose }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{
-        background: '#07090e',
-        border: '1px solid var(--accent-slate-border)',
+        background: '#050507',
+        border: '1px solid var(--border-accent)',
         padding: '0',
         overflow: 'hidden'
       }}>
         {/* Terminal Header */}
         <div style={{
-          background: '#0f131d',
+          background: '#0d0d10',
           padding: '10px 16px',
           display: 'flex',
           alignItems: 'center',

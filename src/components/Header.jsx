@@ -36,7 +36,7 @@ export default function Header({
         position: 'sticky',
         top: 0,
         zIndex: 90,
-        background: 'rgba(11, 13, 18, 0.88)',
+        background: 'rgba(0, 0, 0, 0.92)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
         padding: '18px 28px',

@@ -57,7 +57,7 @@ export default function Hero({ onOpenTerminal }) {
             width: '100%',
             height: '100%',
             borderRadius: '50%',
-            background: '#0d1117',
+            background: '#050507',
             overflow: 'hidden',
             position: 'relative'
           }}>
@@ -84,7 +84,7 @@ export default function Hero({ onOpenTerminal }) {
             height: '12px',
             borderRadius: '50%',
             background: 'var(--accent-slate)',
-            border: '2px solid #0d1117'
+            border: '2px solid #050507'
           }} title="Status: Active" />
         </div>
       </div>
