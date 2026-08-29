@@ -1,25 +1,24 @@
 :root {
-  /* True Pure Black Design System */
+  /* Solid True Black Design System */
   --bg-dark: #000000;
-  --bg-card: #08080a;
-  --bg-card-hover: #101014;
-  --bg-elevated: #141418;
+  --bg-card: #000000;
+  --bg-card-hover: #0a0405;
+  --bg-elevated: #0d0608;
   
-  /* Matte Slate-Blue Accent (Desaturated, Precision, No Glow) */
-  --accent-slate: #7dabc4;
-  --accent-slate-hover: #96bdd4;
-  --accent-slate-soft: rgba(125, 171, 196, 0.10);
-  --accent-slate-border: rgba(125, 171, 196, 0.22);
-  
-  --copper-gold: #b0955d;
-  --led-status: #7dabc4;
+  /* Single Accent Color: Deep Wine / Burgundy (#6B1F2A) */
+  --accent-wine: #6B1F2A;
+  --accent-wine-hover: #862936;
+  --accent-wine-soft: rgba(107, 31, 42, 0.20);
+  --accent-wine-border: rgba(107, 31, 42, 0.50);
+  --accent-wine-border-strong: #6B1F2A;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  /* Pure White / Off-White Text Hierarchy */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.40);
   
-  --border-subtle: #17171c;
-  --border-accent: rgba(125, 171, 196, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(107, 31, 42, 0.50);
   
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -29,7 +28,8 @@
   --radius-md: 6px;
   --radius-lg: 10px;
 
-  --ease-carousel: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Standardized Silky Ease-Out Curve */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -51,15 +51,13 @@ body {
   position: relative;
   overflow-x: hidden;
   background-color: #000000;
-  /* Pure Black with Subtle Crisp Neutral Dot Grid */
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
-  background-size: 24px 24px;
+  background-image: none;
 }
 
 /* Custom Selection */
 ::selection {
-  background: var(--accent-slate);
-  color: #000000;
+  background: var(--accent-wine);
+  color: #ffffff;
 }
 
 /* Monospace Helpers */
@@ -101,7 +99,7 @@ body {
   margin-left: calc(-1 * min(460px, 46vw));
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
-  transition: transform 0.28s var(--ease-carousel), opacity 0.28s var(--ease-carousel);
+  transition: transform 0.42s var(--ease-smooth), opacity 0.42s var(--ease-smooth);
   will-change: transform, opacity;
   pointer-events: none;
   backface-visibility: hidden;
@@ -112,9 +110,9 @@ body {
 .carousel-stage.nav-active .carousel-card {
   clip-path: url(#concave-spherical-clip);
   -webkit-clip-path: url(#concave-spherical-clip);
-  border: 1px solid var(--border-accent);
+  border: 1px solid var(--accent-wine-border);
   border-radius: var(--radius-lg);
-  background: #070709;
+  background: #000000;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
 }
 
@@ -184,7 +182,7 @@ body {
   width: 100%;
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
-  transition: transform 0.28s var(--ease-carousel), opacity 0.28s var(--ease-carousel);
+  transition: transform 0.38s var(--ease-smooth), opacity 0.38s var(--ease-smooth);
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -269,7 +267,7 @@ body {
   }
 }
 
-/* PCB Trace Divider Line */
+/* Divider Line */
 .pcb-divider {
   position: relative;
   height: 1px;
@@ -279,7 +277,7 @@ body {
   background: linear-gradient(90deg, 
     transparent 0%, 
     var(--border-subtle) 20%, 
-    var(--accent-slate-border) 50%, 
+    var(--accent-wine-border) 50%, 
     var(--border-subtle) 80%, 
     transparent 100%
   );
@@ -293,21 +291,21 @@ body {
   transform: translateX(-50%);
   width: 6px;
   height: 6px;
-  background: var(--accent-slate);
+  background: var(--accent-wine);
   border-radius: 50%;
 }
 
-/* Component Footprint Corner Brackets */
+/* Component Corner Brackets */
 .corner-bracket-card {
   position: relative;
-  background: var(--bg-card);
+  background: #000000;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.3s var(--ease-smooth), background-color 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth);
 }
 
 .corner-bracket-card:hover {
-  border-color: var(--border-accent);
+  border-color: var(--accent-wine-border);
   background: var(--bg-card-hover);
   transform: translateY(-2px);
 }
@@ -320,7 +318,7 @@ body {
   font-size: 11px;
   color: var(--text-muted);
   pointer-events: none;
-  transition: color 0.2s ease;
+  transition: color 0.3s var(--ease-smooth);
 }
 
 .corner-bracket-card::before {
@@ -335,10 +333,10 @@ body {
 
 .corner-bracket-card:hover::before,
 .corner-bracket-card:hover::after {
-  color: var(--accent-slate);
+  color: var(--accent-wine);
 }
 
-/* Matte Slate Tag */
+/* Wine Tag */
 .tech-tag {
   display: inline-flex;
   align-items: center;
@@ -347,23 +345,23 @@ body {
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
-  background: var(--accent-slate-soft);
-  border: 1px solid var(--accent-slate-border);
-  color: var(--accent-slate);
-  transition: border-color 0.2s ease;
+  background: var(--accent-wine-soft);
+  border: 1px solid var(--accent-wine-border);
+  color: var(--text-primary);
+  transition: border-color 0.3s var(--ease-smooth), background-color 0.3s var(--ease-smooth);
 }
 
 .tech-tag:hover {
-  border-color: var(--accent-slate);
+  border-color: var(--accent-wine-hover);
 }
 
-/* Static Matte LED Indicator */
+/* Static Wine LED Indicator */
 .led-indicator {
   display: inline-block;
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: var(--accent-slate);
+  background-color: var(--accent-wine);
 }
 
 /* Curved Text Header Styling */
@@ -378,11 +376,11 @@ body {
   font-size: 32px;
   fill: var(--text-primary);
   letter-spacing: -0.03em;
-  transition: fill 0.2s ease;
+  transition: fill 0.3s var(--ease-smooth);
 }
 
 .hero-curve-text:hover {
-  fill: var(--accent-slate);
+  fill: var(--accent-wine);
 }
 
 /* Terminal CLI Copy Box */
@@ -390,18 +388,18 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: #050507;
-  border: 1px solid var(--border-accent);
+  background: #000000;
+  border: 1px solid var(--accent-wine-border);
   padding: 8px 16px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.3s var(--ease-smooth), background-color 0.3s var(--ease-smooth);
 }
 
 .terminal-copy-box:hover {
-  border-color: var(--accent-slate);
-  background: #0a0a0e;
+  border-color: var(--accent-wine);
+  background: var(--bg-card-hover);
 }
 
 .copy-btn {
@@ -412,11 +410,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease;
+  transition: color 0.3s var(--ease-smooth);
 }
 
 .copy-btn:hover {
-  color: var(--accent-slate);
+  color: var(--accent-wine);
 }
 
 /* ----------------------------------------------------------------- */
@@ -433,12 +431,12 @@ body {
   align-items: stretch;
   gap: 4px;
   padding: 10px 8px;
-  background: rgba(8, 8, 10, 0.94);
+  background: rgba(0, 0, 0, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--accent-slate-border);
+  border: 1px solid var(--accent-wine-border);
   border-radius: var(--radius-md);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
 }
 
@@ -463,17 +461,17 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  transition: all 0.2s ease;
+  transition: all 0.3s var(--ease-smooth);
 }
 
 .category-rail-item:hover {
-  color: var(--accent-slate);
-  background: var(--accent-slate-soft);
+  color: #ffffff;
+  background: var(--accent-wine-soft);
 }
 
 .category-rail-item.active {
-  background: var(--accent-slate);
-  color: #000000;
+  background: var(--accent-wine);
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -508,8 +506,8 @@ body {
 }
 
 .modal-content {
-  background: var(--bg-card);
-  border: 1px solid var(--border-accent);
+  background: #000000;
+  border: 1px solid var(--accent-wine-border);
   border-radius: var(--radius-md);
   max-width: 640px;
   width: 100%;
@@ -534,5 +532,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-slate);
+  background: var(--accent-wine);
 }

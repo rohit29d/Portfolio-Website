@@ -23,7 +23,7 @@ export default function Hero({ onOpenTerminal }) {
       flexDirection: 'column',
       alignItems: 'center'
     }}>
-      {/* 1. Curved Name Arch Header (Hugs top of avatar cleanly) */}
+      {/* 1. Curved Name Arch Header */}
       <div style={{ width: '320px', height: '75px', margin: '0 auto -10px', position: 'relative', zIndex: 2 }}>
         <svg viewBox="0 0 320 80" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
           <path id="name-curve" d="M 35,72 A 130,85 0 0,1 285,72" fill="transparent" />
@@ -35,7 +35,7 @@ export default function Hero({ onOpenTerminal }) {
         </svg>
       </div>
 
-      {/* 2. Avatar Container with Matte Slate Border & Static LED */}
+      {/* 2. Avatar Container with Wine Border & LED */}
       <div style={{ display: 'inline-block', position: 'relative', marginBottom: '20px', zIndex: 1 }}>
         <div 
           onMouseEnter={() => setAvatarHover(true)}
@@ -48,10 +48,10 @@ export default function Hero({ onOpenTerminal }) {
             borderRadius: '50%',
             padding: '2px',
             background: avatarHover 
-              ? 'var(--accent-slate)' 
+              ? 'var(--accent-wine)' 
               : 'var(--border-subtle)',
             cursor: 'pointer',
-            transition: 'background 0.2s ease',
+            transition: 'background 0.3s var(--ease-smooth)',
             position: 'relative'
           }}
         >
@@ -60,7 +60,7 @@ export default function Hero({ onOpenTerminal }) {
             width: '100%',
             height: '100%',
             borderRadius: '50%',
-            background: '#050507',
+            background: '#000000',
             overflow: 'hidden',
             position: 'relative'
           }}>
@@ -78,7 +78,7 @@ export default function Hero({ onOpenTerminal }) {
             />
           </div>
 
-          {/* Static Matte LED Indicator Dot */}
+          {/* Wine LED Indicator Dot */}
           <div style={{
             position: 'absolute',
             bottom: '4px',
@@ -86,8 +86,8 @@ export default function Hero({ onOpenTerminal }) {
             width: '12px',
             height: '12px',
             borderRadius: '50%',
-            background: 'var(--accent-slate)',
-            border: '2px solid #050507'
+            background: 'var(--accent-wine)',
+            border: '2px solid #000000'
           }} title="Status: Active" />
         </div>
       </div>
@@ -96,16 +96,16 @@ export default function Hero({ onOpenTerminal }) {
       <div style={{ marginBottom: '14px' }}>
         <span className="font-mono" style={{
           fontSize: '0.85rem',
-          color: 'var(--accent-slate)',
-          background: 'var(--accent-slate-soft)',
+          color: '#ffffff',
+          background: 'var(--accent-wine-soft)',
           padding: '4px 14px',
           borderRadius: '9999px',
-          border: '1px solid var(--accent-slate-border)',
+          border: '1px solid var(--accent-wine-border)',
           display: 'inline-flex',
           alignItems: 'center',
           gap: '6px'
         }}>
-          <Zap size={13} color="var(--accent-slate)" />
+          <Zap size={13} color="var(--accent-wine)" />
           embedded systems @ deltaiot
         </span>
       </div>
@@ -116,9 +116,9 @@ export default function Hero({ onOpenTerminal }) {
         fontWeight: 600,
         letterSpacing: '-0.02em',
         marginBottom: '14px',
-        color: 'var(--text-primary)'
+        color: '#ffffff'
       }}>
-        i like build stuff <span style={{ color: 'var(--accent-slate)' }}>:)</span>
+        i like build stuff <span style={{ color: 'var(--accent-wine)' }}>:)</span>
       </h1>
 
       {/* 5. Intro Description */}
@@ -141,9 +141,9 @@ export default function Hero({ onOpenTerminal }) {
           style={{ cursor: 'pointer' }}
           title="Click to run interactive terminal"
         >
-          <Terminal size={15} color="var(--accent-slate)" />
+          <Terminal size={15} color="var(--accent-wine)" />
           <span style={{ color: 'var(--text-muted)' }}>%</span>
-          <code style={{ color: 'var(--text-primary)', fontWeight: 500 }}>npx rohitdubbaka</code>
+          <code style={{ color: '#ffffff', fontWeight: 500 }}>npx rohitdubbaka</code>
           <button 
             type="button" 
             onClick={handleCopy}
@@ -151,7 +151,7 @@ export default function Hero({ onOpenTerminal }) {
             aria-label="Copy npx command"
             title="Copy command"
           >
-            {copied ? <Check size={14} color="var(--accent-slate)" /> : <Copy size={14} />}
+            {copied ? <Check size={14} color="var(--accent-wine)" /> : <Copy size={14} />}
           </button>
         </div>
 
@@ -160,7 +160,7 @@ export default function Hero({ onOpenTerminal }) {
         </span>
       </div>
 
-      {/* PCB Trace Line Divider */}
+      {/* Divider */}
       <div className="pcb-divider" style={{ marginTop: '40px' }}></div>
     </section>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -13,14 +13,39 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrubbedSection, setScrubbedSection] = useState('home');
   const [isNavHovered, setIsNavHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
+  // Per-frame Lerp Mouse Position for Cursor-Speed-Synced Easing
+  const [lerpedMousePos, setLerpedMousePos] = useState({ x: 0, y: 0 });
+  const targetMousePosRef = useRef({ x: 0, y: 0 });
+  const currentMousePosRef = useRef({ x: 0, y: 0 });
+  const rafRef = useRef(null);
+
   // Scoped Category Cylinder Rotation State
   const [activeCategory, setActiveCategory] = useState('all');
   const [scrubbedCategory, setScrubbedCategory] = useState('all');
   const [isBottomNavHovered, setIsBottomNavHovered] = useState(false);
 
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
+  // Continuous per-frame lerp animation loop (current += (target - current) * factor)
+  useEffect(() => {
+    const updateLerp = () => {
+      const target = targetMousePosRef.current;
+      const current = currentMousePosRef.current;
+      
+      const factor = 0.12; // Smooth catch-up factor
+      current.x += (target.x - current.x) * factor;
+      current.y += (target.y - current.y) * factor;
+
+      setLerpedMousePos({ x: current.x, y: current.y });
+      rafRef.current = requestAnimationFrame(updateLerp);
+    };
+
+    rafRef.current = requestAnimationFrame(updateLerp);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   // Top Nav Hover Trigger: Cursor enters top nav bar
   const handleNavMouseEnter = () => {
@@ -31,15 +56,15 @@ export default function App() {
   // Top Nav Commit: Cursor leaves top nav bar entirely
   const handleNavMouseLeave = () => {
     setIsNavHovered(false);
-    setMousePos({ x: 0, y: 0 });
+    targetMousePosRef.current = { x: 0, y: 0 };
     if (scrubbedSection) {
       setActiveSection(scrubbedSection);
     }
   };
 
-  // Top Nav Parallax Mouse Tracking
+  // Top Nav Parallax Mouse Tracking (Updates target for lerp)
   const handleNavMouseMove = (pos) => {
-    setMousePos(pos);
+    targetMousePosRef.current = pos;
   };
 
   // Top Nav Item Hover
@@ -116,8 +141,8 @@ export default function App() {
         </defs>
       </svg>
 
-      {/* High-Definition PCB Circuitry Backdrop with Cursor Parallax Pan */}
-      <SpaceBackdrop active={isNavHovered} mousePos={mousePos} />
+      {/* High-Definition PCB Circuitry Backdrop with Lerp-Smoothed Parallax Pan */}
+      <SpaceBackdrop active={isNavHovered} mousePos={lerpedMousePos} />
 
       {/* Top Header Navigation */}
       <Header 
@@ -157,7 +182,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* Projects-Specific Bottom Capsule Filter with Scoped Cylinder Rotation */}
+      {/* Projects-Specific Vertical Category Rail with Scoped Cylinder Rotation */}
       <BottomNav 
         activeCategory={activeCategory} 
         scrubbedCategory={scrubbedCategory}

@@ -38,10 +38,10 @@ export default function BottomNav({
         borderBottom: '1px solid var(--border-subtle)',
         marginBottom: '4px'
       }}>
-        <Layers size={13} color="var(--accent-slate)" />
+        <Layers size={13} color="var(--accent-wine)" />
         <span className="font-mono" style={{
           fontSize: '0.68rem',
-          color: 'var(--accent-slate)',
+          color: 'var(--text-secondary)',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
           fontWeight: 600
@@ -65,10 +65,10 @@ export default function BottomNav({
             <span>{tab.label}</span>
             <span className="font-mono" style={{
               fontSize: '0.65rem',
-              opacity: isFocused ? 0.9 : 0.45,
+              opacity: isFocused ? 0.95 : 0.45,
               padding: '1px 5px',
               borderRadius: '3px',
-              background: isFocused ? 'rgba(0,0,0,0.2)' : 'var(--bg-elevated)'
+              background: isFocused ? 'rgba(0,0,0,0.3)' : 'var(--bg-elevated)'
             }}>
               {tab.count}
             </span>

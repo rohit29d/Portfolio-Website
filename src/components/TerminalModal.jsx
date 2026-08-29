@@ -7,31 +7,34 @@ export default function TerminalModal({ isOpen, onClose }) {
   const [copied, setCopied] = useState(false);
 
   const fullSequence = [
-    { text: '- checking hardware curiosity...', color: 'var(--accent-slate)' },
-    { text: '✔ hardware curiosity confirmed.', color: 'var(--accent-slate)' },
+    { text: '- checking hardware curiosity...', color: 'var(--accent-wine-hover)' },
+    { text: '✔ hardware curiosity confirmed.', color: 'var(--accent-wine-hover)' },
     { text: ' ', color: '' },
     { text: 'name? Rohit Kumar Dubbaka', color: '#ffffff' },
-    { text: 'embedded systems engineer @ deltaiot', color: 'var(--accent-slate)' },
+    { text: 'embedded systems intern @ deltaiot pvt ltd (hyderabad)', color: 'var(--accent-wine-hover)' },
+    { text: 'education: B.Tech ECE (2026) @ Amrita Vishwa Vidyapeetham', color: '#ffffff' },
     { text: ' ', color: '' },
-    { text: 'strengths?', color: 'var(--copper-gold)' },
-    { text: '• pcb schematic-to-silicon design', color: 'var(--text-secondary)' },
-    { text: '• low-level stm32 C firmware & RTOS', color: 'var(--text-secondary)' },
-    { text: '• vhdl fpga rtl architecture', color: 'var(--text-secondary)' },
-    { text: '• signal processing & edge ai', color: 'var(--text-secondary)' },
+    { text: 'strengths?', color: '#ffffff' },
+    { text: '• 4-layer LTE/GPS PCB design & 3A burst power management', color: 'var(--text-secondary)' },
+    { text: '• low-level stm32 C firmware, ADC/UART/SPI & RTOS', color: 'var(--text-secondary)' },
+    { text: '• vhdl fpga rtl architecture (basys-3 priority arbiter)', color: 'var(--text-secondary)' },
+    { text: '• wearable sEMG analog front-end (AFE) & edge ai classification', color: 'var(--text-secondary)' },
     { text: ' ', color: '' },
-    { text: 'hardware & software stack?', color: 'var(--copper-gold)' },
-    { text: 'kicad • stm32 • vhdl • ltspice • esp32 • python • matlab • C/C++', color: '#ffffff' },
+    { text: 'hardware & software stack?', color: '#ffffff' },
+    { text: 'altium designer • kicad • stm32cubeide • esp-idf • vivado • ltspice • C/C++ • python • vhdl', color: '#ffffff' },
     { text: ' ', color: '' },
-    { text: 'flagship proof', color: 'var(--copper-gold)' },
+    { text: 'flagship proof', color: '#ffffff' },
     { text: '• hands-free sEMG speech wheelchair AFE PCB & real-time ML', color: 'var(--text-secondary)' },
     { text: '• priority arbiter VHDL logic synthesized on basys-3 FPGA', color: 'var(--text-secondary)' },
-    { text: '• aeromesh edge AI turbulence detection nodes', color: 'var(--text-secondary)' },
+    { text: '• aeromesh edge AI turbulence detection nodes (craftifai buildathon)', color: 'var(--text-secondary)' },
     { text: ' ', color: '' },
-    { text: 'links & contact', color: 'var(--accent-slate)' },
+    { text: 'links & contact', color: 'var(--accent-wine-hover)' },
     { text: 'github: https://github.com/rohit29d', color: '#ffffff' },
-    { text: 'email: rohit.dubbaka@example.com', color: '#ffffff' },
+    { text: 'email: rohitdubbaka29@gmail.com', color: '#ffffff' },
+    { text: 'phone: +91 9908422253', color: '#ffffff' },
+    { text: 'resume: /resume.pdf', color: 'var(--accent-wine-hover)' },
     { text: ' ', color: '' },
-    { text: 'status: 0 errors, system operational. what do you want to build next?', color: 'var(--accent-slate)' }
+    { text: 'status: 0 errors, system operational. what do you want to build next?', color: 'var(--accent-wine-hover)' }
   ];
 
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function TerminalModal({ isOpen, onClose }) {
         setIsTyping(false);
         clearInterval(interval);
       }
-    }, 100);
+    }, 90);
 
     return () => clearInterval(interval);
   }, [isOpen]);
@@ -70,28 +73,28 @@ export default function TerminalModal({ isOpen, onClose }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{
-        background: '#050507',
-        border: '1px solid var(--border-accent)',
+        background: '#000000',
+        border: '1px solid var(--accent-wine-border)',
         padding: '0',
         overflow: 'hidden'
       }}>
         {/* Terminal Header */}
         <div style={{
-          background: '#0d0d10',
-          padding: '10px 16px',
+          background: '#0a0405',
+          padding: '12px 18px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           borderBottom: '1px solid var(--border-subtle)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <TerminalIcon size={16} color="var(--accent-slate)" />
-            <span className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+            <TerminalIcon size={16} color="var(--accent-wine)" />
+            <span className="font-mono" style={{ fontSize: '0.82rem', color: '#ffffff', fontWeight: 600 }}>
               bash — npx rohitdubbaka
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <button
               onClick={handleCopyLogs}
               style={{
@@ -106,7 +109,7 @@ export default function TerminalModal({ isOpen, onClose }) {
               }}
               className="font-mono"
             >
-              {copied ? <Check size={14} color="var(--accent-slate)" /> : <Copy size={14} />}
+              {copied ? <Check size={14} color="var(--accent-wine)" /> : <Copy size={14} />}
               <span>{copied ? 'copied' : 'copy'}</span>
             </button>
 
@@ -126,26 +129,26 @@ export default function TerminalModal({ isOpen, onClose }) {
 
         {/* Terminal Screen Output */}
         <div className="font-mono" style={{
-          padding: '20px',
+          padding: '22px',
           minHeight: '340px',
           maxHeight: '480px',
           overflowY: 'auto',
           fontSize: '0.88rem',
           lineHeight: '1.6',
-          color: 'var(--text-primary)'
+          color: '#ffffff'
         }}>
           <div style={{ marginBottom: '14px', color: 'var(--text-muted)' }}>
-            <span style={{ color: 'var(--accent-slate)' }}>rohit@embedded-node</span>:<span style={{ color: '#ffffff' }}>~</span>$ npx rohitdubbaka
+            <span style={{ color: 'var(--accent-wine)' }}>rohit@embedded-node</span>:<span style={{ color: '#ffffff' }}>~</span>$ npx rohitdubbaka
           </div>
 
           {outputLines.map((line, idx) => (
-            <div key={idx} style={{ color: line.color || 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>
+            <div key={idx} style={{ color: line.color || '#ffffff', whiteSpace: 'pre-wrap' }}>
               {line.text}
             </div>
           ))}
 
           {isTyping && (
-            <div style={{ display: 'inline-block', width: '8px', height: '15px', background: 'var(--accent-slate)', marginLeft: '4px' }} className="led-indicator" />
+            <div style={{ display: 'inline-block', width: '8px', height: '15px', background: 'var(--accent-wine)', marginLeft: '4px' }} className="led-indicator" />
           )}
         </div>
       </div>

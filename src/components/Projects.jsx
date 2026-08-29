@@ -4,13 +4,13 @@ import { Cpu, ExternalLink, Sparkles, Layers, Terminal, ChevronRight, X } from '
 export const ALL_PROJECTS = [
   {
     id: 1,
-    title: 'Hands-Free sEMG Speech-Controlled Wheelchair',
+    title: 'Hands-Free sEMG Based Speech-Controlled Wheelchair',
     category: ['firmware', 'pcb'],
     type: 'flagship',
     hook: 'custom AFE PCB, real-time ML classification, wheelchair actuation',
     tags: ['STM32', 'Python', 'LTspice', 'KiCAD'],
     link: 'https://github.com/rohit29d',
-    details: 'Designed a custom Analog Front-End (AFE) PCB to capture biopotential sEMG signals from facial/vocal muscles. Implemented real-time machine learning inference on STM32 microcontroller to translate signal patterns into wheelchair motor control actuation with safety interlocks.'
+    details: 'Designed a custom Analog Front-End (AFE) PCB for sEMG acquisition from laryngeal muscles, validated for gain and CMRR on bench. Implemented real-time closed-loop firmware on STM32 integrating ADC, timers, and UART; trained a Random Forest classifier for muscle-command recognition. Delivered a full end-to-end system: wearable AFE → signal acquisition → ML inference → wheelchair actuation with safety overrides.'
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ export const ALL_PROJECTS = [
     hook: 'RTL to FPGA implementation, deterministic multi-master arbitration',
     tags: ['VHDL', 'Basys-3 FPGA', 'Vivado'],
     link: 'https://github.com/rohit29d',
-    details: 'Architected a deterministic priority arbitration IP core in VHDL for shared multi-channel bus communication. Simulated logic timing, synthesized RTL onto a Xilinx Basys-3 FPGA board, and validated collision-free bus master access under full load.'
+    details: 'Designed and validated a deterministic multi-channel bus priority arbiter from RTL to FPGA using encoder and sequencer-based arbitration logic. Verified timing correctness through RTL simulation and confirmed deterministic behavior under concurrent access on hardware.'
   },
   {
     id: 3,
@@ -28,9 +28,9 @@ export const ALL_PROJECTS = [
     category: ['firmware'],
     type: 'exploratory',
     hook: 'edge AI turbulence detection mesh network',
-    tags: ['ESP32', 'FirmGen', 'C++'],
+    tags: ['ESP32', 'FirmGen', 'ESP-IDF'],
     link: 'https://github.com/rohit29d',
-    details: 'Built an edge AI mesh network of ESP32 sensor nodes to detect atmospheric turbulence and environmental anomalies in real-time. Automated firmware generation using FirmGen during the CraftifAI Buildathon.'
+    details: 'Rapid-prototyped firmware with FirmGen on a bare ESP32 + MPU6050, processing and detecting turbulence in-situ to avoid streaming chunks of raw sensor data. Trained an edge AI model within minutes during the buildathon to classify turbulence from live motion data. Built a diagnostic module for flight systems, designed to mesh with nearby devices and share real-time wind/air-situation data.'
   },
   {
     id: 4,
@@ -40,17 +40,17 @@ export const ALL_PROJECTS = [
     hook: 'autonomous soil moisture sensing & relay actuation',
     tags: ['Arduino Uno', 'C', 'Embedded C'],
     link: 'https://github.com/rohit29d',
-    details: 'Engineered an autonomous irrigation control system using capacitive soil moisture sensors, analog-to-digital sampling, and relay drive circuitry to maintain optimal soil hydration.'
+    details: 'Used a solar panel as an ambient light sensor (ADC) with a custom scheduling algorithm to replace an RTC and trigger two daily watering cycles. Actuated a relay-driven solenoid valve; serial logging enabled real-time monitoring when connected.'
   },
   {
     id: 5,
-    title: 'Analog Front-End for sEMG Acquisition',
+    title: 'Analog Front-End for sEMG Signal Acquisition',
     category: ['pcb'],
     type: 'exploratory',
     hook: 'low-noise biopotential amplifier & active filtering PCB',
-    tags: ['LTspice', 'KiCAD', 'Analog Circuit'],
+    tags: ['LTspice', 'KiCAD', 'Wearable PCB'],
     link: 'https://github.com/rohit29d',
-    details: 'Simulated and designed a multi-stage analog front-end PCB featuring high-CMRR instrumentation amplification, notch filtering at 50Hz/60Hz, and active bandpass filtering (20Hz–500Hz) for clean EMG acquisition.'
+    details: 'Designed a wearable-size PCB (60×25 mm) for sEMG signal acquisition; bench-validated gain and CMRR performance with surface electrodes and multi-stage active analog filtering.'
   },
   {
     id: 6,
@@ -89,7 +89,6 @@ const CATEGORIES = ['all', 'firmware', 'pcb', 'fpga', 'dsp', 'blogs'];
 export default function Projects({ activeCategory = 'all', scrubbedCategory = 'all', isCylinderActive = false }) {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // Compute 3D cylinder class for each category panel
   const getPanelClass = (catId) => {
     if (!isCylinderActive) {
       return catId === activeCategory ? 'panel-flat' : 'panel-hidden';
@@ -98,7 +97,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
     const currentCenter = scrubbedCategory || activeCategory;
     const targetIdx = CATEGORIES.indexOf(currentCenter);
     const itemIdx = CATEGORIES.indexOf(catId);
-    const total = CATEGORIES.length; // 6
+    const total = CATEGORIES.length;
 
     let offset = (itemIdx - targetIdx) % total;
     if (offset > 3) offset -= total;
@@ -124,16 +123,16 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
 
     return (
       <div style={{ width: '100%' }}>
-        {/* Category Indicator Tag when in 3D Cylinder Mode */}
+        {/* Category Indicator Tag */}
         {isCylinderActive && (
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
             <span className="font-mono" style={{
               fontSize: '0.85rem',
-              color: 'var(--accent-slate)',
-              background: 'var(--accent-slate-soft)',
+              color: '#ffffff',
+              background: 'var(--accent-wine-soft)',
               padding: '4px 14px',
               borderRadius: '9999px',
-              border: '1px solid var(--accent-slate-border)',
+              border: '1px solid var(--accent-wine-border)',
               textTransform: 'uppercase',
               letterSpacing: '0.06em'
             }}>
@@ -146,10 +145,10 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
         {flagship.length > 0 && (
           <div style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Cpu size={16} color="var(--accent-slate)" />
+              <Cpu size={16} color="var(--accent-wine)" />
               <h3 className="font-mono" style={{
                 fontSize: '0.82rem',
-                color: 'var(--accent-slate)',
+                color: '#ffffff',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em'
               }}>
@@ -170,17 +169,17 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                   style={{
                     padding: '22px',
                     cursor: 'pointer',
-                    borderLeft: '3px solid var(--accent-slate)'
+                    borderLeft: '3px solid var(--accent-wine)'
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '10px' }}>
-                    <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: '1.3' }}>
+                    <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', lineHeight: '1.3' }}>
                       {project.title}
                     </h4>
                     <span className="font-mono" style={{
                       fontSize: '0.68rem',
-                      color: 'var(--accent-slate)',
-                      background: 'var(--accent-slate-soft)',
+                      color: '#ffffff',
+                      background: 'var(--accent-wine)',
                       padding: '2px 6px',
                       borderRadius: '3px',
                       whiteSpace: 'nowrap'
@@ -199,7 +198,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                     ))}
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--accent-slate)' }} className="font-mono">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--accent-wine-hover)' }} className="font-mono">
                     <span>inspect schematic / details</span>
                     <ChevronRight size={14} />
                   </div>
@@ -213,10 +212,10 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
         {exploratory.length > 0 && (
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Layers size={16} color="var(--copper-gold)" />
+              <Layers size={16} color="var(--accent-wine)" />
               <h3 className="font-mono" style={{
                 fontSize: '0.82rem',
-                color: 'var(--copper-gold)',
+                color: '#ffffff',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em'
               }}>
@@ -239,7 +238,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                     cursor: 'pointer'
                   }}
                 >
-                  <h4 style={{ fontSize: '0.96rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px', lineHeight: '1.4' }}>
+                  <h4 style={{ fontSize: '0.96rem', fontWeight: 600, color: '#ffffff', marginBottom: '8px', lineHeight: '1.4' }}>
                     {project.title}
                   </h4>
 
@@ -268,7 +267,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
           <div style={{
             textAlign: 'center',
             padding: '50px 20px',
-            background: 'var(--bg-card)',
+            background: '#000000',
             border: '1px dashed var(--border-subtle)',
             borderRadius: 'var(--radius-md)'
           }}>
@@ -295,10 +294,10 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
       {/* Section Header */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-            highlights<span style={{ color: 'var(--accent-slate)' }}>!</span>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff' }}>
+            highlights<span style={{ color: 'var(--accent-wine)' }}>!</span>
           </h2>
-          <Sparkles size={18} color="var(--accent-slate)" />
+          <Sparkles size={18} color="var(--accent-wine)" />
         </div>
         <p className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
           some things i built because i could
@@ -341,7 +340,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-slate)', background: 'var(--accent-slate-soft)', padding: '2px 8px', borderRadius: '3px' }}>
+              <span className="font-mono" style={{ fontSize: '0.75rem', color: '#ffffff', background: 'var(--accent-wine)', padding: '2px 8px', borderRadius: '3px' }}>
                 {selectedProject.type.toUpperCase()} BUILD
               </span>
               <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -349,7 +348,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
               </span>
             </div>
 
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '12px' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 600, color: '#ffffff', marginBottom: '12px' }}>
               {selectedProject.title}
             </h3>
 
@@ -380,8 +379,8 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  background: 'var(--accent-slate)',
-                  color: '#000000',
+                  background: 'var(--accent-wine)',
+                  color: '#ffffff',
                   padding: '8px 16px',
                   borderRadius: 'var(--radius-sm)',
                   textDecoration: 'none',
@@ -397,7 +396,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
         </div>
       )}
 
-      {/* PCB Divider */}
+      {/* Divider */}
       <div className="pcb-divider" style={{ marginTop: '50px' }}></div>
     </section>
   );

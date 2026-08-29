@@ -1,12 +1,11 @@
 import React from 'react';
-import { Cpu } from 'lucide-react';
 
 export default function Header({ 
   activeSection, 
   scrubbedSection,
   onNavMouseEnter, 
   onNavMouseLeave, 
-  onNavMouseMove,
+  onNavMouseMove, 
   onItemHover, 
   onNavClick 
 }) {
@@ -14,6 +13,7 @@ export default function Header({
     { id: 'home', label: 'home' },
     { id: 'projects', label: 'projects' },
     { id: 'about', label: 'about' },
+    { id: 'resume', label: 'resume', isExternal: true },
     { id: 'contact', label: 'contact' }
   ];
 
@@ -36,43 +36,57 @@ export default function Header({
         position: 'sticky',
         top: 0,
         zIndex: 90,
-        background: 'rgba(0, 0, 0, 0.92)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        padding: '18px 28px',
+        background: 'rgba(0, 0, 0, 0.95)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        padding: '20px 28px',
         borderBottom: '1px solid var(--border-subtle)'
       }}
     >
       <div style={{
-        maxWidth: '1000px',
+        maxWidth: '900px',
         margin: '0 auto',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'center'
       }}>
-        {/* Brand / Logo */}
-        <a 
-          href="#home" 
-          onClick={(e) => { e.preventDefault(); onNavClick('home'); }}
-          onMouseEnter={() => onItemHover('home')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            textDecoration: 'none',
-            color: 'var(--text-primary)'
-          }}
-        >
-          <Cpu size={16} color="var(--accent-slate)" />
-          <span className="font-mono" style={{ fontSize: '0.9rem', fontWeight: 600, letterSpacing: '-0.02em' }}>
-            rohit<span style={{ color: 'var(--accent-slate)' }}>.dubbaka</span>
-          </span>
-        </a>
-
-        {/* Minimal Typography Navigation */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+        {/* Minimal Typography Navigation Bar */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
           {navItems.map(item => {
             const isFocused = currentFocused === item.id;
+
+            // Resume Link opens /resume.pdf in a new tab
+            // swap this file to update the resume, filename must stay resume.pdf
+            if (item.isExternal) {
+              return (
+                <a
+                  key={item.id}
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono"
+                  style={{
+                    color: 'var(--text-secondary)',
+                    textDecoration: 'none',
+                    fontSize: '0.86rem',
+                    paddingBottom: '3px',
+                    borderBottom: '1.5px solid transparent',
+                    transition: 'color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)'
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.color = '#ffffff';
+                    e.currentTarget.style.borderColor = 'var(--accent-wine)';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.borderColor = 'transparent';
+                  }}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+
             return (
               <a
                 key={item.id}
@@ -81,12 +95,12 @@ export default function Header({
                 onClick={(e) => { e.preventDefault(); onNavClick(item.id); }}
                 onMouseEnter={() => onItemHover(item.id)}
                 style={{
-                  color: isFocused ? 'var(--accent-slate)' : 'var(--text-secondary)',
+                  color: isFocused ? '#ffffff' : 'var(--text-secondary)',
                   textDecoration: 'none',
-                  fontSize: '0.85rem',
-                  paddingBottom: '2px',
-                  borderBottom: isFocused ? '1.5px solid var(--accent-slate)' : '1.5px solid transparent',
-                  transition: 'color 0.2s ease, border-color 0.2s ease'
+                  fontSize: '0.86rem',
+                  paddingBottom: '3px',
+                  borderBottom: isFocused ? '1.5px solid var(--accent-wine)' : '1.5px solid transparent',
+                  transition: 'color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)'
                 }}
               >
                 {item.label}
@@ -94,14 +108,6 @@ export default function Header({
             );
           })}
         </nav>
-
-        {/* Status Badge */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span className="led-indicator"></span>
-          <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-            SYS_ONLINE
-          </span>
-        </div>
       </div>
     </header>
   );

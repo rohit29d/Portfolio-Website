@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
   // Smooth parallax translation calculation (opposite to cursor movement)
-  const parallaxX = (mousePos.x || 0) * -32;
-  const parallaxY = (mousePos.y || 0) * -18;
+  const parallaxX = (mousePos.x || 0) * -30;
+  const parallaxY = (mousePos.y || 0) * -16;
 
   return (
     <div
@@ -14,7 +14,7 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
         zIndex: 0,
         pointerEvents: 'none',
         opacity: active ? 1 : 0,
-        transition: 'opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+        transition: 'opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
         overflow: 'hidden',
         backgroundColor: '#000000'
       }}
@@ -31,32 +31,21 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           transform: `translate3d(${parallaxX}px, ${parallaxY}px, 0)`,
-          transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+          transition: 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
           willChange: 'transform',
-          filter: 'brightness(1.15) contrast(1.12)'
+          filter: 'brightness(1.15) contrast(1.15)'
         }}
       />
 
-      {/* 2. Soft Neutral Vignette Overlay to preserve foreground card readability */}
+      {/* 2. Soft Neutral Black Vignette Overlay */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background: `
-            radial-gradient(circle at 50% 38%, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.45) 60%, rgba(0, 0, 0, 0.88) 92%),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75))
+            radial-gradient(circle at 50% 38%, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.55) 60%, rgba(0, 0, 0, 0.95) 92%),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.85))
           `
-        }}
-      />
-
-      {/* 3. Subtle Technical Grid Overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.025) 1px, transparent 0)',
-          backgroundSize: '24px 24px',
-          opacity: 0.4
         }}
       />
     </div>
