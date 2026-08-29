@@ -131,28 +131,24 @@ body {
 }
 
 /* All cards share identical scale (0.66) and identical vertical baseline (translateY(0px)) */
-/* Center Card: facing viewer directly on the curved continuous surface */
 .carousel-card.card-carousel-center {
   transform: translateX(0px) translateY(0px) translateZ(0px) rotateY(0deg) scale(0.66);
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Left Neighbor Card: curving into dome along symmetric continuous radius */
 .carousel-card.card-carousel-left {
   transform: translateX(-56vw) translateY(0px) translateZ(-200px) rotateY(32deg) scale(0.66);
   opacity: 0.65;
   pointer-events: none;
 }
 
-/* Right Neighbor Card: curving into dome along symmetric continuous radius */
 .carousel-card.card-carousel-right {
   transform: translateX(56vw) translateY(0px) translateZ(-200px) rotateY(-32deg) scale(0.66);
   opacity: 0.65;
   pointer-events: none;
 }
 
-/* Far / Opposite Card on Ring */
 .carousel-card.card-carousel-far,
 .carousel-card.card-carousel-far-left,
 .carousel-card.card-carousel-far-right {
@@ -161,23 +157,113 @@ body {
   pointer-events: none;
 }
 
+/* ----------------------------------------------------------------- */
+/* SCOPED PROJECTS GRID CYLINDER (HORIZONTAL SODA-CAN ROTATION)      */
+/* ----------------------------------------------------------------- */
+.projects-cylinder-stage {
+  position: relative;
+  width: 100%;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  min-height: 480px;
+}
+
+.projects-cylinder-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  transform-style: preserve-3d;
+}
+
+/* Category Panel inside Scoped Projects Cylinder */
+.category-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  transition: transform 0.28s var(--ease-carousel), opacity 0.28s var(--ease-carousel);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Normal Flat Grid Mode (When Bottom Nav is NOT Hovered) */
+.category-panel.panel-flat {
+  position: relative;
+  transform: translateX(0px) translateY(0px) translateZ(0px) rotateY(0deg) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.category-panel.panel-hidden {
+  display: none;
+  opacity: 0;
+}
+
+/* 3D Scoped Horizontal Cylinder Rotation States */
+.category-panel.panel-center {
+  transform: translateX(0px) translateY(0px) translateZ(0px) rotateY(0deg) scale(0.92);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.category-panel.panel-left {
+  transform: translateX(-48%) translateY(0px) translateZ(-130px) rotateY(26deg) scale(0.85);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.category-panel.panel-right {
+  transform: translateX(48%) translateY(0px) translateZ(-130px) rotateY(-26deg) scale(0.85);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.category-panel.panel-outer-left {
+  transform: translateX(-90%) translateY(0px) translateZ(-280px) rotateY(48deg) scale(0.75);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.category-panel.panel-outer-right {
+  transform: translateX(90%) translateY(0px) translateZ(-280px) rotateY(-48deg) scale(0.75);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.category-panel.panel-far {
+  transform: translateX(0px) translateY(0px) translateZ(-400px) rotateY(180deg) scale(0.60);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* Prefers Reduced Motion Fallback */
 @media (prefers-reduced-motion: reduce) {
-  .carousel-card {
+  .carousel-card,
+  .category-panel {
     transition: none !important;
     transform: none !important;
     clip-path: none !important;
     -webkit-clip-path: none !important;
   }
-  .carousel-card.card-carousel-left,
-  .carousel-card.card-carousel-right,
-  .carousel-card.card-carousel-far,
-  .carousel-card.card-carousel-far-left,
-  .carousel-card.card-carousel-far-right {
+  .category-panel.panel-left,
+  .category-panel.panel-right,
+  .category-panel.panel-outer-left,
+  .category-panel.panel-outer-right,
+  .category-panel.panel-far {
     opacity: 0 !important;
     display: none !important;
   }
-  .carousel-card.card-carousel-center {
+  .category-panel.panel-center {
     transform: none !important;
     opacity: 1 !important;
   }
@@ -331,7 +417,7 @@ body {
   color: var(--accent-slate);
 }
 
-/* Floating Bottom Capsule Nav (Projects Specific Filter) */
+/* Floating Bottom Capsule Nav (Projects Specific Filter with Scoped Cylinder) */
 .bottom-capsule-nav {
   position: fixed;
   bottom: 24px;
@@ -347,7 +433,7 @@ body {
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--accent-slate-border);
   border-radius: 9999px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease;
 }
 
 .bottom-capsule-nav.hidden {

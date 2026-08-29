@@ -84,21 +84,213 @@ export const ALL_PROJECTS = [
   }
 ];
 
-export default function Projects({ activeCategory }) {
+const CATEGORIES = ['all', 'firmware', 'pcb', 'fpga', 'dsp', 'blogs'];
+
+export default function Projects({ activeCategory = 'all', scrubbedCategory = 'all', isCylinderActive = false }) {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const filteredProjects = activeCategory === 'all' 
-    ? ALL_PROJECTS 
-    : ALL_PROJECTS.filter(p => p.category.includes(activeCategory));
+  // Compute 3D cylinder class for each category panel
+  const getPanelClass = (catId) => {
+    if (!isCylinderActive) {
+      return catId === activeCategory ? 'panel-flat' : 'panel-hidden';
+    }
 
-  const flagshipProjects = filteredProjects.filter(p => p.type === 'flagship');
-  const exploratoryProjects = filteredProjects.filter(p => p.type === 'exploratory');
+    const currentCenter = scrubbedCategory || activeCategory;
+    const targetIdx = CATEGORIES.indexOf(currentCenter);
+    const itemIdx = CATEGORIES.indexOf(catId);
+    const total = CATEGORIES.length; // 6
+
+    let offset = (itemIdx - targetIdx) % total;
+    if (offset > 3) offset -= total;
+    if (offset < -2) offset += total;
+
+    if (offset === 0) return 'panel-center';
+    if (offset === -1) return 'panel-left';
+    if (offset === 1) return 'panel-right';
+    if (offset === -2) return 'panel-outer-left';
+    if (offset === 2) return 'panel-outer-right';
+    if (offset === 3 || offset === -3) return 'panel-far';
+
+    return 'panel-center';
+  };
+
+  const renderProjectGrid = (catId) => {
+    const filtered = catId === 'all' 
+      ? ALL_PROJECTS 
+      : ALL_PROJECTS.filter(p => p.category.includes(catId));
+
+    const flagship = filtered.filter(p => p.type === 'flagship');
+    const exploratory = filtered.filter(p => p.type === 'exploratory');
+
+    return (
+      <div style={{ width: '100%' }}>
+        {/* Category Indicator Tag when in 3D Cylinder Mode */}
+        {isCylinderActive && (
+          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+            <span className="font-mono" style={{
+              fontSize: '0.85rem',
+              color: 'var(--accent-slate)',
+              background: 'var(--accent-slate-soft)',
+              padding: '4px 14px',
+              borderRadius: '9999px',
+              border: '1px solid var(--accent-slate-border)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em'
+            }}>
+              // Category: {catId}
+            </span>
+          </div>
+        )}
+
+        {/* Flagship Projects Section */}
+        {flagship.length > 0 && (
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+              <Cpu size={16} color="var(--accent-slate)" />
+              <h3 className="font-mono" style={{
+                fontSize: '0.82rem',
+                color: 'var(--accent-slate)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em'
+              }}>
+                // Flagship Builds
+              </h3>
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+              gap: '18px'
+            }}>
+              {flagship.map(project => (
+                <div 
+                  key={project.id}
+                  className="corner-bracket-card"
+                  onClick={() => setSelectedProject(project)}
+                  style={{
+                    padding: '22px',
+                    cursor: 'pointer',
+                    borderLeft: '3px solid var(--accent-slate)'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '10px' }}>
+                    <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: '1.3' }}>
+                      {project.title}
+                    </h4>
+                    <span className="font-mono" style={{
+                      fontSize: '0.68rem',
+                      color: 'var(--accent-slate)',
+                      background: 'var(--accent-slate-soft)',
+                      padding: '2px 6px',
+                      borderRadius: '3px',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      FLAGSHIP
+                    </span>
+                  </div>
+
+                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
+                    {project.hook}
+                  </p>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
+                    {project.tags.map((tag, idx) => (
+                      <span key={idx} className="tech-tag">{tag}</span>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--accent-slate)' }} className="font-mono">
+                    <span>inspect schematic / details</span>
+                    <ChevronRight size={14} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Exploratory Projects Section */}
+        {exploratory.length > 0 && (
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+              <Layers size={16} color="var(--copper-gold)" />
+              <h3 className="font-mono" style={{
+                fontSize: '0.82rem',
+                color: 'var(--copper-gold)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em'
+              }}>
+                // Exploratory Builds
+              </h3>
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '16px'
+            }}>
+              {exploratory.map(project => (
+                <div 
+                  key={project.id}
+                  className="corner-bracket-card"
+                  onClick={() => setSelectedProject(project)}
+                  style={{
+                    padding: '18px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <h4 style={{ fontSize: '0.96rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px', lineHeight: '1.4' }}>
+                    {project.title}
+                  </h4>
+
+                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '12px' }}>
+                    {project.hook}
+                  </p>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '12px' }}>
+                    {project.tags.map((tag, idx) => (
+                      <span key={idx} className="tech-tag">{tag}</span>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--text-muted)' }} className="font-mono">
+                    <span>view build specs</span>
+                    <ChevronRight size={12} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Empty State when Category has no items */}
+        {filtered.length === 0 && (
+          <div style={{
+            textAlign: 'center',
+            padding: '50px 20px',
+            background: 'var(--bg-card)',
+            border: '1px dashed var(--border-subtle)',
+            borderRadius: 'var(--radius-md)'
+          }}>
+            <Terminal size={30} color="var(--text-muted)" style={{ marginBottom: '12px' }} />
+            <p className="font-mono" style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '4px' }}>
+              // no builds published yet under "{catId}"
+            </p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
+              technical writeup / hardware specs coming soon!
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <section style={{
       padding: '30px 20px 60px',
       maxWidth: '900px',
-      margin: '0 auto'
+      margin: '0 auto',
+      position: 'relative'
     }}>
       {/* Section Header */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
@@ -113,155 +305,21 @@ export default function Projects({ activeCategory }) {
         </p>
       </div>
 
-      {/* Flagship Projects Section */}
-      {flagshipProjects.length > 0 && (
-        <div style={{ marginBottom: '40px' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            marginBottom: '16px'
-          }}>
-            <Cpu size={16} color="var(--accent-slate)" />
-            <h3 className="font-mono" style={{
-              fontSize: '0.85rem',
-              color: 'var(--accent-slate)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.08em'
-            }}>
-              // Flagship Builds
-            </h3>
-          </div>
+      {/* Scoped Projects Horizontal Cylinder Stage */}
+      <div className="projects-cylinder-stage">
+        <div className="projects-cylinder-viewport">
+          {CATEGORIES.map((catId) => {
+            const panelClass = getPanelClass(catId);
+            if (panelClass === 'panel-hidden') return null;
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '20px'
-          }}>
-            {flagshipProjects.map(project => (
-              <div 
-                key={project.id}
-                className="corner-bracket-card"
-                onClick={() => setSelectedProject(project)}
-                style={{
-                  padding: '24px',
-                  cursor: 'pointer',
-                  borderLeft: '3px solid var(--accent-slate)'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '10px' }}>
-                  <h4 style={{ fontSize: '1.15rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: '1.3' }}>
-                    {project.title}
-                  </h4>
-                  <span className="font-mono" style={{
-                    fontSize: '0.7rem',
-                    color: 'var(--accent-slate)',
-                    background: 'var(--accent-slate-soft)',
-                    padding: '2px 6px',
-                    borderRadius: '3px',
-                    whiteSpace: 'nowrap'
-                  }}>
-                    FLAGSHIP
-                  </span>
-                </div>
-
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '16px' }}>
-                  {project.hook}
-                </p>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
-                  {project.tags.map((tag, idx) => (
-                    <span key={idx} className="tech-tag">{tag}</span>
-                  ))}
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem', color: 'var(--accent-slate)' }} className="font-mono">
-                  <span>inspect schematic / details</span>
-                  <ChevronRight size={14} />
-                </div>
+            return (
+              <div key={catId} className={`category-panel ${panelClass}`}>
+                {renderProjectGrid(catId)}
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      )}
-
-      {/* Exploratory Projects Section */}
-      {exploratoryProjects.length > 0 && (
-        <div>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            marginBottom: '16px'
-          }}>
-            <Layers size={16} color="var(--copper-gold)" />
-            <h3 className="font-mono" style={{
-              fontSize: '0.85rem',
-              color: 'var(--copper-gold)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.08em'
-            }}>
-              // Exploratory Builds
-            </h3>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '16px'
-          }}>
-            {exploratoryProjects.map(project => (
-              <div 
-                key={project.id}
-                className="corner-bracket-card"
-                onClick={() => setSelectedProject(project)}
-                style={{
-                  padding: '18px',
-                  cursor: 'pointer'
-                }}
-              >
-                <h4 style={{ fontSize: '0.98rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px', lineHeight: '1.4' }}>
-                  {project.title}
-                </h4>
-
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '14px' }}>
-                  {project.hook}
-                </p>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '12px' }}>
-                  {project.tags.map((tag, idx) => (
-                    <span key={idx} className="tech-tag">{tag}</span>
-                  ))}
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--text-muted)' }} className="font-mono">
-                  <span>view build specs</span>
-                  <ChevronRight size={12} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Empty State when Category has no items */}
-      {filteredProjects.length === 0 && (
-        <div style={{
-          textAlign: 'center',
-          padding: '60px 20px',
-          background: 'var(--bg-card)',
-          border: '1px dashed var(--border-subtle)',
-          borderRadius: 'var(--radius-md)'
-        }}>
-          <Terminal size={32} color="var(--text-muted)" style={{ marginBottom: '12px' }} />
-          <p className="font-mono" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '4px' }}>
-            // no builds found under "{activeCategory}"
-          </p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-            coming soon — stay tuned for updates!
-          </p>
-        </div>
-      )}
+      </div>
 
       {/* Project Detail Modal */}
       {selectedProject && (
@@ -323,7 +381,7 @@ export default function Projects({ activeCategory }) {
                   alignItems: 'center',
                   gap: '6px',
                   background: 'var(--accent-slate)',
-                  color: '#080a0f',
+                  color: '#000000',
                   padding: '8px 16px',
                   borderRadius: 'var(--radius-sm)',
                   textDecoration: 'none',

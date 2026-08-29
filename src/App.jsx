@@ -14,16 +14,21 @@ export default function App() {
   const [scrubbedSection, setScrubbedSection] = useState('home');
   const [isNavHovered, setIsNavHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  
+  // Scoped Category Cylinder Rotation State
   const [activeCategory, setActiveCategory] = useState('all');
+  const [scrubbedCategory, setScrubbedCategory] = useState('all');
+  const [isBottomNavHovered, setIsBottomNavHovered] = useState(false);
+
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
-  // Trigger: Cursor enters top nav bar
+  // Top Nav Hover Trigger: Cursor enters top nav bar
   const handleNavMouseEnter = () => {
     setIsNavHovered(true);
     setScrubbedSection(activeSection);
   };
 
-  // Commit: Cursor leaves top nav bar entirely
+  // Top Nav Commit: Cursor leaves top nav bar entirely
   const handleNavMouseLeave = () => {
     setIsNavHovered(false);
     setMousePos({ x: 0, y: 0 });
@@ -32,21 +37,47 @@ export default function App() {
     }
   };
 
-  // Live tracking of cursor position for smooth parallax pan
+  // Top Nav Parallax Mouse Tracking
   const handleNavMouseMove = (pos) => {
     setMousePos(pos);
   };
 
-  // Scrub: Cursor moves over specific nav item
+  // Top Nav Item Hover
   const handleItemHover = (sectionId) => {
     setScrubbedSection(sectionId);
   };
 
-  // Direct Click on nav item
+  // Top Nav Direct Click
   const handleNavClick = (sectionId) => {
     setActiveSection(sectionId);
     setScrubbedSection(sectionId);
     setIsNavHovered(false);
+  };
+
+  // Bottom Category Bar: Hover Trigger
+  const handleBottomNavMouseEnter = () => {
+    setIsBottomNavHovered(true);
+    setScrubbedCategory(activeCategory);
+  };
+
+  // Bottom Category Bar: Commit on Mouse Leave
+  const handleBottomNavMouseLeave = () => {
+    setIsBottomNavHovered(false);
+    if (scrubbedCategory) {
+      setActiveCategory(scrubbedCategory);
+    }
+  };
+
+  // Bottom Category Bar: Live Category Scrub
+  const handleCategoryHover = (catId) => {
+    setScrubbedCategory(catId);
+  };
+
+  // Bottom Category Bar: Direct Click Commit
+  const handleCategoryClick = (catId) => {
+    setActiveCategory(catId);
+    setScrubbedCategory(catId);
+    setIsBottomNavHovered(false);
   };
 
   // Calculate 3D concave position class for each section in the continuous circular ring
@@ -60,7 +91,6 @@ export default function App() {
     const itemIdx = SECTIONS.indexOf(sectionId);
     const total = SECTIONS.length; // 4
 
-    // Modulo circular shortest offset calculation in range [-1, 2]:
     let offset = (itemIdx - targetIdx) % total;
     if (offset > 2) offset -= total;
     if (offset < -1) offset += total;
@@ -86,7 +116,7 @@ export default function App() {
         </defs>
       </svg>
 
-      {/* Real Astrophotography Deep-Space Backdrop with Cursor-driven Parallax Pan */}
+      {/* High-Definition PCB Circuitry Backdrop with Cursor Parallax Pan */}
       <SpaceBackdrop active={isNavHovered} mousePos={mousePos} />
 
       {/* Top Header Navigation */}
@@ -109,7 +139,11 @@ export default function App() {
 
         {/* Card 1: Projects Section */}
         <div className={`carousel-card ${getCardClass('projects')}`}>
-          <Projects activeCategory={activeCategory} />
+          <Projects 
+            activeCategory={activeCategory} 
+            scrubbedCategory={scrubbedCategory}
+            isCylinderActive={isBottomNavHovered}
+          />
         </div>
 
         {/* Card 2: About Section */}
@@ -123,10 +157,15 @@ export default function App() {
         </div>
       </main>
 
-      {/* Projects-Specific Bottom Capsule Filter (Only Visible when Projects Plane is Focused) */}
+      {/* Projects-Specific Bottom Capsule Filter with Scoped Cylinder Rotation */}
       <BottomNav 
         activeCategory={activeCategory} 
-        setActiveCategory={setActiveCategory} 
+        scrubbedCategory={scrubbedCategory}
+        isBottomNavHovered={isBottomNavHovered}
+        onBottomNavMouseEnter={handleBottomNavMouseEnter}
+        onBottomNavMouseLeave={handleBottomNavMouseLeave}
+        onCategoryHover={handleCategoryHover}
+        onCategoryClick={handleCategoryClick}
         isProjectsVisible={focusedSection === 'projects'}
       />
 
