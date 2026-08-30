@@ -69,6 +69,85 @@ body {
 }
 
 /* ----------------------------------------------------------------- */
+/* SOLID ENCAPSULATED HEADER CAPSULE NAVIGATION (ABHIJITH STYLE)     */
+/* ----------------------------------------------------------------- */
+.header-capsule-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  background: #6B1F2A;
+  border-radius: 9999px;
+  padding: 8px 28px;
+  box-shadow: 0 4px 20px rgba(107, 31, 42, 0.45);
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+}
+
+.header-capsule-item {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 3px 2px;
+  border-bottom: 2px solid transparent;
+  opacity: 0.82;
+  transition: opacity 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth);
+  cursor: pointer;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.header-capsule-item:hover {
+  opacity: 1;
+}
+
+.header-capsule-item.active {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom: 2px solid #ffffff;
+}
+
+/* Solid Resume Pill Button on Extreme Right */
+.header-resume-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #6B1F2A;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 16px rgba(107, 31, 42, 0.45);
+  transition: transform 0.2s var(--ease-smooth), background-color 0.2s var(--ease-smooth);
+}
+
+.header-resume-pill:hover {
+  background: #7f2532;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .nav-spacer {
+    display: none;
+  }
+  .header-capsule-nav {
+    gap: 16px;
+    padding: 6px 18px;
+  }
+  .header-capsule-item {
+    font-size: 0.78rem;
+  }
+  .header-resume-pill {
+    padding: 6px 14px;
+    font-size: 0.78rem;
+  }
+}
+
+/* ----------------------------------------------------------------- */
 /* HOVER-SCRUB SECTION CAROUSEL STAGE (PERFECTLY CENTERED 3D PLANE)  */
 /* ----------------------------------------------------------------- */
 .carousel-stage {

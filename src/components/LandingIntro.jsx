@@ -5,8 +5,8 @@ const GREETINGS = [
   { text: 'नमस्ते', sub: null },
   { text: 'నమస్కారం', sub: null },
   { text: 'வணக்கம்', sub: 'konjam konjam' },
-  { text: 'Bonjour', sub: 'learning rn' },
-  { text: 'Hola', sub: 'learning rn' }
+  { text: 'Bonjour', sub: 'en cours' },
+  { text: 'Hola', sub: 'en curso' }
 ];
 
 export default function LandingIntro({ onComplete }) {

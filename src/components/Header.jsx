@@ -1,4 +1,5 @@
 import React from 'react';
+import { FileText } from 'lucide-react';
 
 export default function Header({ 
   activeSection, 
@@ -13,7 +14,6 @@ export default function Header({
     { id: 'home', label: 'home' },
     { id: 'projects', label: 'projects' },
     { id: 'about', label: 'about' },
-    { id: 'resume', label: 'resume', isExternal: true },
     { id: 'contact', label: 'contact' }
   ];
 
@@ -39,75 +39,53 @@ export default function Header({
         background: 'rgba(0, 0, 0, 0.95)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
-        padding: '20px 28px',
+        padding: '16px 32px',
         borderBottom: '1px solid var(--border-subtle)'
       }}
     >
       <div style={{
-        maxWidth: '900px',
+        maxWidth: '1100px',
         margin: '0 auto',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        position: 'relative'
       }}>
-        {/* Minimal Typography Navigation Bar */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
+        {/* Left Spacer to keep the center nav capsule balanced */}
+        <div style={{ width: '100px' }} className="nav-spacer" />
+
+        {/* 1. Solid Maroon Encapsulated Navigation Capsule (abhijithjinnu.in style) */}
+        <nav className="header-capsule-nav" aria-label="Main Navigation">
           {navItems.map(item => {
             const isFocused = currentFocused === item.id;
 
-            // Resume Link opens /resume.pdf in a new tab
-            // swap this file to update the resume, filename must stay resume.pdf
-            if (item.isExternal) {
-              return (
-                <a
-                  key={item.id}
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono"
-                  style={{
-                    color: 'var(--text-secondary)',
-                    textDecoration: 'none',
-                    fontSize: '0.86rem',
-                    paddingBottom: '3px',
-                    borderBottom: '1.5px solid transparent',
-                    transition: 'color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)'
-                  }}
-                  onMouseOver={e => {
-                    e.currentTarget.style.color = '#ffffff';
-                    e.currentTarget.style.borderColor = 'var(--accent-wine)';
-                  }}
-                  onMouseOut={e => {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                    e.currentTarget.style.borderColor = 'transparent';
-                  }}
-                >
-                  {item.label}
-                </a>
-              );
-            }
-
             return (
-              <a
+              <button
                 key={item.id}
-                href={`#${item.id}`}
-                className="font-mono"
                 onClick={(e) => { e.preventDefault(); onNavClick(item.id); }}
                 onMouseEnter={() => onItemHover(item.id)}
-                style={{
-                  color: isFocused ? '#ffffff' : 'var(--text-secondary)',
-                  textDecoration: 'none',
-                  fontSize: '0.86rem',
-                  paddingBottom: '3px',
-                  borderBottom: isFocused ? '1.5px solid var(--accent-wine)' : '1.5px solid transparent',
-                  transition: 'color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth)'
-                }}
+                className={`header-capsule-item ${isFocused ? 'active' : ''}`}
               >
                 {item.label}
-              </a>
+              </button>
             );
           })}
         </nav>
+
+        {/* 2. Solid Maroon Resume Pill Button on Extreme Right */}
+        {/* swap this file to update the resume, filename must stay resume.pdf */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100px' }}>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header-resume-pill"
+            title="Open Resume PDF in new tab"
+          >
+            <FileText size={14} color="#ffffff" />
+            <span>resume</span>
+          </a>
+        </div>
       </div>
     </header>
   );

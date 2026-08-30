@@ -27,7 +27,7 @@ export default function SpaceBackdrop({ active, mousePos = { x: 0, y: 0 } }) {
           left: '-20%',
           width: '140%',
           height: '140%',
-          backgroundImage: "url('/circuits.gif')",
+          backgroundImage: "url('/wine_circuits.gif')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           transform: `translate3d(${parallaxX}px, ${parallaxY}px, 0)`,

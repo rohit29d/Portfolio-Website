@@ -21,6 +21,9 @@ export default function App() {
   const currentMousePosRef = useRef({ x: 0, y: 0 });
   const rafRef = useRef(null);
 
+  // Wheel and Keyboard Action Throttle Ref
+  const isActionThrottledRef = useRef(false);
+
   // Scoped Category Cylinder Rotation State
   const [activeCategory, setActiveCategory] = useState('all');
   const [scrubbedCategory, setScrubbedCategory] = useState('all');
@@ -47,6 +50,82 @@ export default function App() {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
+
+  // Keyboard Arrow Key Navigation & Scroll Wheel Navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Don't trigger section jump if typing in input or terminal
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName) || isTerminalOpen) {
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        setActiveSection((prev) => {
+          const currentIdx = SECTIONS.indexOf(prev);
+          const nextIdx = (currentIdx + 1) % SECTIONS.length;
+          const nextSection = SECTIONS[nextIdx];
+          setScrubbedSection(nextSection);
+          return nextSection;
+        });
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActiveSection((prev) => {
+          const currentIdx = SECTIONS.indexOf(prev);
+          const prevIdx = (currentIdx - 1 + SECTIONS.length) % SECTIONS.length;
+          const prevSection = SECTIONS[prevIdx];
+          setScrubbedSection(prevSection);
+          return prevSection;
+        });
+      }
+    };
+
+    const handleWheel = (e) => {
+      // Check if user is scrolling inside a modal or terminal
+      const isInsideModal = e.target.closest('.modal-content') || isTerminalOpen;
+      if (isInsideModal) {
+        return; // Allow native internal modal scrolling
+      }
+
+      // Detect strong wheel gesture
+      if (Math.abs(e.deltaY) > 35 || Math.abs(e.deltaX) > 35) {
+        if (isActionThrottledRef.current) return;
+
+        isActionThrottledRef.current = true;
+        setTimeout(() => {
+          isActionThrottledRef.current = false;
+        }, 500); // 500ms cooldown for smooth 1-section advance
+
+        if (e.deltaY > 35 || e.deltaX > 35) {
+          // Scroll down / right -> Next Section
+          setActiveSection((prev) => {
+            const currentIdx = SECTIONS.indexOf(prev);
+            const nextIdx = (currentIdx + 1) % SECTIONS.length;
+            const nextSection = SECTIONS[nextIdx];
+            setScrubbedSection(nextSection);
+            return nextSection;
+          });
+        } else if (e.deltaY < -35 || e.deltaX < -35) {
+          // Scroll up / left -> Previous Section
+          setActiveSection((prev) => {
+            const currentIdx = SECTIONS.indexOf(prev);
+            const prevIdx = (currentIdx - 1 + SECTIONS.length) % SECTIONS.length;
+            const prevSection = SECTIONS[prevIdx];
+            setScrubbedSection(prevSection);
+            return prevSection;
+          });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('wheel', handleWheel, { passive: true });
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [isTerminalOpen]);
 
   // Top Nav Hover Trigger: Cursor enters top nav bar
   const handleNavMouseEnter = () => {
