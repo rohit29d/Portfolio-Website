@@ -1,241 +1,151 @@
-import React from 'react';
-import { Github, Linkedin, Mail, ArrowUpRight, GraduationCap, Briefcase, Code, Award, Phone } from 'lucide-react';
+import React, { useState } from 'react';
+import { Github, Linkedin, Mail, ArrowUpRight, Phone, Heart } from 'lucide-react';
 
 export default function AboutContact({ viewMode = 'all' }) {
-  const skills = [
-    {
-      category: 'Hardware & Microcontrollers',
-      items: ['ESP32', 'STM32', 'Basys-3 FPGA', 'Analog Front-End (AFE)', 'Digital Circuits', 'Sensors']
-    },
-    {
-      category: 'EDA & Simulation Tools',
-      items: ['Altium Designer', 'KiCAD', 'STM32CubeIDE', 'ESP-IDF', 'Xilinx Vivado', 'LTspice']
-    },
-    {
-      category: 'Domains & Protocols',
-      items: ['4-Layer PCB Design', 'Embedded Systems', 'Power Management', 'SPI/I2C/UART/LTE', 'OTA Firmware']
-    },
-    {
-      category: 'Programming & RTL',
-      items: ['C', 'Python', 'Verilog/VHDL', 'Embedded C', 'MATLAB', 'FreeRTOS']
-    }
-  ];
-
-  const certifications = [
-    { name: 'PCB Design with KiCad', issuer: 'Peter Dalmaris (Udemy)', date: 'Aug 2026' },
-    { name: 'Machine Learning Techniques in MATLAB', issuer: 'MathWorks', date: 'Jun 2025' },
-    { name: 'SystemVerilog Fundamentals', issuer: 'Kumar Khandagle (Udemy)', date: 'Dec 2024' }
-  ];
+  const [avatarHover, setAvatarHover] = useState(false);
 
   return (
     <section style={{
-      padding: '30px 20px 80px',
-      maxWidth: '900px',
-      margin: '0 auto'
+      padding: '40px 20px 80px',
+      maxWidth: '820px',
+      margin: '0 auto',
+      position: 'relative'
     }}>
-      {/* Bio / Intro Block */}
+      {/* 1. About Me Section (Matching abhijithjinnu.in/about style) */}
       {(viewMode === 'all' || viewMode === 'about') && (
-        <div id="about-section" style={{ marginBottom: '50px' }}>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff', marginBottom: '16px' }}>
-            who am i<span style={{ color: '#6B1F2A' }}>?</span>
-          </h2>
-
-          <div className="corner-bracket-card" style={{ padding: '24px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
-            <p style={{ marginBottom: '14px' }}>
-              Electronics & Communication graduate (2026) with exposure and contributions across the embedded-IoT development lifecycle — 
-              schematic design, PCB layout, fabrication, firmware stack, cloud integration, and field deployment.
-            </p>
-            <p>
-              currently working as an Embedded Systems Intern at <span style={{ color: '#ffffff', fontWeight: 600 }}>DeltaIOT Pvt Ltd</span>, 
-              focusing on hardware R&D, 4-layer LTE/GPS module boards, hot-swappable power breakout boards, and real-time firmware architecture where system-level ownership matters.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Experience & Education Grid */}
-      {(viewMode === 'all' || viewMode === 'about') && (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '24px',
-          marginBottom: '50px'
+        <div id="about-section" style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          marginBottom: '60px'
         }}>
-          {/* Experience */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <Briefcase size={16} color="#ffffff" />
-              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-                // Experience
-              </h3>
-            </div>
+          {/* High-Mid Curved Header: "Who am i?" */}
+          <div style={{ width: '280px', height: '65px', margin: '0 auto -5px', position: 'relative', zIndex: 2 }}>
+            <svg viewBox="0 0 280 70" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
+              <path id="about-curve" d="M 30,62 A 115,75 0 0,1 250,62" fill="transparent" />
+              <text textAnchor="middle" className="hero-curve-text" style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', letterSpacing: '0.04em' }}>
+                <textPath href="#about-curve" startOffset="50%">
+                  Who am i?
+                </textPath>
+              </text>
+            </svg>
+          </div>
 
-            <div className="corner-bracket-card" style={{ padding: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff' }}>
-                  Embedded Systems Intern
-                </h4>
-                <span className="font-mono" style={{
-                  fontSize: '0.72rem',
-                  color: '#ffffff',
-                  background: '#6B1F2A',
-                  padding: '2px 8px',
-                  borderRadius: '3px',
-                  fontWeight: 600
-                }}>
-                  Feb 2026 – Present
-                </span>
+          {/* High-Mid Centered Avatar */}
+          <div style={{ display: 'inline-block', position: 'relative', marginBottom: '18px', zIndex: 1 }}>
+            <div 
+              onMouseEnter={() => setAvatarHover(true)}
+              onMouseLeave={() => setAvatarHover(false)}
+              style={{
+                width: '130px',
+                height: '130px',
+                borderRadius: '50%',
+                padding: '2px',
+                background: avatarHover 
+                  ? '#6B1F2A' 
+                  : 'var(--border-subtle)',
+                transition: 'background 0.3s var(--ease-smooth)',
+                position: 'relative'
+              }}
+            >
+              <div style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                background: '#000000',
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                <img 
+                  src="/avatar.png" 
+                  alt="Rohit Kumar Dubbaka" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
               </div>
-              <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-                @ DeltaIOT Pvt Ltd (Hyderabad)
-              </p>
-              <ul style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6', paddingLeft: '18px' }}>
-                <li>Delivered a compact 4-Layer LTE/GPS module board capable of handling 3A current bursts for mainstream product.</li>
-                <li>Delivered full PCB design for IC-based hot-swappable power management breakout board (2.5A bursts) from schematic to production.</li>
-                <li>Conducted pin-by-pin hardware reverse-engineering on industry IoT devices for reference architecture.</li>
-                <li>Participated in field deployments and remote firmware OTA lifecycle updates.</li>
-              </ul>
+
+              {/* Status LED */}
+              <div style={{
+                position: 'absolute',
+                bottom: '4px',
+                right: '4px',
+                width: '12px',
+                height: '12px',
+                borderRadius: '50%',
+                background: '#6B1F2A',
+                border: '2px solid #000000'
+              }} title="Status: Active" />
             </div>
           </div>
 
-          {/* Education */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <GraduationCap size={16} color="#ffffff" />
-              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-                // Education
-              </h3>
-            </div>
-
-            <div className="corner-bracket-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
-                  <h4 style={{ fontSize: '0.96rem', fontWeight: 600, color: '#ffffff' }}>
-                    Amrita Vishwa Vidyapeetham
-                  </h4>
-                  <span className="font-mono" style={{
-                    fontSize: '0.72rem',
-                    color: '#ffffff',
-                    background: '#6B1F2A',
-                    padding: '2px 8px',
-                    borderRadius: '3px',
-                    fontWeight: 600
-                  }}>
-                    Grad 2026
-                  </span>
-                </div>
-                <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  B.Tech in Electronics & Communication Engineering • CGPA: 7.6 / 10
-                </p>
-              </div>
-
-              <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '10px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
-                  <h5 style={{ fontSize: '0.9rem', fontWeight: 500, color: '#ffffff' }}>
-                    VINJEE Junior College, Hyderabad
-                  </h5>
-                  <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                    2022
-                  </span>
-                </div>
-                <p className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  Class XII - Telangana Board of Intermediate Education
-                </p>
-              </div>
-
-              <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '10px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
-                  <h5 style={{ fontSize: '0.9rem', fontWeight: 500, color: '#ffffff' }}>
-                    The Hyderabad Public School, Begumpet
-                  </h5>
-                  <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                    2020
-                  </span>
-                </div>
-                <p className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  Class X - ICSE
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Technical Skills Matrix (Solid #6B1F2A Pills) */}
-      {(viewMode === 'all' || viewMode === 'about') && (
-        <div style={{ marginBottom: '50px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
-            <Code size={16} color="#ffffff" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-              // Hardware & Software Stack
-            </h3>
+          {/* Solid Maroon "about me" Badge */}
+          <div style={{ marginBottom: '32px' }}>
+            <span className="font-mono" style={{
+              fontSize: '0.84rem',
+              color: '#ffffff',
+              fontWeight: 600,
+              background: '#6B1F2A',
+              padding: '5px 20px',
+              borderRadius: '9999px',
+              border: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              letterSpacing: '0.02em',
+              boxShadow: '0 2px 12px rgba(107, 31, 42, 0.4)'
+            }}>
+              about me
+            </span>
           </div>
 
+          {/* In-Depth Personal Narrative Write-up */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '16px'
+            maxWidth: '680px',
+            textAlign: 'left',
+            color: 'var(--text-secondary)',
+            fontSize: '1.02rem',
+            lineHeight: '1.75',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px'
           }}>
-            {skills.map((group, idx) => (
-              <div key={idx} className="corner-bracket-card" style={{ padding: '16px' }}>
-                <h4 className="font-mono" style={{ fontSize: '0.82rem', color: '#ffffff', marginBottom: '12px' }}>
-                  {group.category}
-                </h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {group.items.map((item, i) => (
-                    <span key={i} className="tech-tag">{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <p style={{ color: '#ffffff', fontSize: '1.08rem', fontWeight: 500 }}>
+              who am i if not my curiosity, the circuits i solder, and the ideas i build into the physical world?
+            </p>
+
+            <p>
+              i am a hardware engineer and embedded builder (graduating in electronics & communication engineering in 2026). 
+              i do everything i put my mind to — whether it's laying out tight 4-layer LTE/GPS boards capable of taking 3A bursts, writing bare-metal firmware that doesn't drop a single byte, or designing analog front-ends for speech-controlled wheelchairs.
+            </p>
+
+            <p>
+              currently working as an Embedded Systems Intern at <strong style={{ color: '#ffffff' }}>DeltaIOT Pvt Ltd</strong> in Hyderabad, focusing on hardware R&D, power management breakout boards, and real-time firmware architecture where system-level ownership actually matters.
+            </p>
+
+            <p>
+              i believe in craftsmanship over hype. no fluff, no AI slop — just solid engineering, clean PCB routing, disciplined firmware, and making cool things that solve real-world problems.
+            </p>
+
+            <p style={{ fontStyle: 'italic', color: 'var(--text-muted)' }}>
+              when i'm not routing differential pairs or debugging UART traces, i'm probably tinkering with FPGA RTL, exploring edge ML, or building little side projects just because i can.
+            </p>
           </div>
         </div>
       )}
 
-      {/* Certifications */}
-      {(viewMode === 'all' || viewMode === 'about') && (
-        <div style={{ marginBottom: '60px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <Award size={16} color="#ffffff" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-              // Certifications
-            </h3>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
-            {certifications.map((cert, idx) => (
-              <div key={idx} className="corner-bracket-card" style={{ padding: '14px 18px' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
-                  {cert.name}
-                </h4>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{cert.issuer}</span>
-                  <span className="font-mono" style={{
-                    fontSize: '0.70rem',
-                    color: '#ffffff',
-                    background: '#6B1F2A',
-                    padding: '2px 7px',
-                    borderRadius: '3px',
-                    fontWeight: 600
-                  }}>
-                    {cert.date}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Contact Section */}
+      {/* 2. Contact Section */}
       {(viewMode === 'all' || viewMode === 'contact') && (
         <div id="contact-section" style={{
           textAlign: 'center',
-          padding: '50px 24px',
+          padding: '48px 24px',
           background: '#000000',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
-          marginTop: viewMode === 'contact' ? '20px' : '0'
+          marginTop: viewMode === 'contact' ? '20px' : '40px'
         }}>
           <h3 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff', marginBottom: '8px' }}>
             wanna connect<span style={{ color: '#6B1F2A' }}>?</span>

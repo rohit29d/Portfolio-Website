@@ -9,7 +9,7 @@ import TerminalModal from './components/TerminalModal';
 import SpaceBackdrop from './components/SpaceBackdrop';
 import LandingIntro from './components/LandingIntro';
 
-const SECTIONS = ['home', 'projects', 'about', 'contact'];
+const SECTIONS = ['home', 'works', 'about', 'contact'];
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -26,9 +26,9 @@ export default function App() {
   // Wheel Action Throttle Ref (for Menu-scoped wheel scrubbing)
   const isWheelThrottledRef = useRef(false);
 
-  // Scoped Category Cylinder Rotation State
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [scrubbedCategory, setScrubbedCategory] = useState('all');
+  // Scoped Category Rotation State (default: 'technical')
+  const [activeCategory, setActiveCategory] = useState('technical');
+  const [scrubbedCategory, setScrubbedCategory] = useState('technical');
   const [isBottomNavHovered, setIsBottomNavHovered] = useState(false);
 
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
@@ -232,8 +232,8 @@ export default function App() {
           <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
         </div>
 
-        {/* Card 1: Projects Section */}
-        <div className={`carousel-card ${getCardClass('projects')}`}>
+        {/* Card 1: Works Section */}
+        <div className={`carousel-card ${getCardClass('works')}`}>
           <Projects 
             activeCategory={activeCategory} 
             scrubbedCategory={scrubbedCategory}
@@ -252,7 +252,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* Projects-Specific Vertical Category Rail with Scoped Cylinder Rotation */}
+      {/* Works-Specific Vertical Category Rail (Technical, Photography, Art, Movies) */}
       <BottomNav 
         activeCategory={activeCategory} 
         scrubbedCategory={scrubbedCategory}
@@ -261,7 +261,7 @@ export default function App() {
         onBottomNavMouseLeave={handleBottomNavMouseLeave}
         onCategoryHover={handleCategoryHover}
         onCategoryClick={handleCategoryClick}
-        isProjectsVisible={focusedSection === 'projects'}
+        isWorksVisible={focusedSection === 'works'}
       />
 
       {/* Floating Bottom-Right Terminal CLI Box Widget */}

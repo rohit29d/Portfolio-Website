@@ -2,30 +2,28 @@ import React from 'react';
 import { Layers } from 'lucide-react';
 
 export default function BottomNav({ 
-  activeCategory, 
-  scrubbedCategory,
+  activeCategory = 'technical', 
+  scrubbedCategory = 'technical', 
   isBottomNavHovered,
-  onBottomNavMouseEnter,
-  onBottomNavMouseLeave,
-  onCategoryHover,
-  onCategoryClick,
-  isProjectsVisible 
+  onBottomNavMouseEnter, 
+  onBottomNavMouseLeave, 
+  onCategoryHover, 
+  onCategoryClick, 
+  isWorksVisible 
 }) {
   const tabs = [
-    { id: 'all', label: 'all', count: '8' },
-    { id: 'firmware', label: 'firmware', count: '3' },
-    { id: 'pcb', label: 'pcb', count: '4' },
-    { id: 'fpga', label: 'fpga', count: '1' },
-    { id: 'dsp', label: 'dsp', count: '1' },
-    { id: 'blogs', label: 'blogs', count: 'soon' }
+    { id: 'technical', label: 'technical', count: '8' },
+    { id: 'photography', label: 'photography', count: 'gallery' },
+    { id: 'art', label: 'art', count: 'gallery' },
+    { id: 'movies', label: 'movies', count: 'log' }
   ];
 
   const currentFocused = isBottomNavHovered ? (scrubbedCategory || activeCategory) : activeCategory;
 
   return (
     <nav 
-      className={`vertical-category-nav ${!isProjectsVisible ? 'hidden' : ''}`} 
-      aria-label="Vertical Projects Category Rail"
+      className={`vertical-category-nav ${!isWorksVisible ? 'hidden' : ''}`} 
+      aria-label="Vertical Works Category Rail"
       onMouseEnter={onBottomNavMouseEnter}
       onMouseLeave={onBottomNavMouseLeave}
     >
@@ -46,7 +44,7 @@ export default function BottomNav({
           letterSpacing: '0.08em',
           fontWeight: 600
         }}>
-          // Categories
+          // Works
         </span>
       </div>
 
@@ -60,7 +58,7 @@ export default function BottomNav({
             onClick={() => onCategoryClick(tab.id)}
             onMouseEnter={() => onCategoryHover(tab.id)}
             className={`category-rail-item ${isFocused ? 'active' : ''}`}
-            title={tab.id === 'blogs' ? 'Technical blogs coming soon' : `Filter by ${tab.label}`}
+            title={`View ${tab.label}`}
           >
             <span style={{ fontWeight: isFocused ? 600 : 400 }}>{tab.label}</span>
             <span className="font-mono" style={{

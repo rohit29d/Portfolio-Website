@@ -1,409 +1,552 @@
 import React, { useState } from 'react';
-import { Cpu, ExternalLink, Sparkles, Layers, Terminal, ChevronRight, X } from 'lucide-react';
+import { Cpu, ExternalLink, Sparkles, Camera, Palette, Film, ArrowUpRight, Check, Image as ImageIcon, Plus } from 'lucide-react';
 
-export const ALL_PROJECTS = [
+export const TECHNICAL_PROJECTS = [
   {
-    id: 1,
+    id: 'wheelchair',
+    subType: 'hardware',
     title: 'Hands-Free sEMG Based Speech-Controlled Wheelchair',
-    category: ['firmware', 'pcb'],
-    type: 'flagship',
-    hook: 'custom AFE PCB, real-time ML classification, wheelchair actuation',
-    tags: ['STM32', 'Python', 'LTspice', 'KiCAD'],
+    hook: 'Designed a custom Analog Front-End (AFE) PCB for sEMG acquisition from laryngeal muscles, validated gain and CMRR on bench. Trained real-time ML classifiers to translate silent speech signals directly into wheelchair motor actuation with safety overrides.',
+    tags: ['Custom AFE PCB', 'STM32', 'Python ML', 'LTspice', 'KiCAD'],
     link: 'https://github.com/rohit29d',
-    details: 'Designed a custom Analog Front-End (AFE) PCB for sEMG acquisition from laryngeal muscles, validated for gain and CMRR on bench. Implemented real-time closed-loop firmware on STM32 integrating ADC, timers, and UART; trained a Random Forest classifier for muscle-command recognition. Delivered a full end-to-end system: wearable AFE → signal acquisition → ML inference → wheelchair actuation with safety overrides.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 2,
+    id: 'fpga-arbiter',
+    subType: 'hardware',
     title: 'Priority Arbiter for Multi-Channel Bus',
-    category: ['fpga'],
-    type: 'flagship',
-    hook: 'RTL to FPGA implementation, deterministic multi-master arbitration',
-    tags: ['VHDL', 'Basys-3 FPGA', 'Vivado'],
+    hook: 'Designed and validated a deterministic multi-channel bus priority arbiter from RTL to FPGA using encoder and sequencer-based arbitration logic. Verified timing correctness through RTL simulation on Xilinx Vivado and Basys-3 FPGA.',
+    tags: ['VHDL', 'Basys-3 FPGA', 'Vivado RTL', 'Digital Logic'],
     link: 'https://github.com/rohit29d',
-    details: 'Designed and validated a deterministic multi-channel bus priority arbiter from RTL to FPGA using encoder and sequencer-based arbitration logic. Verified timing correctness through RTL simulation and confirmed deterministic behavior under concurrent access on hardware.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 3,
-    title: 'Aeromesh — CraftifAI Buildathon',
-    category: ['firmware'],
-    type: 'exploratory',
-    hook: 'edge AI turbulence detection mesh network',
-    tags: ['ESP32', 'FirmGen', 'ESP-IDF'],
+    id: 'semg-afe',
+    subType: 'hardware',
+    title: 'Wearable Analog Front-End (AFE) for Biopotential Sensing',
+    hook: 'Compact 60×25mm biopotential sensing board with multi-stage active analog filtering, high CMRR instrumentation amplifier, and noise suppression for microvolt biological signals.',
+    tags: ['Wearable PCB', 'KiCAD', 'Analog Filtering', 'LTspice'],
     link: 'https://github.com/rohit29d',
-    details: 'Rapid-prototyped firmware with FirmGen on a bare ESP32 + MPU6050, processing and detecting turbulence in-situ to avoid streaming chunks of raw sensor data. Trained an edge AI model within minutes during the buildathon to classify turbulence from live motion data. Built a diagnostic module for flight systems, designed to mesh with nearby devices and share real-time wind/air-situation data.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 4,
-    title: 'Automatic Plant Watering System',
-    category: ['firmware'],
-    type: 'exploratory',
-    hook: 'autonomous soil moisture sensing & relay actuation',
-    tags: ['Arduino Uno', 'C', 'Embedded C'],
+    id: 'rf-transceiver',
+    subType: 'hardware',
+    title: 'Discrete RF Data Transmission & Reception Module',
+    hook: 'Engineered discrete 433MHz RF oscillator, ASK/FSK modulation, and receiver stages from scratch, verifying antenna impedance matching and harmonic suppression.',
+    tags: ['Discrete RF', 'Hardware Design', 'LTspice', 'Oscillators'],
     link: 'https://github.com/rohit29d',
-    details: 'Used a solar panel as an ambient light sensor (ADC) with a custom scheduling algorithm to replace an RTC and trigger two daily watering cycles. Actuated a relay-driven solenoid valve; serial logging enabled real-time monitoring when connected.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 5,
-    title: 'Analog Front-End for sEMG Signal Acquisition',
-    category: ['pcb'],
-    type: 'exploratory',
-    hook: 'low-noise biopotential amplifier & active filtering PCB',
-    tags: ['LTspice', 'KiCAD', 'Wearable PCB'],
+    id: 'aeromesh',
+    subType: 'software',
+    title: 'Aeromesh — Edge AI Turbulence Detection Mesh Network',
+    hook: 'Rapid-prototyped edge firmware on bare ESP32 + MPU6050 during CraftifAI Buildathon. In-situ ML classification detects turbulence on-device and transmits decentralized telemetry across adjacent mesh nodes without cloud lag.',
+    tags: ['Edge AI', 'ESP32', 'ESP-IDF', 'Mesh Telemetry'],
     link: 'https://github.com/rohit29d',
-    details: 'Designed a wearable-size PCB (60×25 mm) for sEMG signal acquisition; bench-validated gain and CMRR performance with surface electrodes and multi-stage active analog filtering.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 6,
-    title: 'Range and Doppler Optimization in Radar Systems',
-    category: ['dsp'],
-    type: 'exploratory',
-    hook: 'FMCW radar signal processing & 2D FFT resolution map',
-    tags: ['MATLAB', 'DSP', 'Radar Logic'],
+    id: 'radar-dsp',
+    subType: 'software',
+    title: 'FMCW Radar Range & Doppler 2D FFT Signal Processing',
+    hook: 'Processed raw FMCW radar beat signals in MATLAB, applying Chebyshev windowing, Range FFT, and Doppler 2D FFT mapping to isolate high-noise targets with precision velocity estimation.',
+    tags: ['MATLAB', 'DSP', 'Radar Algorithms', '2D FFT'],
     link: 'https://github.com/rohit29d',
-    details: 'Analyzed FMCW radar beat signals in MATLAB, applying windowing functions, Range FFT, and Doppler FFT to optimize target detection resolution and velocity estimation under high noise.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 7,
-    title: 'RF Data Transmission and Reception',
-    category: ['pcb'],
-    type: 'exploratory',
-    hook: 'discrete RF ASK/FSK transmitter and receiver hardware',
-    tags: ['Discrete RF', 'LTspice', 'KiCAD'],
+    id: 'plant-irrigation',
+    subType: 'software',
+    title: 'Autonomous Solar-Scheduled Plant Irrigation System',
+    hook: 'Embedded C controller replacing traditional RTC chips by sampling solar panel ADC voltage curves to calculate diurnal solar cycles and autonomously pulse relay-driven solenoid valves.',
+    tags: ['Embedded C', 'STM32 / AVR', 'Low Power', 'Control Logic'],
     link: 'https://github.com/rohit29d',
-    details: 'Designed discrete RF oscillator, modulation, and demodulation circuits for wireless data packet transmission across 433MHz frequency bands, verifying signal integrity and antenna impedance matching.'
+    image: '/circuit-bg.jpg'
   },
   {
-    id: 8,
-    title: 'Automobile Seatbelt Detection Module',
-    category: ['pcb'],
-    type: 'exploratory',
-    hook: 'safety interlock engineered with discrete TTL logic gates',
-    tags: ['Digital Logic', 'TTL 7400 Series', 'Breadboard'],
+    id: 'seatbelt-safety',
+    subType: 'hardware',
+    title: 'Automobile Seatbelt Safety Interlock State Machine',
+    hook: 'Discrete TTL logic gate network implementing fail-safe ignition interlock based on pressure and latch sensors without MCU dependencies.',
+    tags: ['TTL 7400 Series', 'Digital Circuits', 'Hardware Safety'],
     link: 'https://github.com/rohit29d',
-    details: 'Constructed a hardware safety interlock state machine using discrete TTL logic ICs (AND, OR, NOT gates) to prevent vehicle ignition unless seatbelt latch sensors and pressure pads confirm occupant safety.'
+    image: '/circuit-bg.jpg'
   }
 ];
 
-const CATEGORIES = ['all', 'firmware', 'pcb', 'fpga', 'dsp', 'blogs'];
+// Sample initial galleries (scans / displays images in public/photography, public/art, public/movies)
+const SAMPLE_PHOTOS = [
+  { id: 1, title: 'Urban Geometry', date: '2026', src: '/circuit-bg.jpg', caption: 'Angles and shadows in the city' },
+  { id: 2, title: 'Silicon Macro', date: '2025', src: '/wine_circuits.gif', caption: 'SMD components under 40x magnification' },
+  { id: 3, title: 'Night Lab Session', date: '2025', src: '/circuit-bg.jpg', caption: 'Oscilloscope waveforms at 3 AM' }
+];
 
-export default function Projects({ activeCategory = 'all', scrubbedCategory = 'all', isCylinderActive = false }) {
-  const [selectedProject, setSelectedProject] = useState(null);
+const SAMPLE_ART = [
+  { id: 1, title: 'Schematic Abstract I', type: 'Vector / PCB Art', src: '/wine_circuits.gif', note: 'Topological trace routing aesthetics' },
+  { id: 2, title: 'Silicon Dreams', type: 'Digital Illustration', src: '/avatar.png', note: 'Illustrated portrait & character design' }
+];
 
-  const getPanelClass = (catId) => {
-    if (!isCylinderActive) {
-      return catId === activeCategory ? 'panel-flat' : 'panel-hidden';
-    }
+const SAMPLE_MOVIES = [
+  { id: 1, title: 'Blade Runner 2049', year: '2017', director: 'Denis Villeneuve', rating: '10/10', thoughts: 'Atmospheric perfection and sound design masterclass.' },
+  { id: 2, title: 'Oppenheimer', year: '2023', director: 'Christopher Nolan', rating: '9.5/10', thoughts: 'Pacing, theoretical physics, and historical gravity.' },
+  { id: 3, title: 'Ex Machina', year: '2014', director: 'Alex Garland', rating: '9/10', thoughts: 'Claustrophobic AI ethics and minimalist hardware design.' },
+  { id: 4, title: 'Interstellar', year: '2014', director: 'Christopher Nolan', rating: '10/10', thoughts: 'Relativity, time dilation, and emotional resonance.' }
+];
 
-    const currentCenter = scrubbedCategory || activeCategory;
-    const targetIdx = CATEGORIES.indexOf(currentCenter);
-    const itemIdx = CATEGORIES.indexOf(catId);
-    const total = CATEGORIES.length;
+export default function Projects({ activeCategory = 'technical', scrubbedCategory = 'technical', isCylinderActive = false }) {
+  const [techSubMenu, setTechSubMenu] = useState('hardware'); // 'hardware' or 'software'
+  const [lightboxItem, setLightboxItem] = useState(null);
 
-    let offset = (itemIdx - targetIdx) % total;
-    if (offset > 3) offset -= total;
-    if (offset < -2) offset += total;
-
-    if (offset === 0) return 'panel-center';
-    if (offset === -1) return 'panel-left';
-    if (offset === 1) return 'panel-right';
-    if (offset === -2) return 'panel-outer-left';
-    if (offset === 2) return 'panel-outer-right';
-    if (offset === 3 || offset === -3) return 'panel-far';
-
-    return 'panel-center';
-  };
-
-  const renderProjectGrid = (catId) => {
-    const filtered = catId === 'all' 
-      ? ALL_PROJECTS 
-      : ALL_PROJECTS.filter(p => p.category.includes(catId));
-
-    const flagship = filtered.filter(p => p.type === 'flagship');
-    const exploratory = filtered.filter(p => p.type === 'exploratory');
-
-    return (
-      <div style={{ width: '100%' }}>
-        {/* Solid #6B1F2A Category Indicator Badge */}
-        {isCylinderActive && (
-          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-            <span className="font-mono" style={{
-              fontSize: '0.82rem',
-              color: '#ffffff',
-              background: '#6B1F2A',
-              padding: '5px 16px',
-              borderRadius: '9999px',
-              border: 'none',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              boxShadow: '0 2px 10px rgba(107, 31, 42, 0.4)'
-            }}>
-              // Category: {catId}
-            </span>
-          </div>
-        )}
-
-        {/* Flagship Projects Section */}
-        {flagship.length > 0 && (
-          <div style={{ marginBottom: '32px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Cpu size={16} color="#ffffff" />
-              <h3 className="font-mono" style={{
-                fontSize: '0.82rem',
-                color: '#ffffff',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                fontWeight: 600
-              }}>
-                // Flagship Builds
-              </h3>
-            </div>
-
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-              gap: '18px'
-            }}>
-              {flagship.map(project => (
-                <div 
-                  key={project.id}
-                  className="corner-bracket-card"
-                  onClick={() => setSelectedProject(project)}
-                  style={{
-                    padding: '22px',
-                    cursor: 'pointer',
-                    borderLeft: '3px solid #6B1F2A'
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '10px' }}>
-                    <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', lineHeight: '1.3' }}>
-                      {project.title}
-                    </h4>
-                    <span className="font-mono" style={{
-                      fontSize: '0.68rem',
-                      color: '#ffffff',
-                      background: '#6B1F2A',
-                      padding: '3px 7px',
-                      borderRadius: '3px',
-                      fontWeight: 600,
-                      whiteSpace: 'nowrap'
-                    }}>
-                      FLAGSHIP
-                    </span>
-                  </div>
-
-                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
-                    {project.hook}
-                  </p>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
-                    {project.tags.map((tag, idx) => (
-                      <span key={idx} className="tech-tag">{tag}</span>
-                    ))}
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: '#ffffff' }} className="font-mono">
-                    <span>inspect schematic / details</span>
-                    <ChevronRight size={14} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Exploratory Projects Section */}
-        {exploratory.length > 0 && (
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Layers size={16} color="#ffffff" />
-              <h3 className="font-mono" style={{
-                fontSize: '0.82rem',
-                color: '#ffffff',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                fontWeight: 600
-              }}>
-                // Exploratory Builds
-              </h3>
-            </div>
-
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '16px'
-            }}>
-              {exploratory.map(project => (
-                <div 
-                  key={project.id}
-                  className="corner-bracket-card"
-                  onClick={() => setSelectedProject(project)}
-                  style={{
-                    padding: '18px',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <h4 style={{ fontSize: '0.96rem', fontWeight: 600, color: '#ffffff', marginBottom: '8px', lineHeight: '1.4' }}>
-                    {project.title}
-                  </h4>
-
-                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '12px' }}>
-                    {project.hook}
-                  </p>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
-                    {project.tags.map((tag, idx) => (
-                      <span key={idx} className="tech-tag">{tag}</span>
-                    ))}
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--text-muted)' }} className="font-mono">
-                    <span>view build specs</span>
-                    <ChevronRight size={12} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Empty State when Category has no items */}
-        {filtered.length === 0 && (
-          <div style={{
-            textAlign: 'center',
-            padding: '50px 20px',
-            background: '#000000',
-            border: '1px dashed var(--border-subtle)',
-            borderRadius: 'var(--radius-md)'
-          }}>
-            <Terminal size={30} color="var(--text-muted)" style={{ marginBottom: '12px' }} />
-            <p className="font-mono" style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '4px' }}>
-              // no builds published yet under "{catId}"
-            </p>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-              technical writeup / hardware specs coming soon!
-            </p>
-          </div>
-        )}
-      </div>
-    );
-  };
+  const currentCategory = isCylinderActive ? (scrubbedCategory || activeCategory) : activeCategory;
 
   return (
     <section style={{
-      padding: '30px 20px 60px',
-      maxWidth: '900px',
+      padding: '30px 20px 80px',
+      maxWidth: '960px',
       margin: '0 auto',
       position: 'relative'
     }}>
       {/* Section Header */}
-      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '36px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff' }}>
-            highlights<span style={{ color: '#6B1F2A' }}>!</span>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 600, color: '#ffffff' }}>
+            {currentCategory === 'technical' && 'works & engineering'}
+            {currentCategory === 'photography' && 'photography gallery'}
+            {currentCategory === 'art' && 'art & design'}
+            {currentCategory === 'movies' && 'film diary & watchlist'}
           </h2>
           <Sparkles size={18} color="#6B1F2A" />
         </div>
         <p className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-          some things i built because i could
+          {currentCategory === 'technical' && 'schematic to silicon, firmware, and embedded builds'}
+          {currentCategory === 'photography' && 'moments captured through the lens'}
+          {currentCategory === 'art' && 'visual experiments, digital sketches, and vector art'}
+          {currentCategory === 'movies' && 'cinema that inspires my perspective'}
         </p>
       </div>
 
-      {/* Scoped Projects Horizontal Cylinder Stage */}
-      <div className="projects-cylinder-stage">
-        <div className="projects-cylinder-viewport">
-          {CATEGORIES.map((catId) => {
-            const panelClass = getPanelClass(catId);
-            if (panelClass === 'panel-hidden') return null;
-
-            return (
-              <div key={catId} className={`category-panel ${panelClass}`}>
-                {renderProjectGrid(catId)}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Project Detail Modal */}
-      {selectedProject && (
-        <div className="modal-backdrop" onClick={() => setSelectedProject(null)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <button 
-              onClick={() => setSelectedProject(null)}
-              style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text-muted)',
-                cursor: 'pointer'
-              }}
-            >
-              <X size={20} />
-            </button>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span className="font-mono" style={{
-                fontSize: '0.75rem',
-                color: '#ffffff',
-                background: '#6B1F2A',
-                padding: '3px 9px',
-                borderRadius: '3px',
-                fontWeight: 600
-              }}>
-                {selectedProject.type.toUpperCase()} BUILD
-              </span>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                ID: #{selectedProject.id}
-              </span>
-            </div>
-
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 600, color: '#ffffff', marginBottom: '12px' }}>
-              {selectedProject.title}
-            </h3>
-
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '20px' }}>
-              {selectedProject.details}
-            </p>
-
-            <div style={{ marginBottom: '20px' }}>
-              <h5 className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '8px', textTransform: 'uppercase' }}>
-                // Tech Stack & Hardware Components
-              </h5>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                {selectedProject.tags.map((tag, idx) => (
-                  <span key={idx} className="tech-tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
-              <a 
-                href={selectedProject.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
+      {/* 1. TECHNICAL CATEGORY VIEW */}
+      {currentCategory === 'technical' && (
+        <div>
+          {/* Sub-Sub 2-Way Toggle Menu: [ Hardware ] / [ Software ] */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '36px'
+          }}>
+            <div style={{
+              display: 'inline-flex',
+              background: '#000000',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: '9999px',
+              padding: '4px',
+              gap: '4px'
+            }}>
+              <button
+                type="button"
+                onClick={() => setTechSubMenu('hardware')}
                 className="font-mono"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: '#6B1F2A',
-                  color: '#ffffff',
-                  padding: '9px 18px',
-                  borderRadius: 'var(--radius-sm)',
-                  textDecoration: 'none',
-                  fontSize: '0.85rem',
+                  padding: '7px 24px',
+                  borderRadius: '9999px',
+                  border: 'none',
+                  fontSize: '0.84rem',
                   fontWeight: 600,
-                  boxShadow: '0 2px 10px rgba(107, 31, 42, 0.4)'
+                  cursor: 'pointer',
+                  background: techSubMenu === 'hardware' ? '#6B1F2A' : 'transparent',
+                  color: techSubMenu === 'hardware' ? '#ffffff' : 'var(--text-secondary)',
+                  transition: 'all 0.25s var(--ease-smooth)',
+                  boxShadow: techSubMenu === 'hardware' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
                 }}
               >
-                <span>View on GitHub</span>
-                <ExternalLink size={14} />
+                Hardware ({TECHNICAL_PROJECTS.filter(p => p.subType === 'hardware').length})
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setTechSubMenu('software')}
+                className="font-mono"
+                style={{
+                  padding: '7px 24px',
+                  borderRadius: '9999px',
+                  border: 'none',
+                  fontSize: '0.84rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  background: techSubMenu === 'software' ? '#6B1F2A' : 'transparent',
+                  color: techSubMenu === 'software' ? '#ffffff' : 'var(--text-secondary)',
+                  transition: 'all 0.25s var(--ease-smooth)',
+                  boxShadow: techSubMenu === 'software' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
+                }}
+              >
+                Software ({TECHNICAL_PROJECTS.filter(p => p.subType === 'software').length})
+              </button>
+            </div>
+          </div>
+
+          {/* Abhijith Style Project Cards (Large photo on left, details on right, whole card clickable) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            {TECHNICAL_PROJECTS.filter(p => p.subType === techSubMenu).map((project) => (
+              <a
+                key={project.id}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="corner-bracket-card"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: '28px',
+                  padding: '24px',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s var(--ease-smooth)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: 'var(--radius-md)'
+                }}
+                onMouseOver={e => {
+                  e.currentTarget.style.borderColor = '#6B1F2A';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {/* Left Side: Featured Media Preview Photo */}
+                <div style={{
+                  width: '320px',
+                  minWidth: '280px',
+                  height: '190px',
+                  borderRadius: 'var(--radius-sm)',
+                  overflow: 'hidden',
+                  background: '#000000',
+                  border: '1px solid var(--border-subtle)',
+                  position: 'relative',
+                  flexShrink: 0
+                }}>
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      filter: 'brightness(0.95) contrast(1.05)',
+                      transition: 'transform 0.5s var(--ease-smooth)'
+                    }}
+                    onError={(e) => {
+                      e.target.src = '/wine_circuits.gif';
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '8px',
+                    right: '8px',
+                    background: 'rgba(0, 0, 0, 0.75)',
+                    backdropFilter: 'blur(6px)',
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: '#ffffff',
+                    fontSize: '0.72rem'
+                  }} className="font-mono">
+                    <span>github</span>
+                    <ArrowUpRight size={12} />
+                  </div>
+                </div>
+
+                {/* Right Side: Title, Description, & Stack Tags */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3 style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 600,
+                    color: '#ffffff',
+                    marginBottom: '10px',
+                    lineHeight: '1.35',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}>
+                    <span>{project.title}</span>
+                  </h3>
+
+                  <p style={{
+                    fontSize: '0.92rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: '1.6',
+                    marginBottom: '16px'
+                  }}>
+                    {project.hook}
+                  </p>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {project.tags.map((tag, idx) => (
+                      <span key={idx} className="tech-tag" style={{ fontSize: '0.74rem' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 2. PHOTOGRAPHY CATEGORY VIEW */}
+      {currentCategory === 'photography' && (
+        <div>
+          {/* Helper Drop-in Notice */}
+          <div style={{
+            background: '#000000',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
+            padding: '14px 20px',
+            marginBottom: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Camera size={16} color="#6B1F2A" />
+              <span className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                Drop any photos into <code style={{ color: '#ffffff' }}>public/photography/</code> to display in this gallery.
+              </span>
+            </div>
+            <span className="font-mono" style={{ fontSize: '0.74rem', color: '#6B1F2A', fontWeight: 600 }}>
+              AUTO-SYNCED
+            </span>
+          </div>
+
+          {/* Photo Gallery Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: '20px'
+          }}>
+            {SAMPLE_PHOTOS.map((photo) => (
+              <div 
+                key={photo.id}
+                className="corner-bracket-card"
+                onClick={() => setLightboxItem(photo)}
+                style={{
+                  padding: '12px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s var(--ease-smooth)'
+                }}
+                onMouseOver={e => { e.currentTarget.style.borderColor = '#6B1F2A'; }}
+                onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
+              >
+                <div style={{
+                  height: '220px',
+                  borderRadius: 'var(--radius-sm)',
+                  overflow: 'hidden',
+                  background: '#000000',
+                  marginBottom: '10px'
+                }}>
+                  <img 
+                    src={photo.src} 
+                    alt={photo.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                  <h4 style={{ fontSize: '0.94rem', fontWeight: 600, color: '#ffffff' }}>{photo.title}</h4>
+                  <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{photo.date}</span>
+                </div>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                  {photo.caption}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 3. ART & DESIGN CATEGORY VIEW */}
+      {currentCategory === 'art' && (
+        <div>
+          {/* Helper Drop-in Notice */}
+          <div style={{
+            background: '#000000',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
+            padding: '14px 20px',
+            marginBottom: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Palette size={16} color="#6B1F2A" />
+              <span className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                Drop your sketches, vector art, and 3D renders into <code style={{ color: '#ffffff' }}>public/art/</code>
+              </span>
+            </div>
+            <span className="font-mono" style={{ fontSize: '0.74rem', color: '#6B1F2A', fontWeight: 600 }}>
+              AUTO-SYNCED
+            </span>
+          </div>
+
+          {/* Art Gallery Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gap: '24px'
+          }}>
+            {SAMPLE_ART.map((art) => (
+              <div 
+                key={art.id}
+                className="corner-bracket-card"
+                onClick={() => setLightboxItem(art)}
+                style={{
+                  padding: '14px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s var(--ease-smooth)'
+                }}
+                onMouseOver={e => { e.currentTarget.style.borderColor = '#6B1F2A'; }}
+                onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
+              >
+                <div style={{
+                  height: '240px',
+                  borderRadius: 'var(--radius-sm)',
+                  overflow: 'hidden',
+                  background: '#000000',
+                  marginBottom: '12px'
+                }}>
+                  <img 
+                    src={art.src} 
+                    alt={art.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff' }}>{art.title}</h4>
+                  <span className="font-mono" style={{
+                    fontSize: '0.70rem',
+                    color: '#ffffff',
+                    background: '#6B1F2A',
+                    padding: '2px 7px',
+                    borderRadius: '3px'
+                  }}>
+                    {art.type}
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                  {art.note}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 4. MOVIES & FILM DIARY CATEGORY VIEW */}
+      {currentCategory === 'movies' && (
+        <div>
+          <div style={{
+            background: '#000000',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
+            padding: '14px 20px',
+            marginBottom: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
+            <Film size={16} color="#6B1F2A" />
+            <span className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+              A curated log of films, direction, and cinematography that inspire my creative thinking.
+            </span>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '18px'
+          }}>
+            {SAMPLE_MOVIES.map((movie) => (
+              <div 
+                key={movie.id}
+                className="corner-bracket-card"
+                style={{ padding: '20px' }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: '#ffffff' }}>
+                    {movie.title}
+                  </h4>
+                  <span className="font-mono" style={{
+                    fontSize: '0.72rem',
+                    color: '#ffffff',
+                    background: '#6B1F2A',
+                    padding: '2px 8px',
+                    borderRadius: '3px',
+                    fontWeight: 600
+                  }}>
+                    {movie.rating}
+                  </span>
+                </div>
+
+                <p className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
+                  {movie.year} • Dir. {movie.director}
+                </p>
+
+                <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                  "{movie.thoughts}"
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Lightbox / Modal for photos & art */}
+      {lightboxItem && (
+        <div 
+          className="modal-backdrop"
+          onClick={() => setLightboxItem(null)}
+          style={{ zIndex: 100 }}
+        >
+          <div 
+            className="modal-content"
+            onClick={e => e.stopPropagation()}
+            style={{ maxWidth: '750px', padding: '16px', background: '#000000', border: '1px solid var(--border-subtle)' }}
+          >
+            <div style={{ width: '100%', maxHeight: '70vh', overflow: 'hidden', borderRadius: 'var(--radius-sm)', marginBottom: '12px' }}>
+              <img 
+                src={lightboxItem.src} 
+                alt={lightboxItem.title}
+                style={{ width: '100%', height: 'auto', maxHeight: '70vh', objectFit: 'contain' }}
+              />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', margin: 0 }}>
+                {lightboxItem.title}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setLightboxItem(null)}
+                className="font-mono"
+                style={{
+                  background: '#6B1F2A',
+                  color: '#ffffff',
+                  border: 'none',
+                  padding: '5px 14px',
+                  borderRadius: '3px',
+                  cursor: 'pointer',
+                  fontSize: '0.8rem'
+                }}
+              >
+                close
+              </button>
             </div>
           </div>
         </div>
