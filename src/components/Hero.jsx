@@ -223,7 +223,7 @@ export default function Hero({ onOpenTerminal }) {
                 </span>
               </div>
               <p className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                B.Tech in Electronics & Communication Engineering • CGPA: 7.6 / 10
+                B.Tech in Electronics & Communication Engineering
               </p>
             </div>
 

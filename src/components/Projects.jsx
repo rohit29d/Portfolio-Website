@@ -1,77 +1,89 @@
 import React, { useState } from 'react';
-import { Cpu, ExternalLink, Sparkles, Camera, Palette, Film, ArrowUpRight, Check, Image as ImageIcon, Plus } from 'lucide-react';
+import { Sparkles, Camera, Palette, Film, ArrowUpRight } from 'lucide-react';
 
 export const TECHNICAL_PROJECTS = [
+  // --- MAJOR BUILDS ---
   {
     id: 'wheelchair',
-    subType: 'hardware',
+    tier: 'major',
     title: 'Hands-Free sEMG Based Speech-Controlled Wheelchair',
     hook: 'Designed a custom Analog Front-End (AFE) PCB for sEMG acquisition from laryngeal muscles, validated gain and CMRR on bench. Trained real-time ML classifiers to translate silent speech signals directly into wheelchair motor actuation with safety overrides.',
     tags: ['Custom AFE PCB', 'STM32', 'Python ML', 'LTspice', 'KiCAD'],
-    link: 'https://github.com/rohit29d',
+    link: 'https://github.com/rohit29d/Hands-Free-sEMG-based-speech-controlled-wheelchair-',
     image: '/circuit-bg.jpg'
   },
   {
-    id: 'fpga-arbiter',
-    subType: 'hardware',
-    title: 'Priority Arbiter for Multi-Channel Bus',
-    hook: 'Designed and validated a deterministic multi-channel bus priority arbiter from RTL to FPGA using encoder and sequencer-based arbitration logic. Verified timing correctness through RTL simulation on Xilinx Vivado and Basys-3 FPGA.',
-    tags: ['VHDL', 'Basys-3 FPGA', 'Vivado RTL', 'Digital Logic'],
-    link: 'https://github.com/rohit29d',
-    image: '/circuit-bg.jpg'
-  },
-  {
-    id: 'semg-afe',
-    subType: 'hardware',
-    title: 'Wearable Analog Front-End (AFE) for Biopotential Sensing',
-    hook: 'Compact 60×25mm biopotential sensing board with multi-stage active analog filtering, high CMRR instrumentation amplifier, and noise suppression for microvolt biological signals.',
-    tags: ['Wearable PCB', 'KiCAD', 'Analog Filtering', 'LTspice'],
-    link: 'https://github.com/rohit29d',
-    image: '/circuit-bg.jpg'
-  },
-  {
-    id: 'rf-transceiver',
-    subType: 'hardware',
-    title: 'Discrete RF Data Transmission & Reception Module',
-    hook: 'Engineered discrete 433MHz RF oscillator, ASK/FSK modulation, and receiver stages from scratch, verifying antenna impedance matching and harmonic suppression.',
-    tags: ['Discrete RF', 'Hardware Design', 'LTspice', 'Oscillators'],
-    link: 'https://github.com/rohit29d',
+    id: 'semg-afe-v2',
+    tier: 'major',
+    title: 'Analog Front-End for sEMG Signal Acquisition V2',
+    hook: 'In-house analog front-end circuit designed from scratch for acquiring microvolt sEMG signals, featuring low-noise instrumentation amplifiers, multi-stage active filtering, and high CMRR.',
+    tags: ['Custom AFE PCB', 'KiCAD', 'Analog Filtering', 'LTspice', 'Bio-Sensors'],
+    link: 'https://github.com/rohit29d/Analog-Front-End-for-sEMG-signals-Acquisition-V2',
     image: '/circuit-bg.jpg'
   },
   {
     id: 'aeromesh',
-    subType: 'software',
+    tier: 'major',
     title: 'Aeromesh — Edge AI Turbulence Detection Mesh Network',
     hook: 'Rapid-prototyped edge firmware on bare ESP32 + MPU6050 during CraftifAI Buildathon. In-situ ML classification detects turbulence on-device and transmits decentralized telemetry across adjacent mesh nodes without cloud lag.',
-    tags: ['Edge AI', 'ESP32', 'ESP-IDF', 'Mesh Telemetry'],
-    link: 'https://github.com/rohit29d',
+    tags: ['Edge AI', 'ESP32', 'ESP-IDF', 'Mesh Telemetry', 'IMU'],
+    link: 'https://github.com/rohit29d/CraftifAI_Hackathon_Aeromesh',
+    image: '/circuit-bg.jpg'
+  },
+
+  // --- MINOR BUILDS ---
+  {
+    id: 'speech-rec-ml',
+    tier: 'minor',
+    title: 'Speech Recognition Using Laryngeal sEMG Signals',
+    hook: 'A trained and bench-tested Random Forest ML classification pipeline translating laryngeal sEMG biosignals into discrete directional wheelchair motion commands.',
+    tags: ['Python', 'Random Forest', 'scikit-learn', 'Biosignal Processing'],
+    link: 'https://github.com/rohit29d/Speech-recognition-using-Laryngeal-sEMG-signals',
     image: '/circuit-bg.jpg'
   },
   {
-    id: 'radar-dsp',
-    subType: 'software',
-    title: 'FMCW Radar Range & Doppler 2D FFT Signal Processing',
-    hook: 'Processed raw FMCW radar beat signals in MATLAB, applying Chebyshev windowing, Range FFT, and Doppler 2D FFT mapping to isolate high-noise targets with precision velocity estimation.',
-    tags: ['MATLAB', 'DSP', 'Radar Algorithms', '2D FFT'],
-    link: 'https://github.com/rohit29d',
+    id: 'alexa-tv',
+    tier: 'minor',
+    title: 'Alexa Voice-Controlled Smart TV Remote via ESP32',
+    hook: 'Smart IR/Wi-Fi bridge built with ESP32 to smart-ify legacy non-smart household devices and appliances, enabling direct voice integration via Amazon Alexa.',
+    tags: ['ESP32', 'ESP-IDF', 'IoT', 'IR Blaster', 'Alexa API'],
+    link: 'https://github.com/rohit29d/Alexa-control-of-TV-with-ESP32',
     image: '/circuit-bg.jpg'
   },
   {
-    id: 'plant-irrigation',
-    subType: 'software',
-    title: 'Autonomous Solar-Scheduled Plant Irrigation System',
-    hook: 'Embedded C controller replacing traditional RTC chips by sampling solar panel ADC voltage curves to calculate diurnal solar cycles and autonomously pulse relay-driven solenoid valves.',
-    tags: ['Embedded C', 'STM32 / AVR', 'Low Power', 'Control Logic'],
-    link: 'https://github.com/rohit29d',
+    id: 'plant-watering',
+    tier: 'minor',
+    title: 'Autonomous Household Plant Watering Controller',
+    hook: 'Automated irrigation controller using solar ambient sensing and custom scheduling algorithms to replace traditional RTC chips and actuate relay-driven valves.',
+    tags: ['Embedded C', 'ADC Sensing', 'Automation', 'Actuation'],
+    link: 'https://github.com/rohit29d/House-Hold-Auto-Plant-Watering-System',
     image: '/circuit-bg.jpg'
   },
   {
     id: 'seatbelt-safety',
-    subType: 'hardware',
+    tier: 'minor',
     title: 'Automobile Seatbelt Safety Interlock State Machine',
-    hook: 'Discrete TTL logic gate network implementing fail-safe ignition interlock based on pressure and latch sensors without MCU dependencies.',
-    tags: ['TTL 7400 Series', 'Digital Circuits', 'Hardware Safety'],
-    link: 'https://github.com/rohit29d',
+    hook: 'Hardware safety interlock network engineered purely through discrete TTL 7400 digital logic gates to prevent vehicle ignition without occupant safety confirmation.',
+    tags: ['TTL 7400 Series', 'Digital Logic', 'Hardware Safety', 'Interlock'],
+    link: 'https://github.com/rohit29d/Automobile-Seatbelt-Detection-Module',
+    image: '/circuit-bg.jpg'
+  },
+  {
+    id: 'appimage-installer',
+    tier: 'minor',
+    title: 'Linux AppImage Desktop Integrator & Installer',
+    hook: 'Shell automation script that seamlessly turns standalone Linux AppImages into fully integrated desktop apps in the Ubuntu application tray with proper MIME types and desktop shortcuts.',
+    tags: ['Bash / Shell', 'Linux / Ubuntu', 'Automation', 'CLI Tool'],
+    link: 'https://github.com/rohit29d/Appimage_installer',
+    image: '/circuit-bg.jpg'
+  },
+  {
+    id: 'antigravity-installer',
+    tier: 'minor',
+    title: 'Antigravity Package Linux Desktop App Installer',
+    hook: 'Shell utility to convert installed tarball application packages into native desktop applications in the Linux system app tray with desktop entries.',
+    tags: ['Bash / Shell', 'Linux / Ubuntu', 'Desktop Integration'],
+    link: 'https://github.com/rohit29d/Antigravity_appinstaller',
     image: '/circuit-bg.jpg'
   }
 ];
@@ -96,10 +108,13 @@ const SAMPLE_MOVIES = [
 ];
 
 export default function Projects({ activeCategory = 'technical', scrubbedCategory = 'technical', isCylinderActive = false }) {
-  const [techSubMenu, setTechSubMenu] = useState('hardware'); // 'hardware' or 'software'
+  const [buildTier, setBuildTier] = useState('major'); // 'major' or 'minor'
   const [lightboxItem, setLightboxItem] = useState(null);
 
   const currentCategory = isCylinderActive ? (scrubbedCategory || activeCategory) : activeCategory;
+
+  const majorCount = TECHNICAL_PROJECTS.filter(p => p.tier === 'major').length;
+  const minorCount = TECHNICAL_PROJECTS.filter(p => p.tier === 'minor').length;
 
   return (
     <section style={{
@@ -130,7 +145,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
       {/* 1. TECHNICAL CATEGORY VIEW */}
       {currentCategory === 'technical' && (
         <div>
-          {/* Sub-Sub 2-Way Toggle Menu: [ Hardware ] / [ Software ] */}
+          {/* Sub-Sub 2-Way Toggle Menu: [ Major Builds ] / [ Minor Builds ] */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
@@ -146,7 +161,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
             }}>
               <button
                 type="button"
-                onClick={() => setTechSubMenu('hardware')}
+                onClick={() => setBuildTier('major')}
                 className="font-mono"
                 style={{
                   padding: '7px 24px',
@@ -155,18 +170,18 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  background: techSubMenu === 'hardware' ? '#6B1F2A' : 'transparent',
-                  color: techSubMenu === 'hardware' ? '#ffffff' : 'var(--text-secondary)',
+                  background: buildTier === 'major' ? '#6B1F2A' : 'transparent',
+                  color: buildTier === 'major' ? '#ffffff' : 'var(--text-secondary)',
                   transition: 'all 0.25s var(--ease-smooth)',
-                  boxShadow: techSubMenu === 'hardware' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
+                  boxShadow: buildTier === 'major' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
                 }}
               >
-                Hardware ({TECHNICAL_PROJECTS.filter(p => p.subType === 'hardware').length})
+                Major Builds ({majorCount})
               </button>
 
               <button
                 type="button"
-                onClick={() => setTechSubMenu('software')}
+                onClick={() => setBuildTier('minor')}
                 className="font-mono"
                 style={{
                   padding: '7px 24px',
@@ -175,20 +190,20 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  background: techSubMenu === 'software' ? '#6B1F2A' : 'transparent',
-                  color: techSubMenu === 'software' ? '#ffffff' : 'var(--text-secondary)',
+                  background: buildTier === 'minor' ? '#6B1F2A' : 'transparent',
+                  color: buildTier === 'minor' ? '#ffffff' : 'var(--text-secondary)',
                   transition: 'all 0.25s var(--ease-smooth)',
-                  boxShadow: techSubMenu === 'software' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
+                  boxShadow: buildTier === 'minor' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
                 }}
               >
-                Software ({TECHNICAL_PROJECTS.filter(p => p.subType === 'software').length})
+                Minor Builds ({minorCount})
               </button>
             </div>
           </div>
 
           {/* Abhijith Style Project Cards (Large photo on left, details on right, whole card clickable) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            {TECHNICAL_PROJECTS.filter(p => p.subType === techSubMenu).map((project) => (
+            {TECHNICAL_PROJECTS.filter(p => p.tier === buildTier).map((project) => (
               <a
                 key={project.id}
                 href={project.link}
