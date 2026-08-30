@@ -6,6 +6,7 @@ import AboutContact from './components/AboutContact';
 import BottomNav from './components/BottomNav';
 import TerminalModal from './components/TerminalModal';
 import SpaceBackdrop from './components/SpaceBackdrop';
+import LandingIntro from './components/LandingIntro';
 
 const SECTIONS = ['home', 'projects', 'about', 'contact'];
 
@@ -132,6 +133,9 @@ export default function App() {
 
   return (
     <div className={`carousel-stage ${isNavHovered ? 'nav-active' : ''}`}>
+      {/* 1. Landing Greeting Animation (Multi-language solid #6B1F2A curtain reveal) */}
+      <LandingIntro />
+
       {/* SVG Concave Spherical Distortion ClipPath Definition */}
       <svg width="0" height="0" style={{ position: 'absolute', pointerEvents: 'none' }} aria-hidden="true">
         <defs>
