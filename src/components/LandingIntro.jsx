@@ -29,7 +29,7 @@ export default function LandingIntro({ onComplete }) {
 
     sessionStorage.setItem('hasSeenIntro', 'true');
 
-    // 3. Step through each greeting sequentially
+    // 3. Step through each greeting holding for 1 whole second (1000ms)
     let step = 0;
     const interval = setInterval(() => {
       step++;
@@ -37,12 +37,12 @@ export default function LandingIntro({ onComplete }) {
         setCurrentIndex(step);
       } else {
         clearInterval(interval);
-        // Short pause on the final greeting before lifting curtain
+        // Short pause after final greeting before lifting curtain
         setTimeout(() => {
           setIsSlidingUp(true);
-        }, 220);
+        }, 300);
       }
-    }, 260);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
