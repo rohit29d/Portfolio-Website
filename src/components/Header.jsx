@@ -7,6 +7,7 @@ export default function Header({
   onNavMouseEnter, 
   onNavMouseLeave, 
   onNavMouseMove, 
+  onNavWheel,
   onItemHover, 
   onNavClick 
 }) {
@@ -27,11 +28,18 @@ export default function Header({
     onNavMouseMove({ x: Math.max(-1, Math.min(1, normX)), y: Math.max(-1, Math.min(1, normY)) });
   };
 
+  const handleWheel = (e) => {
+    if (onNavWheel) {
+      onNavWheel(e);
+    }
+  };
+
   return (
     <header 
       onMouseEnter={onNavMouseEnter}
       onMouseLeave={onNavMouseLeave}
       onMouseMove={handleMouseMove}
+      onWheel={handleWheel}
       style={{
         position: 'sticky',
         top: 0,

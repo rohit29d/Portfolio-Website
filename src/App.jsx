@@ -21,8 +21,8 @@ export default function App() {
   const currentMousePosRef = useRef({ x: 0, y: 0 });
   const rafRef = useRef(null);
 
-  // Wheel and Keyboard Action Throttle Ref
-  const isActionThrottledRef = useRef(false);
+  // Wheel Action Throttle Ref (for Menu-scoped wheel scrubbing)
+  const isWheelThrottledRef = useRef(false);
 
   // Scoped Category Cylinder Rotation State
   const [activeCategory, setActiveCategory] = useState('all');
@@ -51,7 +51,7 @@ export default function App() {
     };
   }, []);
 
-  // Keyboard Arrow Key Navigation & Scroll Wheel Navigation
+  // Keyboard Arrow Key Navigation (Left / Right / Up / Down)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Don't trigger section jump if typing in input or terminal
@@ -80,52 +80,29 @@ export default function App() {
       }
     };
 
-    const handleWheel = (e) => {
-      // Check if user is scrolling inside a modal or terminal
-      const isInsideModal = e.target.closest('.modal-content') || isTerminalOpen;
-      if (isInsideModal) {
-        return; // Allow native internal modal scrolling
-      }
-
-      // Detect strong wheel gesture
-      if (Math.abs(e.deltaY) > 35 || Math.abs(e.deltaX) > 35) {
-        if (isActionThrottledRef.current) return;
-
-        isActionThrottledRef.current = true;
-        setTimeout(() => {
-          isActionThrottledRef.current = false;
-        }, 500); // 500ms cooldown for smooth 1-section advance
-
-        if (e.deltaY > 35 || e.deltaX > 35) {
-          // Scroll down / right -> Next Section
-          setActiveSection((prev) => {
-            const currentIdx = SECTIONS.indexOf(prev);
-            const nextIdx = (currentIdx + 1) % SECTIONS.length;
-            const nextSection = SECTIONS[nextIdx];
-            setScrubbedSection(nextSection);
-            return nextSection;
-          });
-        } else if (e.deltaY < -35 || e.deltaX < -35) {
-          // Scroll up / left -> Previous Section
-          setActiveSection((prev) => {
-            const currentIdx = SECTIONS.indexOf(prev);
-            const prevIdx = (currentIdx - 1 + SECTIONS.length) % SECTIONS.length;
-            const prevSection = SECTIONS[prevIdx];
-            setScrubbedSection(prevSection);
-            return prevSection;
-          });
-        }
-      }
-    };
-
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('wheel', handleWheel, { passive: true });
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('wheel', handleWheel);
     };
   }, [isTerminalOpen]);
+
+  // Menu-Scoped Wheel Scrolling (Only rotates menu when mouse cursor is on header menu)
+  const handleNavWheel = (e) => {
+    if (Math.abs(e.deltaY) > 20 || Math.abs(e.deltaX) > 20) {
+      if (isWheelThrottledRef.current) return;
+
+      isWheelThrottledRef.current = true;
+      setTimeout(() => {
+        isWheelThrottledRef.current = false;
+      }, 350);
+
+      const direction = (e.deltaY > 0 || e.deltaX > 0) ? 1 : -1;
+      const current = scrubbedSection || activeSection;
+      const currentIdx = SECTIONS.indexOf(current);
+      const nextIdx = (currentIdx + direction + SECTIONS.length) % SECTIONS.length;
+      setScrubbedSection(SECTIONS[nextIdx]);
+    }
+  };
 
   // Top Nav Hover Trigger: Cursor enters top nav bar
   const handleNavMouseEnter = () => {
@@ -227,13 +204,14 @@ export default function App() {
       {/* High-Definition PCB Circuitry Backdrop with Lerp-Smoothed Parallax Pan */}
       <SpaceBackdrop active={isNavHovered} mousePos={lerpedMousePos} />
 
-      {/* Top Header Navigation */}
+      {/* Top Header Navigation (Scoped wheel listener only activates when scrolling on nav bar) */}
       <Header 
         activeSection={activeSection}
         scrubbedSection={isNavHovered ? scrubbedSection : null}
         onNavMouseEnter={handleNavMouseEnter}
         onNavMouseLeave={handleNavMouseLeave}
         onNavMouseMove={handleNavMouseMove}
+        onNavWheel={handleNavWheel}
         onItemHover={handleItemHover}
         onNavClick={handleNavClick}
       />
