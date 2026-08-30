@@ -6,20 +6,20 @@ export default function Hero({ onOpenTerminal }) {
 
   const skills = [
     {
-      category: 'Hardware & Microcontrollers',
-      items: ['ESP32', 'STM32', 'Basys-3 FPGA', 'Analog Front-End (AFE)', 'Digital Circuits', 'Sensors']
+      category: 'Hardware',
+      items: ['ESP32', 'STM32', 'Basys-3 FPGA', 'Analog and Digital Circuits']
     },
     {
       category: 'EDA & Simulation Tools',
       items: ['Altium Designer', 'KiCAD', 'STM32CubeIDE', 'ESP-IDF', 'Xilinx Vivado', 'LTspice']
     },
     {
-      category: 'Domains & Protocols',
-      items: ['4-Layer PCB Design', 'Embedded Systems', 'Power Management', 'SPI/I2C/UART/LTE', 'OTA Firmware']
+      category: 'Domains',
+      items: ['PCB Design', 'Embedded Systems']
     },
     {
       category: 'Programming & RTL',
-      items: ['C', 'Python', 'Verilog/VHDL', 'Embedded C', 'MATLAB', 'FreeRTOS']
+      items: ['C', 'Embedded C', 'FreeRTOS', 'Verilog/VHDL']
     }
   ];
 
@@ -59,7 +59,7 @@ export default function Hero({ onOpenTerminal }) {
 
         {/* 2. Avatar Container with Solid Maroon LED & Border */}
         <div style={{ display: 'inline-block', position: 'relative', marginBottom: '20px', zIndex: 1 }}>
-          <div 
+          <div
             onMouseEnter={() => setAvatarHover(true)}
             onMouseLeave={() => setAvatarHover(false)}
             onClick={onOpenTerminal}
@@ -69,8 +69,8 @@ export default function Hero({ onOpenTerminal }) {
               height: '124px',
               borderRadius: '50%',
               padding: '2px',
-              background: avatarHover 
-                ? '#6B1F2A' 
+              background: avatarHover
+                ? '#6B1F2A'
                 : 'var(--border-subtle)',
               cursor: 'pointer',
               transition: 'background 0.3s var(--ease-smooth)',
@@ -86,9 +86,9 @@ export default function Hero({ onOpenTerminal }) {
               overflow: 'hidden',
               position: 'relative'
             }}>
-              <img 
-                src="/avatar.png" 
-                alt="Rohit Kumar Dubbaka Avatar" 
+              <img
+                src="/avatar.png"
+                alt="Rohit Kumar Dubbaka Avatar"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -164,7 +164,7 @@ export default function Hero({ onOpenTerminal }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
             <Briefcase size={16} color="#ffffff" />
             <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-              // Experience
+              // My Experience
             </h3>
           </div>
 
@@ -201,7 +201,7 @@ export default function Hero({ onOpenTerminal }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
             <GraduationCap size={16} color="#ffffff" />
             <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-              // Education
+              // My Education
             </h3>
           </div>
 
@@ -263,7 +263,7 @@ export default function Hero({ onOpenTerminal }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
           <Code size={16} color="#ffffff" />
           <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-            // Hardware & Software Stack
+            // Skill cart
           </h3>
         </div>
 
