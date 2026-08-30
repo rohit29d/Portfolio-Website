@@ -38,10 +38,10 @@ export default function BottomNav({
         borderBottom: '1px solid var(--border-subtle)',
         marginBottom: '4px'
       }}>
-        <Layers size={13} color="var(--accent-wine)" />
+        <Layers size={13} color="#ffffff" />
         <span className="font-mono" style={{
           fontSize: '0.68rem',
-          color: 'var(--text-secondary)',
+          color: '#ffffff',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
           fontWeight: 600
@@ -50,7 +50,7 @@ export default function BottomNav({
         </span>
       </div>
 
-      {/* Vertical Rail Category Items */}
+      {/* Vertical Rail Category Items (Solid #6B1F2A on Active) */}
       {tabs.map((tab) => {
         const isFocused = currentFocused === tab.id;
 
@@ -62,13 +62,14 @@ export default function BottomNav({
             className={`category-rail-item ${isFocused ? 'active' : ''}`}
             title={tab.id === 'blogs' ? 'Technical blogs coming soon' : `Filter by ${tab.label}`}
           >
-            <span>{tab.label}</span>
+            <span style={{ fontWeight: isFocused ? 600 : 400 }}>{tab.label}</span>
             <span className="font-mono" style={{
               fontSize: '0.65rem',
-              opacity: isFocused ? 0.95 : 0.45,
-              padding: '1px 5px',
+              fontWeight: 600,
+              padding: '2px 6px',
               borderRadius: '3px',
-              background: isFocused ? 'rgba(0,0,0,0.3)' : 'var(--bg-elevated)'
+              background: isFocused ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255, 255, 255, 0.08)',
+              color: '#ffffff'
             }}>
               {tab.count}
             </span>

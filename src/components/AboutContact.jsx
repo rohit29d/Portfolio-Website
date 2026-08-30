@@ -37,7 +37,7 @@ export default function AboutContact({ viewMode = 'all' }) {
       {(viewMode === 'all' || viewMode === 'about') && (
         <div id="about-section" style={{ marginBottom: '50px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff', marginBottom: '16px' }}>
-            who am i<span style={{ color: 'var(--accent-wine)' }}>?</span>
+            who am i<span style={{ color: '#6B1F2A' }}>?</span>
           </h2>
 
           <div className="corner-bracket-card" style={{ padding: '24px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
@@ -64,8 +64,8 @@ export default function AboutContact({ viewMode = 'all' }) {
           {/* Experience */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <Briefcase size={16} color="var(--accent-wine)" />
-              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <Briefcase size={16} color="#ffffff" />
+              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
                 // Experience
               </h3>
             </div>
@@ -75,7 +75,14 @@ export default function AboutContact({ viewMode = 'all' }) {
                 <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff' }}>
                   Embedded Systems Intern
                 </h4>
-                <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-wine-hover)' }}>
+                <span className="font-mono" style={{
+                  fontSize: '0.72rem',
+                  color: '#ffffff',
+                  background: '#6B1F2A',
+                  padding: '2px 8px',
+                  borderRadius: '3px',
+                  fontWeight: 600
+                }}>
                   Feb 2026 – Present
                 </span>
               </div>
@@ -94,8 +101,8 @@ export default function AboutContact({ viewMode = 'all' }) {
           {/* Education */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <GraduationCap size={16} color="var(--accent-wine)" />
-              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <GraduationCap size={16} color="#ffffff" />
+              <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
                 // Education
               </h3>
             </div>
@@ -106,7 +113,14 @@ export default function AboutContact({ viewMode = 'all' }) {
                   <h4 style={{ fontSize: '0.96rem', fontWeight: 600, color: '#ffffff' }}>
                     Amrita Vishwa Vidyapeetham
                   </h4>
-                  <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--accent-wine-hover)' }}>
+                  <span className="font-mono" style={{
+                    fontSize: '0.72rem',
+                    color: '#ffffff',
+                    background: '#6B1F2A',
+                    padding: '2px 8px',
+                    borderRadius: '3px',
+                    fontWeight: 600
+                  }}>
                     Grad 2026
                   </span>
                 </div>
@@ -147,12 +161,12 @@ export default function AboutContact({ viewMode = 'all' }) {
         </div>
       )}
 
-      {/* Technical Skills Matrix */}
+      {/* Technical Skills Matrix (Solid #6B1F2A Pills) */}
       {(viewMode === 'all' || viewMode === 'about') && (
         <div style={{ marginBottom: '50px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
-            <Code size={16} color="var(--accent-wine)" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <Code size={16} color="#ffffff" />
+            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
               // Hardware & Software Stack
             </h3>
           </div>
@@ -182,8 +196,8 @@ export default function AboutContact({ viewMode = 'all' }) {
       {(viewMode === 'all' || viewMode === 'about') && (
         <div style={{ marginBottom: '60px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <Award size={16} color="var(--accent-wine)" />
-            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <Award size={16} color="#ffffff" />
+            <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
               // Certifications
             </h3>
           </div>
@@ -196,7 +210,16 @@ export default function AboutContact({ viewMode = 'all' }) {
                 </h4>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{cert.issuer}</span>
-                  <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--accent-wine-hover)' }}>{cert.date}</span>
+                  <span className="font-mono" style={{
+                    fontSize: '0.70rem',
+                    color: '#ffffff',
+                    background: '#6B1F2A',
+                    padding: '2px 7px',
+                    borderRadius: '3px',
+                    fontWeight: 600
+                  }}>
+                    {cert.date}
+                  </span>
                 </div>
               </div>
             ))}
@@ -210,12 +233,12 @@ export default function AboutContact({ viewMode = 'all' }) {
           textAlign: 'center',
           padding: '50px 24px',
           background: '#000000',
-          border: '1px solid var(--accent-wine-border)',
+          border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
           marginTop: viewMode === 'contact' ? '20px' : '0'
         }}>
           <h3 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff', marginBottom: '8px' }}>
-            wanna connect<span style={{ color: 'var(--accent-wine)' }}>?</span>
+            wanna connect<span style={{ color: '#6B1F2A' }}>?</span>
           </h3>
           <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto 28px' }}>
             feel free to reach out for embedded hardware collabs, firmware discussions, or cool project ideas :)
@@ -240,7 +263,7 @@ export default function AboutContact({ viewMode = 'all' }) {
                 fontSize: '0.88rem',
                 transition: 'all 0.3s var(--ease-smooth)'
               }}
-              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-wine)'; }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
               onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
             >
               <Github size={16} />
@@ -266,7 +289,7 @@ export default function AboutContact({ viewMode = 'all' }) {
                 fontSize: '0.88rem',
                 transition: 'all 0.3s var(--ease-smooth)'
               }}
-              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-wine)'; }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
               onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
             >
               <Linkedin size={16} />
@@ -283,11 +306,12 @@ export default function AboutContact({ viewMode = 'all' }) {
                 gap: '8px',
                 padding: '10px 18px',
                 borderRadius: 'var(--radius-sm)',
-                background: 'var(--accent-wine)',
+                background: '#6B1F2A',
                 color: '#ffffff',
                 fontWeight: 600,
                 textDecoration: 'none',
-                fontSize: '0.88rem'
+                fontSize: '0.88rem',
+                boxShadow: '0 2px 12px rgba(107, 31, 42, 0.4)'
               }}
             >
               <Mail size={16} />
@@ -309,7 +333,7 @@ export default function AboutContact({ viewMode = 'all' }) {
                 textDecoration: 'none',
                 fontSize: '0.88rem'
               }}
-              onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--accent-wine)'; }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
               onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
             >
               <Phone size={15} />

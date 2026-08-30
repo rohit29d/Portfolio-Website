@@ -35,7 +35,7 @@ export default function Hero({ onOpenTerminal }) {
         </svg>
       </div>
 
-      {/* 2. Avatar Container with Wine Border & LED */}
+      {/* 2. Avatar Container with Solid Maroon LED & Border */}
       <div style={{ display: 'inline-block', position: 'relative', marginBottom: '20px', zIndex: 1 }}>
         <div 
           onMouseEnter={() => setAvatarHover(true)}
@@ -48,7 +48,7 @@ export default function Hero({ onOpenTerminal }) {
             borderRadius: '50%',
             padding: '2px',
             background: avatarHover 
-              ? 'var(--accent-wine)' 
+              ? '#6B1F2A' 
               : 'var(--border-subtle)',
             cursor: 'pointer',
             transition: 'background 0.3s var(--ease-smooth)',
@@ -78,7 +78,7 @@ export default function Hero({ onOpenTerminal }) {
             />
           </div>
 
-          {/* Wine LED Indicator Dot */}
+          {/* Solid Wine LED Indicator Dot */}
           <div style={{
             position: 'absolute',
             bottom: '4px',
@@ -86,26 +86,29 @@ export default function Hero({ onOpenTerminal }) {
             width: '12px',
             height: '12px',
             borderRadius: '50%',
-            background: 'var(--accent-wine)',
+            background: '#6B1F2A',
             border: '2px solid #000000'
           }} title="Status: Active" />
         </div>
       </div>
 
-      {/* 3. Role Badge Line */}
-      <div style={{ marginBottom: '14px' }}>
+      {/* 3. Solid Maroon Role Badge Line (Confident Color Block) */}
+      <div style={{ marginBottom: '16px' }}>
         <span className="font-mono" style={{
-          fontSize: '0.85rem',
+          fontSize: '0.82rem',
           color: '#ffffff',
-          background: 'var(--accent-wine-soft)',
-          padding: '4px 14px',
+          fontWeight: 600,
+          background: '#6B1F2A',
+          padding: '5px 16px',
           borderRadius: '9999px',
-          border: '1px solid var(--accent-wine-border)',
+          border: 'none',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '6px'
+          gap: '6px',
+          letterSpacing: '0.02em',
+          boxShadow: '0 2px 10px rgba(107, 31, 42, 0.4)'
         }}>
-          <Zap size={13} color="var(--accent-wine)" />
+          <Zap size={13} color="#ffffff" />
           embedded systems @ deltaiot
         </span>
       </div>
@@ -118,7 +121,7 @@ export default function Hero({ onOpenTerminal }) {
         marginBottom: '14px',
         color: '#ffffff'
       }}>
-        i like build stuff <span style={{ color: 'var(--accent-wine)' }}>:)</span>
+        i like build stuff <span style={{ color: '#6B1F2A' }}>:)</span>
       </h1>
 
       {/* 5. Intro Description */}
@@ -141,7 +144,7 @@ export default function Hero({ onOpenTerminal }) {
           style={{ cursor: 'pointer' }}
           title="Click to run interactive terminal"
         >
-          <Terminal size={15} color="var(--accent-wine)" />
+          <Terminal size={15} color="#ffffff" />
           <span style={{ color: 'var(--text-muted)' }}>%</span>
           <code style={{ color: '#ffffff', fontWeight: 500 }}>npx rohitdubbaka</code>
           <button 
@@ -151,7 +154,7 @@ export default function Hero({ onOpenTerminal }) {
             aria-label="Copy npx command"
             title="Copy command"
           >
-            {copied ? <Check size={14} color="var(--accent-wine)" /> : <Copy size={14} />}
+            {copied ? <Check size={14} color="#ffffff" /> : <Copy size={14} />}
           </button>
         </div>
 

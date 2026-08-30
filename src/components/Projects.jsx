@@ -123,18 +123,20 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
 
     return (
       <div style={{ width: '100%' }}>
-        {/* Category Indicator Tag */}
+        {/* Solid #6B1F2A Category Indicator Badge */}
         {isCylinderActive && (
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
             <span className="font-mono" style={{
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               color: '#ffffff',
-              background: 'var(--accent-wine-soft)',
-              padding: '4px 14px',
+              background: '#6B1F2A',
+              padding: '5px 16px',
               borderRadius: '9999px',
-              border: '1px solid var(--accent-wine-border)',
+              border: 'none',
+              fontWeight: 600,
               textTransform: 'uppercase',
-              letterSpacing: '0.06em'
+              letterSpacing: '0.06em',
+              boxShadow: '0 2px 10px rgba(107, 31, 42, 0.4)'
             }}>
               // Category: {catId}
             </span>
@@ -145,12 +147,13 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
         {flagship.length > 0 && (
           <div style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Cpu size={16} color="var(--accent-wine)" />
+              <Cpu size={16} color="#ffffff" />
               <h3 className="font-mono" style={{
                 fontSize: '0.82rem',
                 color: '#ffffff',
                 textTransform: 'uppercase',
-                letterSpacing: '0.08em'
+                letterSpacing: '0.08em',
+                fontWeight: 600
               }}>
                 // Flagship Builds
               </h3>
@@ -169,7 +172,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                   style={{
                     padding: '22px',
                     cursor: 'pointer',
-                    borderLeft: '3px solid var(--accent-wine)'
+                    borderLeft: '3px solid #6B1F2A'
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '10px' }}>
@@ -179,9 +182,10 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                     <span className="font-mono" style={{
                       fontSize: '0.68rem',
                       color: '#ffffff',
-                      background: 'var(--accent-wine)',
-                      padding: '2px 6px',
+                      background: '#6B1F2A',
+                      padding: '3px 7px',
                       borderRadius: '3px',
+                      fontWeight: 600,
                       whiteSpace: 'nowrap'
                     }}>
                       FLAGSHIP
@@ -198,7 +202,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                     ))}
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--accent-wine-hover)' }} className="font-mono">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: '#ffffff' }} className="font-mono">
                     <span>inspect schematic / details</span>
                     <ChevronRight size={14} />
                   </div>
@@ -212,12 +216,13 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
         {exploratory.length > 0 && (
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Layers size={16} color="var(--accent-wine)" />
+              <Layers size={16} color="#ffffff" />
               <h3 className="font-mono" style={{
                 fontSize: '0.82rem',
                 color: '#ffffff',
                 textTransform: 'uppercase',
-                letterSpacing: '0.08em'
+                letterSpacing: '0.08em',
+                fontWeight: 600
               }}>
                 // Exploratory Builds
               </h3>
@@ -246,7 +251,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                     {project.hook}
                   </p>
 
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '12px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
                     {project.tags.map((tag, idx) => (
                       <span key={idx} className="tech-tag">{tag}</span>
                     ))}
@@ -295,9 +300,9 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
           <h2 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#ffffff' }}>
-            highlights<span style={{ color: 'var(--accent-wine)' }}>!</span>
+            highlights<span style={{ color: '#6B1F2A' }}>!</span>
           </h2>
-          <Sparkles size={18} color="var(--accent-wine)" />
+          <Sparkles size={18} color="#6B1F2A" />
         </div>
         <p className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
           some things i built because i could
@@ -340,7 +345,14 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: '#ffffff', background: 'var(--accent-wine)', padding: '2px 8px', borderRadius: '3px' }}>
+              <span className="font-mono" style={{
+                fontSize: '0.75rem',
+                color: '#ffffff',
+                background: '#6B1F2A',
+                padding: '3px 9px',
+                borderRadius: '3px',
+                fontWeight: 600
+              }}>
                 {selectedProject.type.toUpperCase()} BUILD
               </span>
               <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -362,7 +374,7 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
               </h5>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                 {selectedProject.tags.map((tag, idx) => (
-                  <span key={idx} className="tech-tag" style={{ fontSize: '0.8rem', padding: '4px 10px' }}>
+                  <span key={idx} className="tech-tag">
                     {tag}
                   </span>
                 ))}
@@ -379,13 +391,14 @@ export default function Projects({ activeCategory = 'all', scrubbedCategory = 'a
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  background: 'var(--accent-wine)',
+                  background: '#6B1F2A',
                   color: '#ffffff',
-                  padding: '8px 16px',
+                  padding: '9px 18px',
                   borderRadius: 'var(--radius-sm)',
                   textDecoration: 'none',
                   fontSize: '0.85rem',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  boxShadow: '0 2px 10px rgba(107, 31, 42, 0.4)'
                 }}
               >
                 <span>View on GitHub</span>

@@ -2,23 +2,22 @@
   /* Solid True Black Design System */
   --bg-dark: #000000;
   --bg-card: #000000;
-  --bg-card-hover: #0a0405;
-  --bg-elevated: #0d0608;
+  --bg-card-hover: #080808;
+  --bg-elevated: #111111;
   
-  /* Single Accent Color: Deep Wine / Burgundy (#6B1F2A) */
+  /* Confident Solid Accent Color: Deep Wine / Maroon (#6B1F2A) */
   --accent-wine: #6B1F2A;
-  --accent-wine-hover: #862936;
-  --accent-wine-soft: rgba(107, 31, 42, 0.20);
-  --accent-wine-border: rgba(107, 31, 42, 0.50);
-  --accent-wine-border-strong: #6B1F2A;
+  --accent-wine-hover: #7f2532;
+  --accent-wine-soft: rgba(107, 31, 42, 0.25);
+  --accent-wine-border: rgba(107, 31, 42, 0.40);
 
-  /* Pure White / Off-White Text Hierarchy */
+  /* High-Contrast White / Off-White Text Hierarchy */
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.65);
-  --text-muted: rgba(255, 255, 255, 0.40);
+  --text-secondary: rgba(255, 255, 255, 0.70);
+  --text-muted: rgba(255, 255, 255, 0.45);
   
-  --border-subtle: rgba(255, 255, 255, 0.12);
-  --border-accent: rgba(107, 31, 42, 0.50);
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-accent: #6B1F2A;
   
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -110,7 +109,7 @@ body {
 .carousel-stage.nav-active .carousel-card {
   clip-path: url(#concave-spherical-clip);
   -webkit-clip-path: url(#concave-spherical-clip);
-  border: 1px solid var(--accent-wine-border);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: #000000;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
@@ -267,7 +266,7 @@ body {
   }
 }
 
-/* Divider Line */
+/* Subtle Hairline Divider */
 .pcb-divider {
   position: relative;
   height: 1px;
@@ -277,7 +276,7 @@ body {
   background: linear-gradient(90deg, 
     transparent 0%, 
     var(--border-subtle) 20%, 
-    var(--accent-wine-border) 50%, 
+    var(--accent-wine) 50%, 
     var(--border-subtle) 80%, 
     transparent 100%
   );
@@ -295,7 +294,7 @@ body {
   border-radius: 50%;
 }
 
-/* Component Corner Brackets */
+/* Clean Solid Black Card with Hairline White Border */
 .corner-bracket-card {
   position: relative;
   background: #000000;
@@ -305,7 +304,7 @@ body {
 }
 
 .corner-bracket-card:hover {
-  border-color: var(--accent-wine-border);
+  border-color: rgba(255, 255, 255, 0.28);
   background: var(--bg-card-hover);
   transform: translateY(-2px);
 }
@@ -333,35 +332,39 @@ body {
 
 .corner-bracket-card:hover::before,
 .corner-bracket-card:hover::after {
-  color: var(--accent-wine);
+  color: #ffffff;
 }
 
-/* Wine Tag */
+/* ----------------------------------------------------------------- */
+/* SOLID #6B1F2A FILL TAGS & PILLS (CONFIDENT BLOCKS, NO TRANSPARENCY)*/
+/* ----------------------------------------------------------------- */
 .tech-tag {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  padding: 3px 8px;
+  font-weight: 500;
+  padding: 3px 9px;
   border-radius: var(--radius-sm);
-  background: var(--accent-wine-soft);
-  border: 1px solid var(--accent-wine-border);
-  color: var(--text-primary);
-  transition: border-color 0.3s var(--ease-smooth), background-color 0.3s var(--ease-smooth);
+  background: #6B1F2A;
+  border: none;
+  color: #ffffff;
+  transition: background-color 0.2s var(--ease-smooth), transform 0.2s var(--ease-smooth);
 }
 
 .tech-tag:hover {
-  border-color: var(--accent-wine-hover);
+  background: #7f2532;
+  transform: translateY(-1px);
 }
 
-/* Static Wine LED Indicator */
+/* Static Solid Wine LED Indicator */
 .led-indicator {
   display: inline-block;
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: var(--accent-wine);
+  background-color: #6B1F2A;
 }
 
 /* Curved Text Header Styling */
@@ -380,7 +383,7 @@ body {
 }
 
 .hero-curve-text:hover {
-  fill: var(--accent-wine);
+  fill: #ffffff;
 }
 
 /* Terminal CLI Copy Box */
@@ -389,7 +392,7 @@ body {
   align-items: center;
   gap: 12px;
   background: #000000;
-  border: 1px solid var(--accent-wine-border);
+  border: 1px solid var(--border-subtle);
   padding: 8px 16px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
@@ -398,7 +401,7 @@ body {
 }
 
 .terminal-copy-box:hover {
-  border-color: var(--accent-wine);
+  border-color: rgba(255, 255, 255, 0.40);
   background: var(--bg-card-hover);
 }
 
@@ -414,11 +417,11 @@ body {
 }
 
 .copy-btn:hover {
-  color: var(--accent-wine);
+  color: #ffffff;
 }
 
 /* ----------------------------------------------------------------- */
-/* VERTICAL CATEGORY BAR (RIGHT-SIDE DOCKED ON PROJECTS SECTION)     */
+/* VERTICAL CATEGORY BAR (CONFIDENT SOLID MAROON PILLS)              */
 /* ----------------------------------------------------------------- */
 .vertical-category-nav {
   position: fixed;
@@ -429,15 +432,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 4px;
+  gap: 6px;
   padding: 10px 8px;
-  background: rgba(0, 0, 0, 0.94);
+  background: rgba(0, 0, 0, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--accent-wine-border);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95);
 }
 
 .vertical-category-nav.hidden {
@@ -461,18 +464,24 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  transition: all 0.3s var(--ease-smooth);
+  transition: all 0.2s var(--ease-smooth);
 }
 
 .category-rail-item:hover {
   color: #ffffff;
-  background: var(--accent-wine-soft);
+  background: rgba(255, 255, 255, 0.08);
 }
 
+/* Solid #6B1F2A Active Capsule */
 .category-rail-item.active {
-  background: var(--accent-wine);
+  background: #6B1F2A;
   color: #ffffff;
   font-weight: 600;
+  border: none;
+}
+
+.category-rail-item.active:hover {
+  background: #7f2532;
 }
 
 .category-rail-item.disabled {
@@ -496,8 +505,8 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.90);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -507,7 +516,7 @@ body {
 
 .modal-content {
   background: #000000;
-  border: 1px solid var(--accent-wine-border);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   max-width: 640px;
   width: 100%;
@@ -532,5 +541,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-wine);
+  background: #6B1F2A;
 }
