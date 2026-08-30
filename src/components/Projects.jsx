@@ -108,10 +108,15 @@ const SAMPLE_MOVIES = [
 ];
 
 export default function Projects({ activeCategory = 'technical', scrubbedCategory = 'technical', isCylinderActive = false }) {
-  const [buildTier, setBuildTier] = useState('major'); // 'major' or 'minor'
+  // Active and hover-scrub state for Major / Minor build sub-menu
+  const [activeTier, setActiveTier] = useState('major'); // 'major' or 'minor'
+  const [scrubbedTier, setScrubbedTier] = useState('major');
+  const [isTierHovered, setIsTierHovered] = useState(false);
+
   const [lightboxItem, setLightboxItem] = useState(null);
 
   const currentCategory = isCylinderActive ? (scrubbedCategory || activeCategory) : activeCategory;
+  const currentTier = isTierHovered ? (scrubbedTier || activeTier) : activeTier;
 
   const majorCount = TECHNICAL_PROJECTS.filter(p => p.tier === 'major').length;
   const minorCount = TECHNICAL_PROJECTS.filter(p => p.tier === 'minor').length;
@@ -145,65 +150,105 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
       {/* 1. TECHNICAL CATEGORY VIEW */}
       {currentCategory === 'technical' && (
         <div>
-          {/* Sub-Sub 2-Way Toggle Menu: [ Major Builds ] / [ Minor Builds ] */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginBottom: '36px'
-          }}>
-            <div style={{
-              display: 'inline-flex',
-              background: '#000000',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '9999px',
-              padding: '4px',
-              gap: '4px'
-            }}>
+          {/* Sub-Sub 2-Way Hover-Select Menu: [ Major Builds ] / [ Minor Builds ] */}
+          <div 
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: '36px',
+              gap: '10px'
+            }}
+          >
+            <div 
+              onMouseEnter={() => {
+                setIsTierHovered(true);
+                setScrubbedTier(activeTier);
+              }}
+              onMouseLeave={() => {
+                setIsTierHovered(false);
+                if (scrubbedTier) setActiveTier(scrubbedTier);
+              }}
+              style={{
+                display: 'inline-flex',
+                background: '#000000',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '9999px',
+                padding: '4px',
+                gap: '4px',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.6)'
+              }}
+            >
+              {/* Major Builds Button */}
               <button
                 type="button"
-                onClick={() => setBuildTier('major')}
+                onClick={() => {
+                  setActiveTier('major');
+                  setScrubbedTier('major');
+                  setIsTierHovered(false);
+                }}
+                onMouseEnter={() => setScrubbedTier('major')}
                 className="font-mono"
                 style={{
                   padding: '7px 24px',
                   borderRadius: '9999px',
                   border: 'none',
                   fontSize: '0.84rem',
-                  fontWeight: 600,
+                  fontWeight: currentTier === 'major' ? 600 : 400,
                   cursor: 'pointer',
-                  background: buildTier === 'major' ? '#6B1F2A' : 'transparent',
-                  color: buildTier === 'major' ? '#ffffff' : 'var(--text-secondary)',
-                  transition: 'all 0.25s var(--ease-smooth)',
-                  boxShadow: buildTier === 'major' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
+                  background: currentTier === 'major' ? '#6B1F2A' : 'transparent',
+                  color: currentTier === 'major' ? '#ffffff' : 'var(--text-secondary)',
+                  transition: 'all 0.22s var(--ease-smooth)',
+                  boxShadow: currentTier === 'major' ? '0 2px 10px rgba(107, 31, 42, 0.45)' : 'none'
                 }}
               >
                 Major Builds ({majorCount})
               </button>
 
+              {/* Minor Builds Button */}
               <button
                 type="button"
-                onClick={() => setBuildTier('minor')}
+                onClick={() => {
+                  setActiveTier('minor');
+                  setScrubbedTier('minor');
+                  setIsTierHovered(false);
+                }}
+                onMouseEnter={() => setScrubbedTier('minor')}
                 className="font-mono"
                 style={{
                   padding: '7px 24px',
                   borderRadius: '9999px',
                   border: 'none',
                   fontSize: '0.84rem',
-                  fontWeight: 600,
+                  fontWeight: currentTier === 'minor' ? 600 : 400,
                   cursor: 'pointer',
-                  background: buildTier === 'minor' ? '#6B1F2A' : 'transparent',
-                  color: buildTier === 'minor' ? '#ffffff' : 'var(--text-secondary)',
-                  transition: 'all 0.25s var(--ease-smooth)',
-                  boxShadow: buildTier === 'minor' ? '0 2px 10px rgba(107, 31, 42, 0.4)' : 'none'
+                  background: currentTier === 'minor' ? '#6B1F2A' : 'transparent',
+                  color: currentTier === 'minor' ? '#ffffff' : 'var(--text-secondary)',
+                  transition: 'all 0.22s var(--ease-smooth)',
+                  boxShadow: currentTier === 'minor' ? '0 2px 10px rgba(107, 31, 42, 0.45)' : 'none'
                 }}
               >
                 Minor Builds ({minorCount})
               </button>
             </div>
+
+            {/* Tagline below Major / Minor menu */}
+            <p className="font-mono" style={{
+              fontSize: '0.78rem',
+              color: 'var(--text-muted)',
+              margin: 0,
+              letterSpacing: '0.03em',
+              transition: 'opacity 0.25s ease'
+            }}>
+              {currentTier === 'major'
+                ? '// flagship hardware architectures, custom PCBs, and end-to-end systems'
+                : '// exploratory firmware modules, automation scripts, and rapid hardware prototypes'}
+            </p>
           </div>
 
           {/* Abhijith Style Project Cards (Large photo on left, details on right, whole card clickable) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            {TECHNICAL_PROJECTS.filter(p => p.tier === buildTier).map((project) => (
+            {TECHNICAL_PROJECTS.filter(p => p.tier === currentTier).map((project) => (
               <a
                 key={project.id}
                 href={project.link}
