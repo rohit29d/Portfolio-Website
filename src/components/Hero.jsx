@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import { Copy, Check, Terminal, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 export default function Hero({ onOpenTerminal }) {
-  const [copied, setCopied] = useState(false);
   const [avatarHover, setAvatarHover] = useState(false);
-
-  const handleCopy = (e) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText('npx rohitdubbaka');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section style={{
@@ -41,7 +33,7 @@ export default function Hero({ onOpenTerminal }) {
           onMouseEnter={() => setAvatarHover(true)}
           onMouseLeave={() => setAvatarHover(false)}
           onClick={onOpenTerminal}
-          title="Click to run npx rohitdubbaka"
+          title="Click to run interactive terminal profile"
           style={{
             width: '124px',
             height: '124px',
@@ -93,13 +85,13 @@ export default function Hero({ onOpenTerminal }) {
       </div>
 
       {/* 3. Solid Maroon Role Badge Line (Confident Color Block) */}
-      <div style={{ marginBottom: '16px' }}>
+      <div style={{ marginBottom: '20px' }}>
         <span className="font-mono" style={{
-          fontSize: '0.82rem',
+          fontSize: '0.84rem',
           color: '#ffffff',
           fontWeight: 600,
           background: '#6B1F2A',
-          padding: '5px 16px',
+          padding: '5px 18px',
           borderRadius: '9999px',
           border: 'none',
           display: 'inline-flex',
@@ -113,55 +105,17 @@ export default function Hero({ onOpenTerminal }) {
         </span>
       </div>
 
-      {/* 4. Tagline */}
-      <h1 style={{
-        fontSize: '1.75rem',
-        fontWeight: 600,
-        letterSpacing: '-0.02em',
-        marginBottom: '14px',
-        color: '#ffffff'
-      }}>
-        i like build stuff <span style={{ color: '#6B1F2A' }}>:)</span>
-      </h1>
-
-      {/* 5. Intro Description */}
+      {/* 4. Intro Description */}
       <p style={{
-        fontSize: '0.96rem',
+        fontSize: '0.98rem',
         lineHeight: '1.6',
         color: 'var(--text-secondary)',
         maxWidth: '560px',
-        margin: '0 auto 24px'
+        margin: '0 auto 26px'
       }}>
         i engineer hardware from schematic to silicon. focused on custom pcb design, 
         real-time stm32 firmware, fpga rtl in vhdl, and edge ai.
       </p>
-
-      {/* 6. Terminal CLI Copy Box Widget */}
-      <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <div 
-          className="terminal-copy-box"
-          onClick={onOpenTerminal}
-          style={{ cursor: 'pointer' }}
-          title="Click to run interactive terminal"
-        >
-          <Terminal size={15} color="#ffffff" />
-          <span style={{ color: 'var(--text-muted)' }}>%</span>
-          <code style={{ color: '#ffffff', fontWeight: 500 }}>npx rohitdubbaka</code>
-          <button 
-            type="button" 
-            onClick={handleCopy}
-            className="copy-btn" 
-            aria-label="Copy npx command"
-            title="Copy command"
-          >
-            {copied ? <Check size={14} color="#ffffff" /> : <Copy size={14} />}
-          </button>
-        </div>
-
-        <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-          {copied ? '✓ copied to clipboard!' : 'click banner to execute interactive CLI'}
-        </span>
-      </div>
 
       {/* Divider */}
       <div className="pcb-divider" style={{ marginTop: '40px' }}></div>

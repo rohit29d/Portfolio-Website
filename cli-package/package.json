@@ -1,0 +1,16 @@
+{
+  "name": "rohitdubbaka",
+  "version": "1.0.0",
+  "description": "Interactive CLI resume & card for Rohit Kumar Dubbaka",
+  "main": "bin/index.js",
+  "bin": {
+    "rohitdubbaka": "./bin/index.js"
+  },
+  "keywords": ["resume", "portfolio", "embedded", "stm32", "pcb", "fpga", "rohitdubbaka"],
+  "author": "Rohit Kumar Dubbaka <rohitdubbaka29@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohit29d/Portfolio-Website.git"
+  }
+}
