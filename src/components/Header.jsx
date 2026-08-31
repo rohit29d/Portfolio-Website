@@ -2,8 +2,9 @@ import React from 'react';
 import { ArrowUpRight, FileText } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { id: 'home', label: 'origin' },
-  { id: 'works', label: 'work' },
+  { id: 'home', label: 'home' },
+  { id: 'experience', label: 'experience' },
+  { id: 'projects', label: 'projects' },
   { id: 'about', label: 'about' },
   { id: 'contact', label: 'contact' }
 ];
@@ -16,7 +17,7 @@ export default function Header({ activeSection = 'home', onNavClick }) {
           type="button"
           className="wordmark"
           onClick={() => onNavClick?.('home')}
-          aria-label="Return to the beginning"
+          aria-label="Go to Home"
         >
           <span className="wordmark-mark">RKD</span>
           <span className="wordmark-name">Rohit Kumar Dubbaka</span>
