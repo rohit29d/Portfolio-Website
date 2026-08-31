@@ -45,10 +45,10 @@ export default function Hero({ onOpenTerminal }) {
         flexDirection: 'column',
         alignItems: 'center'
       }}>
-        {/* 1. Curved Name Arch Header */}
-        <div style={{ width: '320px', height: '75px', margin: '0 auto -6px', position: 'relative', zIndex: 2 }}>
-          <svg viewBox="0 0 320 80" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
-            <path id="name-curve" d="M 35,72 A 130,85 0 0,1 285,72" fill="transparent" />
+        {/* 1. Curved Name Arch Header with Increased Font Size */}
+        <div style={{ width: '380px', height: '90px', margin: '0 auto -12px', position: 'relative', zIndex: 2 }}>
+          <svg viewBox="0 0 380 90" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
+            <path id="name-curve" d="M 25,82 A 160,105 0 0,1 355,82" fill="transparent" />
             <text textAnchor="middle" className="hero-curve-text">
               <textPath href="#name-curve" startOffset="50%">
                 Rohit Kumar Dubbaka
@@ -57,36 +57,60 @@ export default function Hero({ onOpenTerminal }) {
           </svg>
         </div>
 
-        {/* 2. Floating Transparent Face Illustration (Abhijith Style - No Background Disc) */}
-        <div style={{ display: 'inline-block', position: 'relative', marginBottom: '16px', zIndex: 1 }}>
+        {/* 2. Avatar Container with Solid Maroon Background Disc & LED Status */}
+        <div style={{ display: 'inline-block', position: 'relative', marginBottom: '20px', zIndex: 1 }}>
           <div
             onMouseEnter={() => setAvatarHover(true)}
             onMouseLeave={() => setAvatarHover(false)}
             onClick={onOpenTerminal}
             title="Click to run interactive terminal profile"
             style={{
-              width: '124px',
-              height: '124px',
+              width: '136px',
+              height: '136px',
+              borderRadius: '50%',
+              padding: '2px',
+              background: avatarHover
+                ? '#6B1F2A'
+                : 'var(--border-subtle)',
               cursor: 'pointer',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transform: avatarHover ? 'translateY(-3px) scale(1.06)' : 'translateY(0) scale(1)',
-              transition: 'transform 0.3s var(--ease-smooth)'
+              transition: 'all 0.3s var(--ease-smooth)',
+              position: 'relative'
             }}
           >
-            <img
-              src="/avatar.png"
-              alt="Rohit Kumar Dubbaka Face Illustration"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                filter: avatarHover ? 'drop-shadow(0 8px 20px rgba(107, 31, 42, 0.5))' : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6))',
-                transition: 'filter 0.3s var(--ease-smooth)'
-              }}
-            />
+            {/* Inner Avatar Image with Maroon Disc */}
+            <div style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              background: '#000000',
+              overflow: 'hidden',
+              position: 'relative'
+            }}>
+              <img
+                src="/avatar.png"
+                alt="Rohit Kumar Dubbaka Avatar"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+
+            {/* Solid Wine LED Indicator Dot */}
+            <div style={{
+              position: 'absolute',
+              bottom: '4px',
+              right: '4px',
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              background: '#6B1F2A',
+              border: '2px solid #000000'
+            }} title="Status: Active" />
           </div>
         </div>
 

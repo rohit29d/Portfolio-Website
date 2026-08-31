@@ -32,33 +32,53 @@ export default function AboutContact({ viewMode = 'all' }) {
             </svg>
           </div>
 
-          {/* High-Mid Centered Floating Transparent Avatar (Abhijith Style - No Background Disc) */}
-          <div style={{ display: 'inline-block', position: 'relative', marginBottom: '16px', zIndex: 1 }}>
+          {/* High-Mid Centered Avatar Container with Solid Maroon LED & Border */}
+          <div style={{ display: 'inline-block', position: 'relative', marginBottom: '18px', zIndex: 1 }}>
             <div 
               onMouseEnter={() => setAvatarHover(true)}
               onMouseLeave={() => setAvatarHover(false)}
               style={{
-                width: '130px',
-                height: '130px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-                transform: avatarHover ? 'translateY(-3px) scale(1.06)' : 'translateY(0) scale(1)',
-                transition: 'transform 0.3s var(--ease-smooth)'
+                width: '136px',
+                height: '136px',
+                borderRadius: '50%',
+                padding: '2px',
+                background: avatarHover 
+                  ? '#6B1F2A' 
+                  : 'var(--border-subtle)',
+                transition: 'background 0.3s var(--ease-smooth)',
+                position: 'relative'
               }}
             >
-              <img 
-                src="/avatar.png" 
-                alt="Rohit Kumar Dubbaka Face Illustration" 
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  filter: avatarHover ? 'drop-shadow(0 8px 20px rgba(107, 31, 42, 0.5))' : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6))',
-                  transition: 'filter 0.3s var(--ease-smooth)'
-                }}
-              />
+              <div style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                background: '#000000',
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                <img 
+                  src="/avatar.png" 
+                  alt="Rohit Kumar Dubbaka Avatar" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+
+              {/* Status LED */}
+              <div style={{
+                position: 'absolute',
+                bottom: '4px',
+                right: '4px',
+                width: '12px',
+                height: '12px',
+                borderRadius: '50%',
+                background: '#6B1F2A',
+                border: '2px solid #000000'
+              }} title="Status: Active" />
             </div>
           </div>
 
