@@ -31,7 +31,7 @@ export default function Hero({ onOpenTerminal }) {
 
   return (
     <section style={{
-      padding: '40px 20px 80px',
+      padding: '55px 20px 80px',
       maxWidth: '900px',
       margin: '0 auto',
       position: 'relative'
@@ -45,10 +45,18 @@ export default function Hero({ onOpenTerminal }) {
         flexDirection: 'column',
         alignItems: 'center'
       }}>
-        {/* 1. Curved Name Arch Header with Increased Font Size */}
-        <div style={{ width: '380px', height: '90px', margin: '0 auto -12px', position: 'relative', zIndex: 2 }}>
-          <svg viewBox="0 0 380 90" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
-            <path id="name-curve" d="M 25,82 A 160,105 0 0,1 355,82" fill="transparent" />
+        {/* 1. Curved Name Arch Header (Increased font, generous SVG headroom, positioned 1cm above avatar) */}
+        <div style={{ 
+          width: '450px', 
+          maxWidth: '95vw',
+          height: '110px', 
+          margin: '0 auto -24px', 
+          position: 'relative', 
+          zIndex: 2,
+          overflow: 'visible'
+        }}>
+          <svg viewBox="0 0 460 120" className="hero-curve-svg" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+            <path id="name-curve" d="M 30,102 A 200,105 0 0,1 430,102" fill="transparent" />
             <text textAnchor="middle" className="hero-curve-text">
               <textPath href="#name-curve" startOffset="50%">
                 Rohit Kumar Dubbaka
@@ -57,7 +65,7 @@ export default function Hero({ onOpenTerminal }) {
           </svg>
         </div>
 
-        {/* 2. Avatar Container with Solid Maroon Background Disc & LED Status */}
+        {/* 2. Avatar Container (Snugly positioned ~1cm below curved name arch) */}
         <div style={{ display: 'inline-block', position: 'relative', marginBottom: '20px', zIndex: 1 }}>
           <div
             onMouseEnter={() => setAvatarHover(true)}
