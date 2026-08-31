@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Camera, Palette, Film, ArrowUpRight } from 'lucide-react';
+import { Sparkles, Camera, Palette, Film, ArrowUpRight, ExternalLink } from 'lucide-react';
 
 export const TECHNICAL_PROJECTS = [
   // --- MAJOR BUILDS ---
@@ -57,7 +57,11 @@ export const TECHNICAL_PROJECTS = [
     hook: 'Shell utility to convert installed tarball application packages into native desktop applications in the Linux system app tray with desktop entries.',
     tags: ['Bash / Shell', 'Linux / Ubuntu', 'Desktop Integration'],
     link: 'https://github.com/rohit29d/Antigravity_appinstaller',
-    image: '/Antigravity.jpg'
+    image: '/Antigravity.jpg',
+    imageCredit: {
+      label: 'Image © Incrypted.com',
+      url: 'https://incrypted.com/en/google-antigravity-guide-agentic-development-environment/'
+    }
   },
   {
     id: 'plant-watering',
@@ -302,6 +306,8 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                       e.target.src = '/wine_circuits.gif';
                     }}
                   />
+
+                  {/* GitHub link indicator top right */}
                   <div style={{
                     position: 'absolute',
                     top: '8px',
@@ -314,11 +320,55 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                     alignItems: 'center',
                     gap: '4px',
                     color: '#ffffff',
-                    fontSize: '0.72rem'
+                    fontSize: '0.72rem',
+                    zIndex: 2
                   }} className="font-mono">
                     <span>github</span>
                     <ArrowUpRight size={12} />
                   </div>
+
+                  {/* Optional Image Attribution credit badge on bottom left */}
+                  {project.imageCredit && (
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(project.imageCredit.url, '_blank', 'noopener,noreferrer');
+                      }}
+                      style={{
+                        position: 'absolute',
+                        bottom: '8px',
+                        left: '8px',
+                        background: 'rgba(0, 0, 0, 0.82)',
+                        backdropFilter: 'blur(6px)',
+                        border: '1px solid rgba(255, 255, 255, 0.18)',
+                        padding: '3px 8px',
+                        borderRadius: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        color: 'var(--text-secondary)',
+                        fontSize: '0.66rem',
+                        textDecoration: 'none',
+                        zIndex: 3,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                      className="font-mono"
+                      title="View original image source on Incrypted.com"
+                      onMouseOver={e => {
+                        e.currentTarget.style.color = '#ffffff';
+                        e.currentTarget.style.borderColor = '#6B1F2A';
+                      }}
+                      onMouseOut={e => {
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+                      }}
+                    >
+                      <span>{project.imageCredit.label}</span>
+                      <ExternalLink size={10} />
+                    </span>
+                  )}
                 </div>
 
                 {/* Right Side: Title, Description, & Stack Tags */}
