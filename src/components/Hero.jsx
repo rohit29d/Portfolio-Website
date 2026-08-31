@@ -258,9 +258,9 @@ export default function Hero({ onOpenTerminal }) {
         </div>
       </div>
 
-      {/* 6. Hardware & Software Stack Section */}
+      {/* 6. Hardware & Software Stack Section (Centered Alignment) */}
       <div style={{ marginBottom: '48px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px', justifyContent: 'flex-start' }}>
           <Code size={16} color="#ffffff" />
           <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
             // Skill cart
@@ -273,13 +273,37 @@ export default function Hero({ onOpenTerminal }) {
           gap: '16px'
         }}>
           {skills.map((group, idx) => (
-            <div key={idx} className="corner-bracket-card" style={{ padding: '16px' }}>
-              <h4 className="font-mono" style={{ fontSize: '0.82rem', color: '#ffffff', marginBottom: '12px' }}>
+            <div 
+              key={idx} 
+              className="corner-bracket-card" 
+              style={{ 
+                padding: '18px 14px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center'
+              }}
+            >
+              <h4 className="font-mono" style={{ 
+                fontSize: '0.84rem', 
+                color: '#ffffff', 
+                marginBottom: '14px',
+                textAlign: 'center',
+                fontWeight: 600
+              }}>
                 {group.category}
               </h4>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              <div style={{ 
+                display: 'flex', 
+                flexWrap: 'wrap', 
+                gap: '8px', 
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
                 {group.items.map((item, i) => (
-                  <span key={i} className="tech-tag">{item}</span>
+                  <span key={i} className="tech-tag" style={{ textAlign: 'center' }}>
+                    {item}
+                  </span>
                 ))}
               </div>
             </div>
