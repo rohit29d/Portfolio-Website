@@ -126,7 +126,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
   const minorCount = TECHNICAL_PROJECTS.filter(p => p.tier === 'minor').length;
 
   return (
-    <section style={{
+    <section className="projects-scene" style={{
       padding: '30px 20px 80px',
       maxWidth: '960px',
       margin: '0 auto',
@@ -251,14 +251,19 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
           </div>
 
           {/* Abhijith Style Project Cards (Large photo on left, details on right, whole card clickable) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            {TECHNICAL_PROJECTS.filter(p => p.tier === currentTier).map((project) => (
+          <div className="project-lane" onWheel={(event) => {
+            event.stopPropagation();
+            if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+              event.currentTarget.scrollLeft += event.deltaY;
+            }
+          }}>
+            {TECHNICAL_PROJECTS.filter(p => p.tier === currentTier).map((project, projectIndex) => (
               <a
                 key={project.id}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="corner-bracket-card"
+                className="corner-bracket-card project-story-card"
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
@@ -281,7 +286,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                 }}
               >
                 {/* Left Side: Featured Media Preview Photo */}
-                <div style={{
+                <div className="project-story-media" style={{
                   width: '320px',
                   minWidth: '280px',
                   height: '190px',
@@ -292,7 +297,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                   position: 'relative',
                   flexShrink: 0
                 }}>
-                  <img 
+                  <img className="project-story-image"
                     src={project.image} 
                     alt={project.title}
                     style={{
@@ -372,7 +377,10 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                 </div>
 
                 {/* Right Side: Title, Description, & Stack Tags */}
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div className="project-story-copy" style={{ flex: 1, minWidth: 0 }}>
+                  <span className="project-story-index font-mono">
+                    {String(projectIndex + 1).padStart(2, '0')} / {currentTier}
+                  </span>
                   <h3 style={{
                     fontSize: '1.25rem',
                     fontWeight: 600,
