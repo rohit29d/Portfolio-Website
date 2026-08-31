@@ -30,6 +30,7 @@ export default function Header({ activeSection = 'home', onNavClick }) {
               type="button"
               className={`primary-nav-item ${activeSection === item.id ? 'active' : ''}`}
               onClick={() => onNavClick?.(item.id)}
+              aria-current={activeSection === item.id ? 'page' : undefined}
             >
               <span className="font-mono">{item.label}</span>
               <span className="primary-nav-dot" aria-hidden="true" />
