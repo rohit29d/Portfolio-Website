@@ -36,8 +36,8 @@ export default function Header({
 
   return (
     <header 
-      onMouseEnter={onNavMouseEnter}
-      onMouseLeave={onNavMouseLeave}
+      onMouseEnter={() => onNavMouseEnter?.()}
+      onMouseLeave={() => onNavMouseLeave?.()}
       onMouseMove={handleMouseMove}
       onWheel={handleWheel}
       style={{
@@ -70,8 +70,8 @@ export default function Header({
             return (
               <button
                 key={item.id}
-                onClick={(e) => { e.preventDefault(); onNavClick(item.id); }}
-                onMouseEnter={() => onItemHover(item.id)}
+                onClick={(e) => { e.preventDefault(); onNavClick?.(item.id); }}
+                onMouseEnter={() => onItemHover?.(item.id)}
                 className={`header-capsule-item ${isFocused ? 'active' : ''}`}
               >
                 {item.label}
