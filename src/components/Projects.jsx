@@ -157,9 +157,16 @@ export default function Projects({ activeCategory = 'technical' }) {
           <div
             className="project-lane"
             onWheel={(event) => {
-              event.stopPropagation();
-              if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-                event.currentTarget.scrollLeft += event.deltaY;
+              const lane = event.currentTarget;
+              if (Math.abs(event.deltaY) > Math.abs(event.deltaX) && lane.scrollWidth > lane.clientWidth) {
+                const nextLeft = Math.max(
+                  0,
+                  Math.min(lane.scrollWidth - lane.clientWidth, lane.scrollLeft + event.deltaY)
+                );
+                if (nextLeft !== lane.scrollLeft) {
+                  event.preventDefault();
+                  lane.scrollLeft = nextLeft;
+                }
               }
             }}
           >
