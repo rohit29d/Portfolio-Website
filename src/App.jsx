@@ -1,103 +1,83 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDownRight, Check, Copy, Terminal } from 'lucide-react';
+import { Check, Copy, Terminal } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
 import AboutContact from './components/AboutContact';
 import BottomNav from './components/BottomNav';
 import TerminalModal from './components/TerminalModal';
 import SpaceBackdrop from './components/SpaceBackdrop';
 
-const SCENES = [
-  { id: 'home', label: 'origin', index: '01' },
-  { id: 'works', label: 'selected work', index: '02' },
-  { id: 'about', label: 'the person', index: '03' },
-  { id: 'contact', label: 'open channel', index: '04' }
+export const PAGES = [
+  { id: 'home', label: 'home', index: '01' },
+  { id: 'experience', label: 'experience', index: '02' },
+  { id: 'projects', label: 'projects', index: '03' },
+  { id: 'about', label: 'about', index: '04' },
+  { id: 'contact', label: 'contact', index: '05' }
 ];
 
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const getPageFromHash = () => {
+  const hash = window.location.hash.replace('#', '');
+  return PAGES.some((page) => page.id === hash) ? hash : 'home';
+};
 
 export default function App() {
-  const storyRef = useRef(null);
-  const progressRef = useRef(0);
-  const [progress, setProgress] = useState(0);
-  const [activeScene, setActiveScene] = useState('home');
+  const pageRef = useRef(null);
+  const [activePage, setActivePage] = useState(() => getPageFromHash());
   const [activeCategory, setActiveCategory] = useState('technical');
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [copiedCli, setCopiedCli] = useState(false);
 
   useEffect(() => {
-    let frameId;
-
-    const measureScroll = () => {
-      const story = storyRef.current;
-      if (!story) return;
-
-      const viewportHeight = window.innerHeight || 1;
-      const nextProgress = clamp(
-        (window.scrollY - story.offsetTop) / viewportHeight,
-        0,
-        SCENES.length - 1
-      );
-      const nextScene = SCENES[Math.round(nextProgress)].id;
-
-      progressRef.current = nextProgress;
-      setProgress(nextProgress);
-      setActiveScene(nextScene);
-      frameId = undefined;
+    const handleLocationChange = () => {
+      setActivePage(getPageFromHash());
+      window.scrollTo({ top: 0, behavior: 'auto' });
     };
 
-    const handleScroll = () => {
-      if (frameId === undefined) frameId = requestAnimationFrame(measureScroll);
-    };
-
-    measureScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-
+    window.addEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      if (frameId !== undefined) cancelAnimationFrame(frameId);
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
     };
   }, []);
 
-  const goToScene = (sceneId) => {
-    const sceneIndex = SCENES.findIndex((scene) => scene.id === sceneId);
-    if (sceneIndex < 0) return;
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    pageRef.current?.focus({ preventScroll: true });
+  }, [activePage]);
 
-    window.scrollTo({
-      top: (storyRef.current?.offsetTop || 0) + sceneIndex * window.innerHeight,
-      behavior: 'smooth'
-    });
+  const goToPage = (pageId) => {
+    if (!PAGES.some((page) => page.id === pageId)) return;
+
+    setActivePage(pageId);
+    if (window.location.hash !== `#${pageId}`) {
+      window.history.pushState({}, '', `#${pageId}`);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (isTerminalOpen || ['INPUT', 'TEXTAREA', 'BUTTON'].includes(event.target.tagName)) return;
 
-      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+      if (event.altKey && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) {
         event.preventDefault();
-        goToScene(SCENES[Math.min(SCENES.length - 1, Math.round(progressRef.current) + 1)].id);
+        const index = PAGES.findIndex((page) => page.id === activePage);
+        goToPage(PAGES[Math.min(PAGES.length - 1, index + 1)].id);
       }
 
-      if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+      if (event.altKey && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) {
         event.preventDefault();
-        goToScene(SCENES[Math.max(0, Math.round(progressRef.current) - 1)].id);
+        const index = PAGES.findIndex((page) => page.id === activePage);
+        goToPage(PAGES[Math.max(0, index - 1)].id);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isTerminalOpen]);
-
-  const handleStoryWheel = (event) => {
-    if (event.target.closest('.project-lane')) return;
-    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-
-    event.preventDefault();
-    window.scrollBy({ top: event.deltaY, behavior: 'auto' });
-  };
+  }, [activePage, isTerminalOpen]);
 
   const copyCommand = (event) => {
     event.stopPropagation();
@@ -106,101 +86,46 @@ export default function App() {
     window.setTimeout(() => setCopiedCli(false), 2000);
   };
 
-  const sceneNumber = String(Math.round(progress) + 1).padStart(2, '0');
-  const progressPercent = ((progress + 1) / SCENES.length) * 100;
+  const activePageMeta = PAGES.find((page) => page.id === activePage) || PAGES[0];
 
   return (
     <div className="site-shell">
       <SpaceBackdrop active />
 
-      <Header activeSection={activeScene} onNavClick={goToScene} />
+      <Header activeSection={activePage} onNavClick={goToPage} />
 
-      <div className="scene-scroll" ref={storyRef}>
-        <main className="scene-stage" aria-label="Rohit Kumar Dubbaka portfolio">
-          <div
-            className="scene-track"
-            style={{ transform: `translate3d(-${progress * 100}vw, 0, 0)` }}
-          >
-            <section className="scene-panel scene-panel-home" onWheel={handleStoryWheel}>
-              <div className="scene-panel-content">
-                <div className="scene-label font-mono">
-                  <span>scroll to explore</span>
-                  <ArrowDownRight size={13} />
-                </div>
-                <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
-              </div>
-            </section>
-
-            <section className="scene-panel scene-panel-works" onWheel={handleStoryWheel}>
-              <div className="scene-panel-content">
-                <div className="scene-label font-mono">
-                  <span>systems that leave the bench</span>
-                  <ArrowDownRight size={13} />
-                </div>
-                <Projects
-                  activeCategory={activeCategory}
-                  scrubbedCategory={activeCategory}
-                  isCylinderActive={false}
-                />
-              </div>
-            </section>
-
-            <section className="scene-panel scene-panel-about" onWheel={handleStoryWheel}>
-              <div className="scene-panel-content">
-                <div className="scene-label font-mono">
-                  <span>behind the schematics</span>
-                  <ArrowDownRight size={13} />
-                </div>
-                <AboutContact viewMode="about" />
-              </div>
-            </section>
-
-            <section className="scene-panel scene-panel-contact" onWheel={handleStoryWheel}>
-              <div className="scene-panel-content">
-                <div className="scene-label font-mono">
-                  <span>signal received?</span>
-                  <ArrowDownRight size={13} />
-                </div>
-                <AboutContact viewMode="contact" />
-              </div>
-            </section>
+      <main
+        ref={pageRef}
+        className={`page-view page-view-${activePage}`}
+        tabIndex="-1"
+        aria-label={`${activePageMeta.label} page`}
+      >
+        <div className="page-view-inner">
+          <div className="page-meta font-mono">
+            <span>{activePageMeta.index} / {String(PAGES.length).padStart(2, '0')}</span>
+            <span>{activePageMeta.label}</span>
           </div>
-        </main>
-      </div>
+
+          {activePage === 'home' && <Hero onOpenTerminal={() => setIsTerminalOpen(true)} onNavigate={goToPage} />}
+          {activePage === 'experience' && <Experience />}
+          {activePage === 'projects' && (
+            <Projects
+              activeCategory={activeCategory}
+            />
+          )}
+          {activePage === 'about' && <AboutContact viewMode="about" />}
+          {activePage === 'contact' && <AboutContact viewMode="contact" />}
+        </div>
+      </main>
 
       <BottomNav
         activeCategory={activeCategory}
-        scrubbedCategory={activeCategory}
-        isBottomNavHovered={false}
-        onCategoryHover={setActiveCategory}
-        onCategoryClick={setActiveCategory}
-        isWorksVisible={activeScene === 'works'}
+        onCategoryClick={(category) => {
+          setActiveCategory(category);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        isWorksVisible={activePage === 'projects'}
       />
-
-      <aside className="scene-rail" aria-label="Portfolio progress">
-        <div className="scene-rail-heading font-mono">
-          <span>index</span>
-          <span>00—04</span>
-        </div>
-        <div className="scene-rail-line">
-          <span style={{ height: `${progressPercent}%` }} />
-        </div>
-        <div className="scene-rail-scenes">
-          {SCENES.map((scene) => (
-            <button
-              key={scene.id}
-              type="button"
-              className={`scene-rail-scene ${activeScene === scene.id ? 'active' : ''}`}
-              onClick={() => goToScene(scene.id)}
-              aria-label={`Go to ${scene.label}`}
-            >
-              <span className="font-mono">{scene.index}</span>
-              <span>{scene.label}</span>
-            </button>
-          ))}
-        </div>
-        <div className="scene-rail-current font-mono">{sceneNumber} / 04</div>
-      </aside>
 
       <div className="terminal-trigger">
         <button
