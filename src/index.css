@@ -1907,11 +1907,13 @@ a:focus-visible {
 
 html {
   background: var(--bg);
+  overscroll-behavior-x: none;
 }
 
 body {
   overflow-x: hidden;
   background: var(--bg);
+  overscroll-behavior-x: none;
 }
 
 .site-shell {
@@ -2371,7 +2373,7 @@ body {
   gap: 20px;
   width: calc(100% + 8vw);
   padding: 32px 8vw 45px 0;
-  overscroll-behavior-x: contain;
+  overscroll-behavior: contain;
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
 }
@@ -2558,6 +2560,33 @@ body {
   border-color: var(--wine);
   color: #fffaf6;
   background: var(--wine);
+}
+
+.lightbox {
+  background: rgba(36, 29, 27, 0.48);
+}
+
+.lightbox-content {
+  border-color: rgba(36, 29, 27, 0.14);
+  border-radius: 24px;
+  background: var(--bg-soft);
+  box-shadow: 0 30px 90px rgba(36, 29, 27, 0.24);
+}
+
+.lightbox-close {
+  border-radius: 999px;
+  border-color: var(--hairline);
+  color: var(--ink);
+  background: rgba(255, 250, 246, 0.9);
+}
+
+.modal-backdrop {
+  background: rgba(36, 29, 27, 0.48);
+}
+
+.modal-content {
+  border-radius: 24px;
+  box-shadow: 0 30px 90px rgba(36, 29, 27, 0.28);
 }
 
 /* Fixed controls stay contextual, never become another scroll axis. */
