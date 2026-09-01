@@ -3538,34 +3538,29 @@ body {
 }
 
 .home-tour-track {
-  position: absolute;
-  top: 34px;
-  right: 24px;
-  bottom: 34px;
-  z-index: 1;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(183, 93, 105, 0.46) 12%, rgba(183, 93, 105, 0.2) 88%, transparent);
-  pointer-events: none;
+  display: none;
 }
 
 .home-tour-lead {
   position: absolute;
-  right: 24px;
+  top: 0;
+  left: 0;
   z-index: 5;
   display: flex;
-  width: 94px;
+  width: 158px;
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  transform: translate(-50%, -50%);
   pointer-events: none;
-  will-change: top, transform;
+  will-change: left, top;
 }
 
 .home-tour-avatar {
   position: relative;
   display: grid;
-  width: 78px;
-  height: 78px;
+  width: 158px;
+  height: 158px;
   place-items: center;
   border: 1px solid rgba(183, 93, 105, 0.5);
   border-radius: 50%;
@@ -3574,6 +3569,7 @@ body {
   cursor: pointer;
   pointer-events: auto;
   transition: border-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  animation: tour-avatar-hover 5.5s ease-in-out infinite;
 }
 
 .home-tour-avatar:hover,
@@ -3593,20 +3589,20 @@ body {
 }
 
 .home-tour-avatar .hero-avatar-ring-one {
-  inset: -9px;
+  inset: -14px;
   border-color: rgba(183, 93, 105, 0.44);
 }
 
 .home-tour-avatar .hero-avatar-ring-two {
-  inset: -17px;
+  inset: -27px;
   border-color: rgba(251, 244, 239, 0.16);
 }
 
 .home-tour-avatar .hero-status {
-  right: 0;
-  bottom: 7px;
-  width: 9px;
-  height: 9px;
+  right: 5px;
+  bottom: 13px;
+  width: 11px;
+  height: 11px;
 }
 
 .home-tour-label {
@@ -3649,6 +3645,11 @@ body {
   justify-content: center;
 }
 
+.hero-intro-tour .hero-avatar-space {
+  width: 158px;
+  height: 158px;
+}
+
 .home-stage-heading {
   max-width: 940px;
   margin-inline: auto;
@@ -3669,11 +3670,23 @@ body {
 .experience-stage-content .experience-grid,
 .experience-stage-content .experience-lower-grid,
 .education-stage-content {
-  margin-inline: auto;
+  width: min(980px, 100%);
 }
 
 .experience-stage-content .info-heading {
   justify-content: center;
+}
+
+.home-stage-experience .home-stage-heading,
+.home-stage-experience .experience-stage-content {
+  margin-left: max(0px, calc((100% - 980px) / 2 - 30px));
+  margin-right: auto;
+}
+
+.home-stage-education .home-stage-heading,
+.home-stage-education .education-stage-content {
+  margin-left: auto;
+  margin-right: max(0px, calc((100% - 980px) / 2 - 30px));
 }
 
 .stage-next-link {
@@ -3682,45 +3695,52 @@ body {
   margin-inline: auto;
 }
 
-@media (min-width: 1081px) {
-  .home-tour-track,
-  .home-tour-lead {
-    right: max(24px, calc((100% - 940px) / 2 - 74px));
+@keyframes tour-avatar-hover {
+  0%, 100% {
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), 0 0 0 7px rgba(107, 31, 42, 0.1);
   }
+  50% {
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.38), 0 0 0 12px rgba(107, 31, 42, 0.15);
+  }
+}
+
+.environment-orbit-one {
+  transform: rotate(calc(-18deg + var(--orbit-scroll-turn, 0deg)));
+}
+
+.environment-orbit-two {
+  transform: rotate(calc(-18deg + var(--orbit-scroll-turn, 0deg))) scale(0.82);
 }
 
 @media (max-width: 680px) {
   .home-tour-track {
-    top: 20px;
-    right: 17px;
-    bottom: 20px;
+    display: none;
   }
 
   .home-tour-lead {
-    right: 2px;
-    width: 70px;
-    gap: 7px;
+    width: 100px;
+    gap: 8px;
   }
 
   .home-tour-avatar {
-    width: 57px;
-    height: 57px;
+    width: 100px;
+    height: 100px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32), 0 0 0 5px rgba(107, 31, 42, 0.1);
   }
 
   .home-tour-avatar .hero-avatar-ring-one {
-    inset: -7px;
+    inset: -10px;
   }
 
   .home-tour-avatar .hero-avatar-ring-two {
-    inset: -13px;
+    inset: -19px;
   }
 
   .home-tour-avatar .hero-status {
-    right: -1px;
-    bottom: 4px;
-    width: 7px;
-    height: 7px;
+    right: 3px;
+    bottom: 8px;
+    width: 8px;
+    height: 8px;
   }
 
   .home-tour-label {
@@ -3731,10 +3751,16 @@ body {
   .home-stage-heading,
   .experience-stage-content,
   .education-stage-content {
-    width: calc(100% - 42px);
+    width: calc(100% - 34px);
+    margin-inline: auto;
   }
 
   .hero-intro-no-avatar {
     width: calc(100% - 32px);
+  }
+
+  .hero-intro-tour .hero-avatar-space {
+    width: 100px;
+    height: 100px;
   }
 }
