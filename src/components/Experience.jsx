@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Briefcase, Code, GraduationCap } from 'lucide-react';
+import { Code } from 'lucide-react';
 
 const SKILLS = [
   { category: 'Hardware', items: ['ESP32', 'STM32', 'Basys-3 FPGA', 'Analog and Digital Circuits'] },
@@ -8,30 +8,12 @@ const SKILLS = [
   { category: 'Programming & RTL', items: ['C', 'Embedded C', 'FreeRTOS', 'Verilog/VHDL'] }
 ];
 
-const CERTIFICATIONS = [
-  { name: 'PCB Design with KiCad', issuer: 'Peter Dalmaris (Udemy)', date: 'Aug 2026' },
-  { name: 'Machine Learning Techniques in MATLAB', issuer: 'MathWorks', date: 'Jun 2025' },
-  { name: 'SystemVerilog Fundamentals', issuer: 'Kumar Khandagle (Udemy)', date: 'Dec 2024' }
-];
-
-export default function Experience() {
+export function ExperienceStage() {
   return (
-    <section className="experience-scene">
-      <header className="experience-heading">
-        <div>
-          <p className="eyebrow font-mono">the path / practical proof</p>
-          <h1>work that <em>ships</em><span>.</span></h1>
-          <p className="experience-subheading font-mono">
-            hardware ownership, systems thinking, and the tools behind the builds
-          </p>
-        </div>
-        <span className="experience-stamp font-mono">available / 2026</span>
-      </header>
-
+    <div className="experience-stage-content">
       <div className="experience-grid">
         <div className="info-block">
           <div className="info-heading">
-            <Briefcase size={17} />
             <span className="font-mono">// experience</span>
           </div>
           <article className="info-card experience-card">
@@ -49,31 +31,6 @@ export default function Experience() {
           </article>
         </div>
 
-        <div className="info-block">
-          <div className="info-heading">
-            <GraduationCap size={17} />
-            <span className="font-mono">// education</span>
-          </div>
-          <article className="info-card education-card">
-            <div>
-              <div className="info-card-topline">
-                <h2>Amrita Vishwa Vidyapeetham</h2>
-                <span className="font-mono info-date">Grad 2026</span>
-              </div>
-              <p className="font-mono info-muted">B.Tech in Electronics & Communication Engineering</p>
-            </div>
-            <div className="education-row">
-              <h3>VINJEE Junior College, Hyderabad</h3>
-              <span className="font-mono info-muted">2022</span>
-              <p className="font-mono info-muted">Class XII — Telangana Board of Intermediate Education</p>
-            </div>
-            <div className="education-row">
-              <h3>The Hyderabad Public School, Begumpet</h3>
-              <span className="font-mono info-muted">2020</span>
-              <p className="font-mono info-muted">Class X — ICSE</p>
-            </div>
-          </article>
-        </div>
       </div>
 
       <div className="experience-lower-grid">
@@ -94,24 +51,33 @@ export default function Experience() {
           </div>
         </div>
 
-        <div className="info-block certification-block">
-          <div className="info-heading">
-            <Award size={17} />
-            <span className="font-mono">// certifications</span>
-          </div>
-          <div className="cert-list">
-            {CERTIFICATIONS.map((cert) => (
-              <article className="cert-card" key={cert.name}>
-                <h2>{cert.name}</h2>
-                <div>
-                  <span className="font-mono info-muted">{cert.issuer}</span>
-                  <span className="font-mono info-date">{cert.date}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }
+
+export function EducationStage() {
+  return (
+    <div className="education-stage-content">
+      <div className="education-card info-card">
+        <div className="info-card-topline">
+          <h2>Amrita Vishwa Vidyapeetham</h2>
+          <span className="font-mono info-date">Grad 2026</span>
+        </div>
+        <p className="font-mono info-muted">B.Tech in Electronics & Communication Engineering</p>
+        <div className="education-row">
+          <h3>VINJEE Junior College, Hyderabad</h3>
+          <span className="font-mono info-muted">2022</span>
+          <p className="font-mono info-muted">Class XII — Telangana Board of Intermediate Education</p>
+        </div>
+        <div className="education-row">
+          <h3>The Hyderabad Public School, Begumpet</h3>
+          <span className="font-mono info-muted">2020</span>
+          <p className="font-mono info-muted">Class X — ICSE</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ExperienceStage;
