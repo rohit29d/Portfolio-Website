@@ -88,7 +88,7 @@ export default function App() {
 
   return (
     <div className="site-shell">
-      <SpaceBackdrop active />
+      <SpaceBackdrop active scrollLinked={activePage === 'home'} />
 
       <Header activeSection={activePage} onNavClick={goToPage} />
 
