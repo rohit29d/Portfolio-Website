@@ -5,28 +5,59 @@ import { EducationStage, ExperienceStage } from './Experience';
 
 export default function HomeStages({ onOpenTerminal, onNavigate }) {
   const homeStagesRef = useRef(null);
-  const [tourProgress, setTourProgress] = useState(0);
+  const heroAvatarAnchorRef = useRef(null);
+  const experienceStageRef = useRef(null);
+  const educationStageRef = useRef(null);
+  const [tourPosition, setTourPosition] = useState({ left: 90, top: 180 });
 
   useEffect(() => {
     let frameId;
 
-    const updateTourProgress = () => {
+    const updateTourPosition = () => {
       const homeStages = homeStagesRef.current;
       if (!homeStages) return;
 
-      const rect = homeStages.getBoundingClientRect();
-      const documentTop = window.scrollY + rect.top;
+      const homeRect = homeStages.getBoundingClientRect();
+      const documentTop = window.scrollY + homeRect.top;
       const scrollRange = Math.max(1, homeStages.offsetHeight - window.innerHeight);
       const progress = Math.max(0, Math.min(1, (window.scrollY - documentTop) / scrollRange));
-      setTourProgress(progress);
+      const anchorRect = heroAvatarAnchorRef.current?.getBoundingClientRect();
+      const experienceRect = experienceStageRef.current?.getBoundingClientRect();
+      const educationRect = educationStageRef.current?.getBoundingClientRect();
+
+      const stops = [
+        {
+          left: anchorRect ? anchorRect.left - homeRect.left + anchorRect.width / 2 : homeRect.width * 0.12,
+          top: anchorRect ? anchorRect.top - homeRect.top + anchorRect.height / 2 : homeRect.height * 0.14
+        },
+        {
+          left: homeRect.width - (window.innerWidth <= 680 ? 58 : 92),
+          top: experienceRect ? experienceRect.top - homeRect.top + experienceRect.height * 0.5 : homeRect.height * 0.48
+        },
+        {
+          left: window.innerWidth <= 680 ? 58 : 92,
+          top: educationRect ? educationRect.top - homeRect.top + educationRect.height * 0.5 : homeRect.height * 0.8
+        }
+      ];
+
+      const scaledProgress = progress * (stops.length - 1);
+      const stopIndex = Math.min(stops.length - 2, Math.floor(scaledProgress));
+      const segmentProgress = scaledProgress - stopIndex;
+      const from = stops[stopIndex];
+      const to = stops[stopIndex + 1];
+
+      setTourPosition({
+        left: from.left + (to.left - from.left) * segmentProgress,
+        top: from.top + (to.top - from.top) * segmentProgress
+      });
     };
 
     const handleScroll = () => {
       window.cancelAnimationFrame(frameId);
-      frameId = window.requestAnimationFrame(updateTourProgress);
+      frameId = window.requestAnimationFrame(updateTourPosition);
     };
 
-    updateTourProgress();
+    updateTourPosition();
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
 
@@ -43,8 +74,8 @@ export default function HomeStages({ onOpenTerminal, onNavigate }) {
       <div
         className="home-tour-lead"
         style={{
-          top: `${tourProgress * 100}%`,
-          transform: `translateY(-${tourProgress * 100}px)`
+          left: `${tourPosition.left}px`,
+          top: `${tourPosition.top}px`
         }}
       >
         <button
@@ -63,7 +94,13 @@ export default function HomeStages({ onOpenTerminal, onNavigate }) {
 
       <section className="home-stage home-stage-hero" id="home-stage-home">
         <div className="home-stage-index font-mono">01 / 03</div>
-        <Hero showAvatar={false} onOpenTerminal={onOpenTerminal} onNavigate={onNavigate} />
+        <Hero
+          showAvatar={false}
+          reserveAvatar
+          avatarAnchorRef={heroAvatarAnchorRef}
+          onOpenTerminal={onOpenTerminal}
+          onNavigate={onNavigate}
+        />
         <button
           type="button"
           className="stage-scroll-cue font-mono"
@@ -74,7 +111,7 @@ export default function HomeStages({ onOpenTerminal, onNavigate }) {
         </button>
       </section>
 
-      <section className="home-stage home-stage-experience" id="home-stage-experience">
+      <section className="home-stage home-stage-experience" id="home-stage-experience" ref={experienceStageRef}>
         <StageHeading
           index="02 / 03"
           icon={<Briefcase size={16} />}
@@ -94,7 +131,7 @@ export default function HomeStages({ onOpenTerminal, onNavigate }) {
         </button>
       </section>
 
-      <section className="home-stage home-stage-education" id="home-stage-education">
+      <section className="home-stage home-stage-education" id="home-stage-education" ref={educationStageRef}>
         <StageHeading
           index="03 / 03"
           icon={<GraduationCap size={16} />}
