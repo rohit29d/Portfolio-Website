@@ -1,14 +1,69 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowUpRight, Briefcase, GraduationCap } from 'lucide-react';
 import Hero from './Hero';
 import { EducationStage, ExperienceStage } from './Experience';
 
 export default function HomeStages({ onOpenTerminal, onNavigate }) {
+  const homeStagesRef = useRef(null);
+  const [tourProgress, setTourProgress] = useState(0);
+
+  useEffect(() => {
+    let frameId;
+
+    const updateTourProgress = () => {
+      const homeStages = homeStagesRef.current;
+      if (!homeStages) return;
+
+      const rect = homeStages.getBoundingClientRect();
+      const documentTop = window.scrollY + rect.top;
+      const scrollRange = Math.max(1, homeStages.offsetHeight - window.innerHeight);
+      const progress = Math.max(0, Math.min(1, (window.scrollY - documentTop) / scrollRange));
+      setTourProgress(progress);
+    };
+
+    const handleScroll = () => {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateTourProgress);
+    };
+
+    updateTourProgress();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="home-stages">
+    <div className="home-stages" ref={homeStagesRef}>
+      <div className="home-tour-track" aria-hidden="true" />
+      <div
+        className="home-tour-lead"
+        style={{
+          top: `${tourProgress * 100}%`,
+          transform: `translateY(-${tourProgress * 100}px)`
+        }}
+      >
+        <button
+          type="button"
+          className="home-tour-avatar"
+          onClick={onOpenTerminal}
+          aria-label="Open Rohit's interactive terminal profile"
+        >
+          <span className="hero-avatar-ring hero-avatar-ring-one" />
+          <span className="hero-avatar-ring hero-avatar-ring-two" />
+          <img src="/avatar.png" alt="Rohit Kumar Dubbaka Avatar" />
+          <span className="hero-status" title="Status: Active" />
+        </button>
+        <span className="home-tour-label font-mono">leading the tour</span>
+      </div>
+
       <section className="home-stage home-stage-hero" id="home-stage-home">
         <div className="home-stage-index font-mono">01 / 03</div>
-        <Hero onOpenTerminal={onOpenTerminal} onNavigate={onNavigate} />
+        <Hero showAvatar={false} onOpenTerminal={onOpenTerminal} onNavigate={onNavigate} />
         <button
           type="button"
           className="stage-scroll-cue font-mono"
