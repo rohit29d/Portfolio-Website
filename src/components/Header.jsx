@@ -3,7 +3,6 @@ import { ArrowUpRight, FileText } from 'lucide-react';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'home' },
-  { id: 'experience', label: 'experience' },
   { id: 'projects', label: 'projects' },
   { id: 'about', label: 'about' },
   { id: 'contact', label: 'contact' }
