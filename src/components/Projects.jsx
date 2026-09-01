@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowUpRight, Camera, ExternalLink, Film, Palette, Sparkles, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowUpRight, Award, Camera, ExternalLink, Film, Palette, Sparkles, X } from 'lucide-react';
 
 export const TECHNICAL_PROJECTS = [
   {
@@ -107,6 +107,12 @@ const SAMPLE_MOVIES = [
   { id: 4, title: 'Interstellar', year: '2014', director: 'Christopher Nolan', rating: '10/10', thoughts: 'Relativity, time dilation, and emotional resonance.' }
 ];
 
+const CERTIFICATIONS = [
+  { name: 'PCB Design with KiCad', issuer: 'Peter Dalmaris (Udemy)', date: 'Aug 2026' },
+  { name: 'Machine Learning Techniques in MATLAB', issuer: 'MathWorks', date: 'Jun 2025' },
+  { name: 'SystemVerilog Fundamentals', issuer: 'Kumar Khandagle (Udemy)', date: 'Dec 2024' }
+];
+
 const categoryCopy = {
   technical: ['selected systems', 'schematic to silicon, firmware, and embedded builds'],
   photography: ['photography gallery', 'moments captured through the lens'],
@@ -117,9 +123,19 @@ const categoryCopy = {
 export default function Projects({ activeCategory = 'technical' }) {
   const [activeTier, setActiveTier] = useState('major');
   const [lightboxItem, setLightboxItem] = useState(null);
+  const [isCertificationOpen, setIsCertificationOpen] = useState(false);
   const currentCategory = activeCategory || 'technical';
   const [heading, subheading] = categoryCopy[currentCategory];
   const visibleProjects = TECHNICAL_PROJECTS.filter((project) => project.tier === activeTier);
+
+  useEffect(() => {
+    if (!isCertificationOpen) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsCertificationOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isCertificationOpen]);
 
   return (
     <section className="projects-scene">
@@ -129,7 +145,19 @@ export default function Projects({ activeCategory = 'technical' }) {
           <h1>{heading}<span>.</span></h1>
           <p className="projects-subheading font-mono">{subheading}</p>
         </div>
-        <Sparkles className="projects-heading-icon" size={20} />
+        <div className="projects-heading-actions">
+          <Sparkles className="projects-heading-icon" size={20} />
+          <button
+            type="button"
+            className="certification-trigger font-mono"
+            onClick={() => setIsCertificationOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={isCertificationOpen}
+          >
+            <Award size={14} />
+            <span>certifications</span>
+          </button>
+        </div>
       </header>
 
       {currentCategory === 'technical' && (
@@ -279,6 +307,39 @@ export default function Projects({ activeCategory = 'technical' }) {
               <h2>{lightboxItem.title}</h2>
             </div>
           </div>
+        </div>
+      )}
+
+      {isCertificationOpen && (
+        <div className="certification-dialog-backdrop" onClick={() => setIsCertificationOpen(false)}>
+          <section
+            className="certification-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="certification-dialog-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="certification-dialog-header">
+              <div>
+                <span className="eyebrow font-mono">learning log</span>
+                <h2 id="certification-dialog-title">certifications<span>.</span></h2>
+              </div>
+              <button type="button" className="certification-dialog-close" onClick={() => setIsCertificationOpen(false)} aria-label="Close certifications">
+                <X size={18} />
+              </button>
+            </div>
+            <div className="certification-list">
+              {CERTIFICATIONS.map((cert) => (
+                <article className="certification-item" key={cert.name}>
+                  <div>
+                    <h3>{cert.name}</h3>
+                    <p className="font-mono">{cert.issuer}</p>
+                  </div>
+                  <span className="font-mono">{cert.date}</span>
+                </article>
+              ))}
+            </div>
+          </section>
         </div>
       )}
     </section>
