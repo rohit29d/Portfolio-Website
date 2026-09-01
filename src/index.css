@@ -3531,3 +3531,210 @@ body {
     gap: 9px;
   }
 }
+
+/* Home tour: the avatar travels through the vertical story as the page scrolls. */
+.home-stages {
+  position: relative;
+}
+
+.home-tour-track {
+  position: absolute;
+  top: 34px;
+  right: 24px;
+  bottom: 34px;
+  z-index: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(183, 93, 105, 0.46) 12%, rgba(183, 93, 105, 0.2) 88%, transparent);
+  pointer-events: none;
+}
+
+.home-tour-lead {
+  position: absolute;
+  right: 24px;
+  z-index: 5;
+  display: flex;
+  width: 94px;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  will-change: top, transform;
+}
+
+.home-tour-avatar {
+  position: relative;
+  display: grid;
+  width: 78px;
+  height: 78px;
+  place-items: center;
+  border: 1px solid rgba(183, 93, 105, 0.5);
+  border-radius: 50%;
+  background: rgba(18, 16, 17, 0.95);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), 0 0 0 7px rgba(107, 31, 42, 0.1);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: border-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+.home-tour-avatar:hover,
+.home-tour-avatar:focus-visible {
+  border-color: var(--wine-bright);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38), 0 0 0 9px rgba(107, 31, 42, 0.16);
+  transform: scale(1.05);
+}
+
+.home-tour-avatar img {
+  position: relative;
+  z-index: 2;
+  width: 88%;
+  height: 88%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.home-tour-avatar .hero-avatar-ring-one {
+  inset: -9px;
+  border-color: rgba(183, 93, 105, 0.44);
+}
+
+.home-tour-avatar .hero-avatar-ring-two {
+  inset: -17px;
+  border-color: rgba(251, 244, 239, 0.16);
+}
+
+.home-tour-avatar .hero-status {
+  right: 0;
+  bottom: 7px;
+  width: 9px;
+  height: 9px;
+}
+
+.home-tour-label {
+  padding: 4px 7px;
+  border: 1px solid var(--hairline-soft);
+  border-radius: 999px;
+  color: var(--wine-bright);
+  background: rgba(18, 16, 17, 0.88);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero-intro-no-avatar {
+  display: block;
+  max-width: 980px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero-intro-no-avatar .hero-copy h1 {
+  max-width: none;
+}
+
+.hero-intro-no-avatar .hero-copy h1 em,
+.hero-intro-no-avatar .hero-copy h1 span {
+  margin-left: 0;
+}
+
+.hero-intro-no-avatar .hero-role {
+  justify-content: center;
+}
+
+.hero-intro-no-avatar .hero-lede {
+  margin-inline: auto;
+}
+
+.hero-intro-no-avatar .hero-actions {
+  justify-content: center;
+}
+
+.home-stage-heading {
+  max-width: 940px;
+  margin-inline: auto;
+  align-items: center;
+  flex-direction: column;
+  gap: 22px;
+  text-align: center;
+}
+
+.home-stage-heading-topline {
+  justify-content: center;
+}
+
+.home-stage-description {
+  margin-inline: auto;
+}
+
+.experience-stage-content .experience-grid,
+.experience-stage-content .experience-lower-grid,
+.education-stage-content {
+  margin-inline: auto;
+}
+
+.experience-stage-content .info-heading {
+  justify-content: center;
+}
+
+.stage-next-link {
+  display: flex;
+  justify-content: center;
+  margin-inline: auto;
+}
+
+@media (min-width: 1081px) {
+  .home-tour-track,
+  .home-tour-lead {
+    right: max(24px, calc((100% - 940px) / 2 - 74px));
+  }
+}
+
+@media (max-width: 680px) {
+  .home-tour-track {
+    top: 20px;
+    right: 17px;
+    bottom: 20px;
+  }
+
+  .home-tour-lead {
+    right: 2px;
+    width: 70px;
+    gap: 7px;
+  }
+
+  .home-tour-avatar {
+    width: 57px;
+    height: 57px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32), 0 0 0 5px rgba(107, 31, 42, 0.1);
+  }
+
+  .home-tour-avatar .hero-avatar-ring-one {
+    inset: -7px;
+  }
+
+  .home-tour-avatar .hero-avatar-ring-two {
+    inset: -13px;
+  }
+
+  .home-tour-avatar .hero-status {
+    right: -1px;
+    bottom: 4px;
+    width: 7px;
+    height: 7px;
+  }
+
+  .home-tour-label {
+    padding: 3px 5px;
+    font-size: 0.42rem;
+  }
+
+  .home-stage-heading,
+  .experience-stage-content,
+  .education-stage-content {
+    width: calc(100% - 42px);
+  }
+
+  .hero-intro-no-avatar {
+    width: calc(100% - 32px);
+  }
+}
