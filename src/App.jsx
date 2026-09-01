@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Check, Copy, Terminal } from 'lucide-react';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Experience from './components/Experience';
+import HomeStages from './components/HomeStages';
 import Projects from './components/Projects';
 import AboutContact from './components/AboutContact';
 import BottomNav from './components/BottomNav';
@@ -11,10 +10,9 @@ import SpaceBackdrop from './components/SpaceBackdrop';
 
 export const PAGES = [
   { id: 'home', label: 'home', index: '01' },
-  { id: 'experience', label: 'experience', index: '02' },
-  { id: 'projects', label: 'projects', index: '03' },
-  { id: 'about', label: 'about', index: '04' },
-  { id: 'contact', label: 'contact', index: '05' }
+  { id: 'projects', label: 'projects', index: '02' },
+  { id: 'about', label: 'about', index: '03' },
+  { id: 'contact', label: 'contact', index: '04' }
 ];
 
 const getPageFromHash = () => {
@@ -106,8 +104,18 @@ export default function App() {
             <span>{activePageMeta.label}</span>
           </div>
 
-          {activePage === 'home' && <Hero onOpenTerminal={() => setIsTerminalOpen(true)} onNavigate={goToPage} />}
-          {activePage === 'experience' && <Experience />}
+          {activePage === 'home' && (
+            <HomeStages
+              onOpenTerminal={() => setIsTerminalOpen(true)}
+              onNavigate={(destination) => {
+                if (destination === 'experience') {
+                  document.getElementById('home-stage-experience')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  return;
+                }
+                goToPage(destination);
+              }}
+            />
+          )}
           {activePage === 'projects' && (
             <Projects
               activeCategory={activeCategory}
