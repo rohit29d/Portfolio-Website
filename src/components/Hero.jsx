@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
-export default function Hero({ onOpenTerminal, onNavigate }) {
+export default function Hero({ onOpenTerminal, onNavigate, showAvatar = true }) {
   const [avatarHover, setAvatarHover] = useState(false);
 
   return (
     <section className="hero-scene">
-      <div className="hero-intro">
-        <div className="hero-identity">
-          <p className="eyebrow font-mono">embedded systems engineer / hyderabad, india</p>
-          <button
-            type="button"
-            className={`hero-avatar ${avatarHover ? 'is-hovered' : ''}`}
-            onMouseEnter={() => setAvatarHover(true)}
-            onMouseLeave={() => setAvatarHover(false)}
-            onClick={onOpenTerminal}
-            aria-label="Open Rohit's interactive terminal profile"
-          >
-            <span className="hero-avatar-ring hero-avatar-ring-one" />
-            <span className="hero-avatar-ring hero-avatar-ring-two" />
-            <img src="/avatar.png" alt="Rohit Kumar Dubbaka Avatar" />
-            <span className="hero-status" title="Status: Active" />
-          </button>
-          <p className="hero-availability font-mono">
-            <span className="led-indicator" /> available for curious problems
-          </p>
-        </div>
+      <div className={`hero-intro ${showAvatar ? '' : 'hero-intro-no-avatar'}`}>
+        {showAvatar && (
+          <div className="hero-identity">
+            <p className="eyebrow font-mono">embedded systems engineer / hyderabad, india</p>
+            <button
+              type="button"
+              className={`hero-avatar ${avatarHover ? 'is-hovered' : ''}`}
+              onMouseEnter={() => setAvatarHover(true)}
+              onMouseLeave={() => setAvatarHover(false)}
+              onClick={onOpenTerminal}
+              aria-label="Open Rohit's interactive terminal profile"
+            >
+              <span className="hero-avatar-ring hero-avatar-ring-one" />
+              <span className="hero-avatar-ring hero-avatar-ring-two" />
+              <img src="/avatar.png" alt="Rohit Kumar Dubbaka Avatar" />
+              <span className="hero-status" title="Status: Active" />
+            </button>
+            <p className="hero-availability font-mono">
+              <span className="led-indicator" /> available for curious problems
+            </p>
+          </div>
+        )}
 
         <div className="hero-copy">
           <h1>
