@@ -30,6 +30,15 @@ export const TECHNICAL_PROJECTS = [
     link: 'https://github.com/rohit29d/Analog-Front-End-for-sEMG-signals-Acquisition-V2',
     image: '/sEMG_AFE.png'
   },
+  {
+    id: 'fpga-arbiter',
+    tier: 'major',
+    title: 'Priority Arbiter for Multi-Channel Bus',
+    hook: 'Designed and validated a deterministic multi-channel bus priority arbiter from RTL to FPGA using encoder and sequencer-based arbitration logic. Verified timing correctness through RTL simulation on Xilinx Vivado and Basys-3 FPGA.',
+    tags: ['VHDL', 'Basys-3 FPGA', 'Vivado RTL', 'Digital Logic'],
+    link: 'https://github.com/rohit29d',
+    image: '/arbiter.png'
+  },
 
   // --- MINOR BUILDS ---
   {
