@@ -7,8 +7,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'aeromesh',
     tier: 'major',
     title: 'Aeromesh — Edge AI Turbulence Detection Mesh Network',
-    hook: 'Rapid-prototyped edge firmware on bare ESP32 + MPU6050 during CraftifAI Buildathon. In-situ ML classification detects turbulence on-device and transmits decentralized telemetry across adjacent mesh nodes without cloud lag.',
-    tags: ['Edge AI', 'ESP32', 'ESP-IDF', 'Mesh Telemetry', 'IMU'],
+    hook: 'Rapid-prototyped edge firmware on bare ESP32 + MPU6050 during CraftifAI Buildathon. In-situ Edge-AI detects turbulence on-device and transmits decentralized telemetry across adjacent mesh nodes without cloud lag.',
+    tags: ['ESP32', 'ESP-IDF', 'Firmgen', 'Edge AI', 'IMU'],
     link: 'https://github.com/rohit29d/CraftifAI_Hackathon_Aeromesh',
     image: '/aeromesh.png'
   },
@@ -16,8 +16,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'wheelchair',
     tier: 'major',
     title: 'Hands-Free sEMG Based Speech-Controlled Wheelchair',
-    hook: 'Designed a custom Analog Front-End (AFE) PCB for sEMG acquisition from laryngeal muscles, validated gain and CMRR on bench. Trained real-time ML classifiers to translate silent speech signals directly into wheelchair motor actuation with safety overrides.',
-    tags: ['Custom AFE PCB', 'STM32', 'Python ML', 'LTspice', 'KiCAD'],
+    hook: 'Engineered a complete sEMG controlled wheelchair from scratch as a part of my bachelors final year thesis. This project covered a complete end-to-product. The custom AFE realized on a PCB for signal acquisition from the laryngeal region, followed by the ML model rigorusly trained and tuned for command recognition and finally the hardware level processing and motor actuation on an STM32-H7 board',
+    tags: ['PCB-Design', 'STM32', 'Python ML', 'LTspice', 'Embedded-System', 'BioMed-Healthcare'],
     link: 'https://github.com/rohit29d/Hands-Free-sEMG-based-speech-controlled-wheelchair-',
     image: '/Wheelchair.png'
   },
@@ -25,7 +25,7 @@ export const TECHNICAL_PROJECTS = [
     id: 'semg-afe-v2',
     tier: 'major',
     title: 'Analog Front-End for sEMG Signal Acquisition V2',
-    hook: 'In-house analog front-end circuit designed from scratch for acquiring microvolt sEMG signals, featuring low-noise instrumentation amplifiers, multi-stage active filtering, and high CMRR.',
+    hook: 'In-house analog front-end circuit designed from scratch for acquiring microvolt sEMG signals featuring low-noise instrumentation amplifiers, multi-stage active filtering, and high CMRR.',
     tags: ['Custom AFE PCB', 'KiCAD', 'Analog Filtering', 'LTspice', 'Bio-Sensors'],
     link: 'https://github.com/rohit29d/Analog-Front-End-for-sEMG-signals-Acquisition-V2',
     image: '/sEMG_AFE.png'
@@ -36,8 +36,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'alexa-tv',
     tier: 'minor',
     title: 'Alexa Voice-Controlled Smart TV Remote via ESP32',
-    hook: 'Smart IR/Wi-Fi bridge built with ESP32 to smart-ify legacy non-smart household devices and appliances, enabling direct voice integration via Amazon Alexa.',
-    tags: ['ESP32', 'ESP-IDF', 'IoT', 'IR Blaster', 'Alexa API'],
+    hook: 'Smart IR/Wi-Fi bridge built with ESP32 to smart-ify a TV, enabling direct voice integration via Alexa.',
+    tags: ['ESP32', 'ESP-IDF', 'IoT', 'Vibe-coded'],
     link: 'https://github.com/rohit29d/Alexa-control-of-TV-with-ESP32',
     image: '/alexa_ir_tv.png'
   },
@@ -45,8 +45,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'appimage-installer',
     tier: 'minor',
     title: 'Linux AppImage Desktop Integrator & Installer',
-    hook: 'Shell automation script that seamlessly turns standalone Linux AppImages into fully integrated desktop apps in the Ubuntu application tray with proper MIME types and desktop shortcuts.',
-    tags: ['Bash / Shell', 'Linux / Ubuntu', 'Automation', 'CLI Tool'],
+    hook: 'Shell automation script that easily turns standalone Linux AppImages into fully integrated desktop apps in the Ubuntu application tray with proper MIME types and desktop shortcuts.',
+    tags: ['Bash / Shell', 'Automation', "Vibe-coded"],
     link: 'https://github.com/rohit29d/Appimage_installer',
     image: '/appimage.png'
   },
@@ -55,7 +55,7 @@ export const TECHNICAL_PROJECTS = [
     tier: 'minor',
     title: 'Antigravity Package Linux Desktop App Installer',
     hook: 'Shell utility to convert installed tarball application packages into native desktop applications in the Linux system app tray with desktop entries.',
-    tags: ['Bash / Shell', 'Linux / Ubuntu', 'Desktop Integration'],
+    tags: ['Bash / Shell', 'Automation', "Vibe-coded"],
     link: 'https://github.com/rohit29d/Antigravity_appinstaller',
     image: '/Antigravity.jpg',
     imageCredit: {
@@ -68,7 +68,7 @@ export const TECHNICAL_PROJECTS = [
     tier: 'minor',
     title: 'Autonomous Household Plant Watering Controller',
     hook: 'Automated irrigation controller using solar ambient sensing and custom scheduling algorithms to replace traditional RTC chips and actuate relay-driven valves.',
-    tags: ['Embedded C', 'ADC Sensing', 'Automation', 'Actuation'],
+    tags: ['Arduino', 'Solar-ADC Sensing', 'Automation'],
     link: 'https://github.com/rohit29d/House-Hold-Auto-Plant-Watering-System',
     image: '/plantwaterer.png'
   },
@@ -77,7 +77,7 @@ export const TECHNICAL_PROJECTS = [
     tier: 'minor',
     title: 'Speech Recognition Using Laryngeal sEMG Signals',
     hook: 'A trained and bench-tested Random Forest ML classification pipeline translating laryngeal sEMG biosignals into discrete directional wheelchair motion commands.',
-    tags: ['Python', 'Random Forest', 'scikit-learn', 'Biosignal Processing'],
+    tags: ['Python', 'ML-Models', 'Biosignal Processing'],
     link: 'https://github.com/rohit29d/Speech-recognition-using-Laryngeal-sEMG-signals',
     image: '/sEMG.png'
   },
@@ -85,8 +85,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'seatbelt-safety',
     tier: 'minor',
     title: 'Automobile Seatbelt Safety Interlock State Machine',
-    hook: 'Hardware safety interlock network engineered purely through discrete TTL 7400 digital logic gates to prevent vehicle ignition without occupant safety confirmation.',
-    tags: ['TTL 7400 Series', 'Digital Logic', 'Hardware Safety', 'Interlock'],
+    hook: 'A simple Gate-logic based system to detect and flag seat-belts for drivers and passengers. This is a very elementary project but since its my first official project what i did from scratch , Its on here',
+    tags: ['TTL 7400 Series', 'Digital Logic'],
     link: 'https://github.com/rohit29d/Automobile-Seatbelt-Detection-Module',
     image: '/autobelt.png'
   }
@@ -155,7 +155,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
       {currentCategory === 'technical' && (
         <div>
           {/* Sub-Sub 2-Way Hover-Select Menu: [ Major Builds ] / [ Minor Builds ] */}
-          <div 
+          <div
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -164,7 +164,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
               gap: '10px'
             }}
           >
-            <div 
+            <div
               onMouseEnter={() => {
                 setIsTierHovered(true);
                 setScrubbedTier(activeTier);
@@ -292,8 +292,8 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                   position: 'relative',
                   flexShrink: 0
                 }}>
-                  <img 
-                    src={project.image} 
+                  <img
+                    src={project.image}
                     alt={project.title}
                     style={{
                       width: '100%',
@@ -442,7 +442,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
             gap: '20px'
           }}>
             {SAMPLE_PHOTOS.map((photo) => (
-              <div 
+              <div
                 key={photo.id}
                 className="corner-bracket-card"
                 onClick={() => setLightboxItem(photo)}
@@ -461,8 +461,8 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                   background: '#000000',
                   marginBottom: '10px'
                 }}>
-                  <img 
-                    src={photo.src} 
+                  <img
+                    src={photo.src}
                     alt={photo.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -513,7 +513,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
             gap: '24px'
           }}>
             {SAMPLE_ART.map((art) => (
-              <div 
+              <div
                 key={art.id}
                 className="corner-bracket-card"
                 onClick={() => setLightboxItem(art)}
@@ -532,8 +532,8 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                   background: '#000000',
                   marginBottom: '12px'
                 }}>
-                  <img 
-                    src={art.src} 
+                  <img
+                    src={art.src}
                     alt={art.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -584,7 +584,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
             gap: '18px'
           }}>
             {SAMPLE_MOVIES.map((movie) => (
-              <div 
+              <div
                 key={movie.id}
                 className="corner-bracket-card"
                 style={{ padding: '20px' }}
@@ -620,19 +620,19 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
 
       {/* Lightbox / Modal for photos & art */}
       {lightboxItem && (
-        <div 
+        <div
           className="modal-backdrop"
           onClick={() => setLightboxItem(null)}
           style={{ zIndex: 100 }}
         >
-          <div 
+          <div
             className="modal-content"
             onClick={e => e.stopPropagation()}
             style={{ maxWidth: '750px', padding: '16px', background: '#000000', border: '1px solid var(--border-subtle)' }}
           >
             <div style={{ width: '100%', maxHeight: '70vh', overflow: 'hidden', borderRadius: 'var(--radius-sm)', marginBottom: '12px' }}>
-              <img 
-                src={lightboxItem.src} 
+              <img
+                src={lightboxItem.src}
                 alt={lightboxItem.title}
                 style={{ width: '100%', height: 'auto', maxHeight: '70vh', objectFit: 'contain' }}
               />

@@ -16,7 +16,7 @@ export default function App() {
   const [scrubbedSection, setScrubbedSection] = useState('home');
   const [isNavHovered, setIsNavHovered] = useState(false);
   const [copiedCli, setCopiedCli] = useState(false);
-  
+
   // Per-frame Lerp Mouse Position for Cursor-Speed-Synced Easing
   const [lerpedMousePos, setLerpedMousePos] = useState({ x: 0, y: 0 });
   const targetMousePosRef = useRef({ x: 0, y: 0 });
@@ -38,7 +38,7 @@ export default function App() {
     const updateLerp = () => {
       const target = targetMousePosRef.current;
       const current = currentMousePosRef.current;
-      
+
       const factor = 0.12; // Smooth catch-up factor
       current.x += (target.x - current.x) * factor;
       current.y += (target.y - current.y) * factor;
@@ -53,7 +53,7 @@ export default function App() {
     };
   }, []);
 
-  // Keyboard Arrow Key Navigation (Left / Right / Up / Down)
+  // Keyboard Arrow Key Navigation (Left / Right navigate sections horizontally, Up / Down scroll vertically)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Don't trigger section jump if typing in input or terminal
@@ -61,7 +61,7 @@ export default function App() {
         return;
       }
 
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      if (e.key === 'ArrowRight') {
         e.preventDefault();
         setActiveSection((prev) => {
           const currentIdx = SECTIONS.indexOf(prev);
@@ -70,7 +70,7 @@ export default function App() {
           setScrubbedSection(nextSection);
           return nextSection;
         });
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         setActiveSection((prev) => {
           const currentIdx = SECTIONS.indexOf(prev);
@@ -80,6 +80,7 @@ export default function App() {
           return prevSection;
         });
       }
+      // Up and Down arrow keys perform standard vertical page scrolling
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -214,7 +215,7 @@ export default function App() {
       <SpaceBackdrop active={isNavHovered} mousePos={lerpedMousePos} />
 
       {/* Top Header Navigation */}
-      <Header 
+      <Header
         activeSection={activeSection}
         scrubbedSection={isNavHovered ? scrubbedSection : null}
         onNavMouseEnter={handleNavMouseEnter}
@@ -234,8 +235,8 @@ export default function App() {
 
         {/* Card 1: Works Section */}
         <div className={`carousel-card ${getCardClass('works')}`}>
-          <Projects 
-            activeCategory={activeCategory} 
+          <Projects
+            activeCategory={activeCategory}
             scrubbedCategory={scrubbedCategory}
             isCylinderActive={isBottomNavHovered}
           />
@@ -253,8 +254,8 @@ export default function App() {
       </main>
 
       {/* Works-Specific Vertical Category Rail (Technical, Photography, Art, Movies) */}
-      <BottomNav 
-        activeCategory={activeCategory} 
+      <BottomNav
+        activeCategory={activeCategory}
         scrubbedCategory={scrubbedCategory}
         isBottomNavHovered={isBottomNavHovered}
         onBottomNavMouseEnter={handleBottomNavMouseEnter}
@@ -275,7 +276,7 @@ export default function App() {
         alignItems: 'flex-end',
         gap: '4px'
       }}>
-        <div 
+        <div
           className="terminal-copy-box"
           onClick={() => setIsTerminalOpen(true)}
           style={{
@@ -291,10 +292,10 @@ export default function App() {
           <Terminal size={14} color="#ffffff" />
           <span style={{ color: 'var(--text-muted)' }}>%</span>
           <code style={{ color: '#ffffff', fontWeight: 500, fontSize: '0.82rem' }}>npx rohitdubbaka</code>
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={handleCopyCli}
-            className="copy-btn" 
+            className="copy-btn"
             aria-label="Copy npx command"
             title="Copy command"
           >

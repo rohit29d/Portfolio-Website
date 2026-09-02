@@ -4,9 +4,9 @@ const GREETINGS = [
   { text: 'Hello', sub: null },
   { text: 'नमस्ते', sub: null },
   { text: 'నమస్కారం', sub: null },
-  { text: 'வணக்கம்', sub: 'konjam konjam' },
-  { text: 'Bonjour', sub: 'en cours' },
-  { text: 'Hola', sub: 'en curso' }
+  { text: 'வணக்கம்', sub: null },
+  { text: 'Bonjour', sub: null },
+  { text: 'Hola', sub: null }
 ];
 
 export default function LandingIntro({ onComplete }) {
@@ -17,7 +17,7 @@ export default function LandingIntro({ onComplete }) {
   useEffect(() => {
     // 1. Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+
     // 2. Check session storage (play once per browser session)
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
 
