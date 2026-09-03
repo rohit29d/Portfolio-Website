@@ -45,19 +45,19 @@ export default function Hero({ onOpenTerminal }) {
         flexDirection: 'column',
         alignItems: 'center'
       }}>
-        {/* 1. Curved Name Arch Header (Increased font, generous SVG headroom, positioned 1cm above avatar) */}
+        {/* 1. Curved Name Arch Header (Increased font, gracefully framed directly above avatar) */}
         <div style={{
-          width: '450px',
+          width: '460px',
           maxWidth: '95vw',
-          height: '110px',
-          margin: '0 auto -24px',
+          height: '75px',
+          margin: '0 auto -10px',
           position: 'relative',
           zIndex: 2,
           overflow: 'visible'
         }}>
-          <svg viewBox="0 0 460 120" className="hero-curve-svg" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
-            <path id="name-curve" d="M 30,102 A 200,105 0 0,1 430,102" fill="transparent" />
-            <text textAnchor="middle" className="hero-curve-text">
+          <svg viewBox="0 0 460 85" className="hero-curve-svg" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+            <path id="name-curve" d="M 35,76 A 210,64 0 0,1 425,76" fill="transparent" />
+            <text textAnchor="middle" className="hero-curve-text hero-name-text">
               <textPath href="#name-curve" startOffset="50%">
                 Rohit Kumar Dubbaka
               </textPath>

@@ -462,6 +462,12 @@ body {
   transition: fill 0.3s var(--ease-smooth);
 }
 
+.hero-curve-text.hero-name-text {
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
 .hero-curve-text:hover {
   fill: #ffffff;
 }
@@ -627,4 +633,54 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #6B1F2A;
+}
+
+/* ----------------------------------------------------------------- */
+/* ABOUT ME 2-COLUMN SPLIT LAYOUT (STICKY LEFT / SCROLLABLE RIGHT)   */
+/* ----------------------------------------------------------------- */
+.about-split-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 48px;
+  width: 100%;
+}
+
+.about-left-sticky {
+  position: sticky;
+  top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+  width: 250px;
+  padding-top: 4px;
+}
+
+.about-right-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .about-split-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .about-left-sticky {
+    position: static;
+    width: 100%;
+  }
+  .about-right-content {
+    text-align: left;
+  }
 }

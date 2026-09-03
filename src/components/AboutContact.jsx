@@ -7,112 +7,100 @@ export default function AboutContact({ viewMode = 'all' }) {
   return (
     <section style={{
       padding: '40px 20px 80px',
-      maxWidth: '820px',
+      maxWidth: '960px',
       margin: '0 auto',
       position: 'relative'
     }}>
-      {/* 1. About Me Section (Matching abhijithjinnu.in/about style) */}
+      {/* 1. About Me Section (2-Column Sticky Split Layout) */}
       {(viewMode === 'all' || viewMode === 'about') && (
-        <div id="about-section" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          marginBottom: '60px'
-        }}>
-          {/* High-Mid Curved Header: "Who am i?" */}
-          <div style={{ width: '280px', height: '65px', margin: '0 auto -5px', position: 'relative', zIndex: 2 }}>
-            <svg viewBox="0 0 280 70" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
-              <path id="about-curve" d="M 30,62 A 115,75 0 0,1 250,62" fill="transparent" />
-              <text textAnchor="middle" className="hero-curve-text" style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', letterSpacing: '0.04em' }}>
-                <textPath href="#about-curve" startOffset="50%">
-                  Who am i?
-                </textPath>
-              </text>
-            </svg>
-          </div>
+        <div id="about-section" className="about-split-container" style={{ marginBottom: '60px' }}>
+          {/* Left Column: Fixed / Sticky Profile Identity Lockup */}
+          <div className="about-left-sticky">
+            {/* High-Mid Curved Header: "Who am i?" */}
+            <div style={{ width: '260px', height: '60px', margin: '0 auto -6px', position: 'relative', zIndex: 2 }}>
+              <svg viewBox="0 0 280 70" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
+                <path id="about-curve" d="M 30,62 A 115,75 0 0,1 250,62" fill="transparent" />
+                <text textAnchor="middle" className="hero-curve-text" style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', letterSpacing: '0.04em' }}>
+                  <textPath href="#about-curve" startOffset="50%">
+                    Who am i?
+                  </textPath>
+                </text>
+              </svg>
+            </div>
 
-          {/* High-Mid Centered Avatar Container with Solid Maroon LED & Border */}
-          <div style={{ display: 'inline-block', position: 'relative', marginBottom: '18px', zIndex: 1 }}>
-            <div
-              onMouseEnter={() => setAvatarHover(true)}
-              onMouseLeave={() => setAvatarHover(false)}
-              style={{
-                width: '136px',
-                height: '136px',
-                borderRadius: '50%',
-                padding: '2px',
-                background: avatarHover
-                  ? '#6B1F2A'
-                  : 'var(--border-subtle)',
-                transition: 'background 0.3s var(--ease-smooth)',
-                position: 'relative'
-              }}
-            >
-              <div style={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '50%',
-                background: '#000000',
-                overflow: 'hidden',
-                position: 'relative'
-              }}>
-                <img
-                  src="/avatar.png"
-                  alt="Rohit Kumar Dubbaka Avatar"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                />
+            {/* High-Mid Centered Avatar Container with Solid Maroon LED & Border */}
+            <div style={{ display: 'inline-block', position: 'relative', marginBottom: '18px', zIndex: 1 }}>
+              <div
+                onMouseEnter={() => setAvatarHover(true)}
+                onMouseLeave={() => setAvatarHover(false)}
+                style={{
+                  width: '136px',
+                  height: '136px',
+                  borderRadius: '50%',
+                  padding: '2px',
+                  background: avatarHover
+                    ? '#6B1F2A'
+                    : 'var(--border-subtle)',
+                  transition: 'background 0.3s var(--ease-smooth)',
+                  position: 'relative'
+                }}
+              >
+                <div style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  background: '#000000',
+                  overflow: 'hidden',
+                  position: 'relative'
+                }}>
+                  <img
+                    src="/avatar.png"
+                    alt="Rohit Kumar Dubbaka Avatar"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                </div>
+
+                {/* Status LED */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '4px',
+                  right: '4px',
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  background: '#6B1F2A',
+                  border: '2px solid #000000'
+                }} title="Status: Active" />
               </div>
+            </div>
 
-              {/* Status LED */}
-              <div style={{
-                position: 'absolute',
-                bottom: '4px',
-                right: '4px',
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
+            {/* Solid Maroon "about me" Badge */}
+            <div>
+              <span className="font-mono" style={{
+                fontSize: '0.84rem',
+                color: '#ffffff',
+                fontWeight: 600,
                 background: '#6B1F2A',
-                border: '2px solid #000000'
-              }} title="Status: Active" />
+                padding: '5px 20px',
+                borderRadius: '9999px',
+                border: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '2px',
+                letterSpacing: '0.02em',
+                boxShadow: '0 2px 12px rgba(107, 31, 42, 0.4)'
+              }}>
+                about me
+              </span>
             </div>
           </div>
 
-          {/* Solid Maroon "about me" Badge */}
-          <div style={{ marginBottom: '32px' }}>
-            <span className="font-mono" style={{
-              fontSize: '0.84rem',
-              color: '#ffffff',
-              fontWeight: 600,
-              background: '#6B1F2A',
-              padding: '5px 20px',
-              borderRadius: '9999px',
-              border: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '2px',
-              letterSpacing: '0.02em',
-              boxShadow: '0 2px 12px rgba(107, 31, 42, 0.4)'
-            }}>
-              about me
-            </span>
-          </div>
-
-          {/* In-Depth Personal Narrative Write-up */}
-          <div style={{
-            maxWidth: '680px',
-            textAlign: 'left',
-            color: 'var(--text-secondary)',
-            fontSize: '1.02rem',
-            lineHeight: '1.75',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px'
-          }}>
+          {/* Right Column: Scrollable Personal Narrative Write-up */}
+          <div className="about-right-content">
             <p style={{ color: '#ffffff', fontSize: '1.08rem', fontWeight: 500 }}>
               i am just another one of the human species walking this planet. As mundane or boring as that sounds, I think each one of us has their own flair, so here's mine:
             </p>
@@ -141,31 +129,13 @@ export default function AboutContact({ viewMode = 'all' }) {
               basically, I'm a full-circle novelty junkie: i have to balance the nerd that pays my bills and the creative that keeps me sane.
             </p>
 
-            {/* My Takes Sub-section */}
-            <div style={{ marginTop: '12px', borderTop: '1px solid var(--border-subtle)', paddingTop: '20px' }}>
-              <h4 className="font-mono" style={{
-                color: '#ffffff',
-                fontSize: '1rem',
-                fontWeight: 600,
-                letterSpacing: '0.04em',
-                marginBottom: '14px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                <span style={{ color: '#6B1F2A' }}>//</span> My takes
-              </h4>
+            <p>
+              Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming, and I see my peers kind of feeling that way too. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop—so I'm learning to run, but on my own path and in my own direction.
+            </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-                <p>
-                  Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming, and I see my peers kind of feeling that way too. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop—so I'm learning to run, but on my own path and in my own direction.
-                </p>
-
-                <p>
-                  i'd like to think I'm a determined and ambitious person. I used to be a 96 kg kid—afraid and deeply self-conscious. But I grew out of it: burned off 20+ kilos by hitting the gym, running, and cycling. Although that journey is continuous, it gave me firsthand proof of what consistency and putting in the work can really do.
-                </p>
-              </div>
-            </div>
+            <p>
+              i'd like to think I'm a determined and ambitious person. I used to be a 96 kg kid—afraid and deeply self-conscious. But I grew out of it: burned off 20+ kilos by hitting the gym, running, and cycling. Although that journey is continuous, it gave me firsthand proof of what consistency and putting in the work can really do.
+            </p>
           </div>
         </div>
       )}
