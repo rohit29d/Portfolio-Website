@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, Copy, Check } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import AboutContact from './components/AboutContact';
 import BottomNav from './components/BottomNav';
-import TerminalModal from './components/TerminalModal';
 import SpaceBackdrop from './components/SpaceBackdrop';
 import LandingIntro from './components/LandingIntro';
 
@@ -15,7 +13,6 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrubbedSection, setScrubbedSection] = useState('home');
   const [isNavHovered, setIsNavHovered] = useState(false);
-  const [copiedCli, setCopiedCli] = useState(false);
 
   // Per-frame Lerp Mouse Position for Cursor-Speed-Synced Easing
   const [lerpedMousePos, setLerpedMousePos] = useState({ x: 0, y: 0 });
@@ -30,8 +27,6 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('technical');
   const [scrubbedCategory, setScrubbedCategory] = useState('technical');
   const [isBottomNavHovered, setIsBottomNavHovered] = useState(false);
-
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   // Continuous per-frame lerp animation loop (current += (target - current) * factor)
   useEffect(() => {
@@ -56,8 +51,8 @@ export default function App() {
   // Keyboard Arrow Key Navigation (Left / Right navigate sections horizontally, Up / Down scroll vertically)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Don't trigger section jump if typing in input or terminal
-      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName) || isTerminalOpen) {
+      // Don't trigger section jump if typing in input
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
         return;
       }
 
@@ -87,7 +82,7 @@ export default function App() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isTerminalOpen]);
+  }, []);
 
   // Menu-Scoped Wheel Scrolling (Only rotates menu when mouse cursor is on header menu)
   const handleNavWheel = (e) => {
@@ -165,13 +160,6 @@ export default function App() {
     setIsBottomNavHovered(false);
   };
 
-  const handleCopyCli = (e) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText('npx rohitdubbaka');
-    setCopiedCli(true);
-    setTimeout(() => setCopiedCli(false), 2000);
-  };
-
   // Calculate 3D concave position class for each section in the continuous circular ring
   const getCardClass = (sectionId) => {
     if (!isNavHovered) {
@@ -230,7 +218,7 @@ export default function App() {
       <main className="carousel-viewport">
         {/* Card 0: Home Section */}
         <div className={`carousel-card ${getCardClass('home')}`}>
-          <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
+          <Hero />
         </div>
 
         {/* Card 1: Works Section */}
@@ -264,51 +252,6 @@ export default function App() {
         onCategoryClick={handleCategoryClick}
         isWorksVisible={focusedSection === 'works'}
       />
-
-      {/* Floating Bottom-Right Terminal CLI Box Widget */}
-      <div style={{
-        position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        zIndex: 80,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        gap: '4px'
-      }}>
-        <div
-          className="terminal-copy-box"
-          onClick={() => setIsTerminalOpen(true)}
-          style={{
-            cursor: 'pointer',
-            background: 'rgba(0, 0, 0, 0.94)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.85)',
-            border: '1px solid var(--border-subtle)'
-          }}
-          title="Click to run interactive terminal"
-        >
-          <Terminal size={14} color="#ffffff" />
-          <span style={{ color: 'var(--text-muted)' }}>%</span>
-          <code style={{ color: '#ffffff', fontWeight: 500, fontSize: '0.82rem' }}>npx rohitdubbaka</code>
-          <button
-            type="button"
-            onClick={handleCopyCli}
-            className="copy-btn"
-            aria-label="Copy npx command"
-            title="Copy command"
-          >
-            {copiedCli ? <Check size={13} color="#ffffff" /> : <Copy size={13} />}
-          </button>
-        </div>
-        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', paddingRight: '4px' }}>
-          {copiedCli ? '✓ copied!' : 'interactive CLI'}
-        </span>
-      </div>
-
-      {/* Terminal CLI Modal Simulator */}
-      <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
     </div>
   );
 }

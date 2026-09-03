@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Zap, Briefcase, GraduationCap, Code } from 'lucide-react';
 
-export default function Hero({ onOpenTerminal }) {
+export default function Hero() {
   const [avatarHover, setAvatarHover] = useState(false);
 
   const skills = [
@@ -64,8 +64,6 @@ export default function Hero({ onOpenTerminal }) {
           <div
             onMouseEnter={() => setAvatarHover(true)}
             onMouseLeave={() => setAvatarHover(false)}
-            onClick={onOpenTerminal}
-            title="Click to run interactive terminal profile"
             style={{
               width: '136px',
               height: '136px',
@@ -74,7 +72,6 @@ export default function Hero({ onOpenTerminal }) {
               background: avatarHover
                 ? '#6B1F2A'
                 : 'var(--border-subtle)',
-              cursor: 'pointer',
               transition: 'all 0.3s var(--ease-smooth)',
               position: 'relative'
             }}
