@@ -42,7 +42,7 @@ export default function LandingIntro({ onComplete }) {
           setIsSlidingUp(true);
         }, 300);
       }
-    }, 1000);
+    }, 500);
 
     return () => clearInterval(interval);
   }, []);
