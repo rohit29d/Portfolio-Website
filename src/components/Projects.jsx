@@ -153,10 +153,10 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
           <Sparkles size={18} color="#6B1F2A" />
         </div>
         <p className="font-mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-          {currentCategory === 'technical' && 'schematic to silicon, firmware, and embedded builds'}
-          {currentCategory === 'photography' && 'moments captured through the lens'}
-          {currentCategory === 'art' && 'visual experiments, digital sketches, and vector art'}
-          {currentCategory === 'movies' && 'cinema that inspires my perspective'}
+          {currentCategory === 'technical' && 'my professional and personal brainscape'}
+          {currentCategory === 'photography' && 'moments i felt like framing'}
+          {currentCategory === 'art' && ' a creative corner '}
+          {currentCategory === 'movies' && 'stories that i felt deserved a screen'}
         </p>
       </div>
 
@@ -254,8 +254,8 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
               transition: 'opacity 0.25s ease'
             }}>
               {currentTier === 'major'
-                ? '// flagship hardware architectures, custom PCBs, and end-to-end systems'
-                : '// exploratory firmware modules, automation scripts, and rapid hardware prototypes'}
+                ? '// flagship architectures, custom PCBs, and end-to-end systems'
+                : '// small scale projects that i made out of curiosity or boredom '}
             </p>
           </div>
 

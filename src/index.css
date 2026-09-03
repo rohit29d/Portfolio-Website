@@ -565,8 +565,13 @@ body {
 }
 
 .category-rail-item.disabled {
-  opacity: 0.4;
+  opacity: 0.32;
   cursor: not-allowed;
+}
+
+.category-rail-item.disabled:hover {
+  background: transparent;
+  color: var(--text-secondary);
 }
 
 /* Responsive adjustment for vertical category bar on smaller screens */

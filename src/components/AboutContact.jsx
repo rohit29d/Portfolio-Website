@@ -34,7 +34,7 @@ export default function AboutContact({ viewMode = 'all' }) {
 
           {/* High-Mid Centered Avatar Container with Solid Maroon LED & Border */}
           <div style={{ display: 'inline-block', position: 'relative', marginBottom: '18px', zIndex: 1 }}>
-            <div 
+            <div
               onMouseEnter={() => setAvatarHover(true)}
               onMouseLeave={() => setAvatarHover(false)}
               style={{
@@ -42,8 +42,8 @@ export default function AboutContact({ viewMode = 'all' }) {
                 height: '136px',
                 borderRadius: '50%',
                 padding: '2px',
-                background: avatarHover 
-                  ? '#6B1F2A' 
+                background: avatarHover
+                  ? '#6B1F2A'
                   : 'var(--border-subtle)',
                 transition: 'background 0.3s var(--ease-smooth)',
                 position: 'relative'
@@ -57,9 +57,9 @@ export default function AboutContact({ viewMode = 'all' }) {
                 overflow: 'hidden',
                 position: 'relative'
               }}>
-                <img 
-                  src="/avatar.png" 
-                  alt="Rohit Kumar Dubbaka Avatar" 
+                <img
+                  src="/avatar.png"
+                  alt="Rohit Kumar Dubbaka Avatar"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -94,7 +94,7 @@ export default function AboutContact({ viewMode = 'all' }) {
               border: 'none',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '2px',
               letterSpacing: '0.02em',
               boxShadow: '0 2px 12px rgba(107, 31, 42, 0.4)'
             }}>
@@ -114,25 +114,58 @@ export default function AboutContact({ viewMode = 'all' }) {
             gap: '20px'
           }}>
             <p style={{ color: '#ffffff', fontSize: '1.08rem', fontWeight: 500 }}>
-              who am i if not my curiosity, the circuits i solder, and the ideas i build into the physical world?
+              i am just another one of the human species walking this planet. As mundane or boring as that sounds, I think each one of us has their own flair, so here's mine:
             </p>
 
             <p>
-              i am a hardware engineer and embedded builder (graduating in electronics & communication engineering in 2026). 
-              i do everything i put my mind to — whether it's laying out tight 4-layer LTE/GPS boards capable of taking 3A bursts, writing bare-metal firmware that doesn't drop a single byte, or designing analog front-ends for speech-controlled wheelchairs.
+              i am a hardware engineer and embedded builder (graduated in electronics &amp; communication engineering... you can probably get that from my resume). As for my professional path, i am an upcoming embedded hardware engineer at DeltaIOT after my 6-month internship there, during which i delivered some pretty cool PCBs. Prior to that, I had some pretty interesting builds during my bachelor's. I built—or rather, engineered—a complete wheelchair that runs on commands from your muscles; the sweet part? The entire thing was done from scratch in the lab. This one brought me close to hardware. Apart from this, there are a couple of other projects (head over to the projects tab to check them out).
             </p>
 
             <p>
-              currently working as an Embedded Systems Intern at <strong style={{ color: '#ffffff' }}>DeltaIOT Pvt Ltd</strong> in Hyderabad, focusing on hardware R&D, power management breakout boards, and real-time firmware architecture where system-level ownership actually matters.
+              i basically have an itch inside me to learn how things work... guess they call it curiosity. There is a new piece of tech? Sure, yes—how does it work? Your Alexa can do that... HOWWW? This intrigue drew me to electronics: from ripping apart appliances at home to laying out tight 4-layer boards capable of taking 3A bursts, writing bare-metal firmware that doesn't drop a single byte, or designing analog front-ends for speech-controlled wheelchairs.
             </p>
 
             <p>
-              i believe in craftsmanship over hype. no fluff, no AI slop — just solid engineering, clean PCB routing, disciplined firmware, and making cool things that solve real-world problems.
+              many of the projects didn't work as soon as i plugged them in. That's the beauty of electronics—you may spend an hour designing it, but it might take days to debug it. After months of fine-tuning, i had that wheelchair moving on commands; after days of probing every PCB pad, i had those boards transmitting data. So that's one side of me: i stick with things.
             </p>
 
-            <p style={{ fontStyle: 'italic', color: 'var(--text-muted)' }}>
-              when i'm not routing differential pairs or debugging UART traces, i'm probably tinkering with FPGA RTL, exploring edge ML, or building little side projects just because i can.
+            <p>
+              I am not purely a techie; sometimes the closer you get to tech, the farther you want to step away from computers. For me, it's all about creativity and making things. You will find me in the gym building myself, in the garden taking care of my plants, photographing things i find beautiful, sketching up something, or writing random stories (which i intend to film sometime :), oh and movies—yes, i love watching movies, I'm a huge cinema geek).
             </p>
+
+            <p>
+              i love being on the creative side of things and hope I never have to leave this side. Because creativity and engineering—god, what a combo. All those magnificent buildings, airplanes, ROCKETS!!, the boards that run our phones and computers, CHIPS!! (not the ones you eat, the ones that store our data). Engineering is no less than wizardry, and I'm glad that i get to be a wizard (an engineer of course, haha).
+            </p>
+
+            <p>
+              basically, I'm a full-circle novelty junkie: i have to balance the nerd that pays my bills and the creative that keeps me sane.
+            </p>
+
+            {/* My Takes Sub-section */}
+            <div style={{ marginTop: '12px', borderTop: '1px solid var(--border-subtle)', paddingTop: '20px' }}>
+              <h4 className="font-mono" style={{
+                color: '#ffffff',
+                fontSize: '1rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                marginBottom: '14px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span style={{ color: '#6B1F2A' }}>//</span> My takes
+              </h4>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+                <p>
+                  Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming, and I see my peers kind of feeling that way too. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop—so I'm learning to run, but on my own path and in my own direction.
+                </p>
+
+                <p>
+                  i'd like to think I'm a determined and ambitious person. I used to be a 96 kg kid—afraid and deeply self-conscious. But I grew out of it: burned off 20+ kilos by hitting the gym, running, and cycling. Although that journey is continuous, it gave me firsthand proof of what consistency and putting in the work can really do.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -151,13 +184,13 @@ export default function AboutContact({ viewMode = 'all' }) {
             wanna connect<span style={{ color: '#6B1F2A' }}>?</span>
           </h3>
           <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto 28px' }}>
-            feel free to reach out for embedded hardware collabs, firmware discussions, or cool project ideas :)
+            feel free to reach out, im always curious for anything new :)
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '14px' }}>
-            <a 
-              href="https://github.com/rohit29d" 
-              target="_blank" 
+            <a
+              href="https://github.com/rohit29d"
+              target="_blank"
               rel="noopener noreferrer"
               className="font-mono"
               style={{
@@ -181,9 +214,9 @@ export default function AboutContact({ viewMode = 'all' }) {
               <ArrowUpRight size={14} />
             </a>
 
-            <a 
-              href="https://linkedin.com/in/rohit-kumar-dubbaka" 
-              target="_blank" 
+            <a
+              href="https://linkedin.com/in/rohit-kumar-dubbaka"
+              target="_blank"
               rel="noopener noreferrer"
               className="font-mono"
               style={{
@@ -207,8 +240,8 @@ export default function AboutContact({ viewMode = 'all' }) {
               <ArrowUpRight size={14} />
             </a>
 
-            <a 
-              href="mailto:rohitdubbaka29@gmail.com" 
+            <a
+              href="mailto:rohitdubbaka29@gmail.com"
               className="font-mono"
               style={{
                 display: 'inline-flex',
@@ -228,8 +261,8 @@ export default function AboutContact({ viewMode = 'all' }) {
               <span>rohitdubbaka29@gmail.com</span>
             </a>
 
-            <a 
-              href="tel:+919908422253" 
+            <a
+              href="tel:+919908422253"
               className="font-mono"
               style={{
                 display: 'inline-flex',

@@ -46,12 +46,12 @@ export default function Hero({ onOpenTerminal }) {
         alignItems: 'center'
       }}>
         {/* 1. Curved Name Arch Header (Increased font, generous SVG headroom, positioned 1cm above avatar) */}
-        <div style={{ 
-          width: '450px', 
+        <div style={{
+          width: '450px',
           maxWidth: '95vw',
-          height: '110px', 
-          margin: '0 auto -24px', 
-          position: 'relative', 
+          height: '110px',
+          margin: '0 auto -24px',
+          position: 'relative',
           zIndex: 2,
           overflow: 'visible'
         }}>
@@ -139,7 +139,7 @@ export default function Hero({ onOpenTerminal }) {
             boxShadow: '0 2px 10px rgba(107, 31, 42, 0.4)'
           }}>
             <Zap size={13} color="#ffffff" />
-            embedded systems @ deltaiot
+            Embedded Hardware Intern @ DeltaIOT Pvt Ltd
           </span>
         </div>
 
@@ -281,10 +281,10 @@ export default function Hero({ onOpenTerminal }) {
           gap: '16px'
         }}>
           {skills.map((group, idx) => (
-            <div 
-              key={idx} 
-              className="corner-bracket-card" 
-              style={{ 
+            <div
+              key={idx}
+              className="corner-bracket-card"
+              style={{
                 padding: '18px 14px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -292,19 +292,19 @@ export default function Hero({ onOpenTerminal }) {
                 textAlign: 'center'
               }}
             >
-              <h4 className="font-mono" style={{ 
-                fontSize: '0.84rem', 
-                color: '#ffffff', 
+              <h4 className="font-mono" style={{
+                fontSize: '0.84rem',
+                color: '#ffffff',
                 marginBottom: '14px',
                 textAlign: 'center',
                 fontWeight: 600
               }}>
                 {group.category}
               </h4>
-              <div style={{ 
-                display: 'flex', 
-                flexWrap: 'wrap', 
-                gap: '8px', 
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>
