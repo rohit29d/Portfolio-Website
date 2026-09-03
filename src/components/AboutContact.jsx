@@ -17,10 +17,10 @@ export default function AboutContact({ viewMode = 'all' }) {
           {/* Left Column: Fixed / Sticky Profile Identity Lockup */}
           <div className="about-left-sticky">
             {/* High-Mid Curved Header: "Who am i?" */}
-            <div style={{ width: '260px', height: '60px', margin: '0 auto -6px', position: 'relative', zIndex: 2 }}>
-              <svg viewBox="0 0 280 70" className="hero-curve-svg" style={{ width: '100%', height: '100%' }}>
-                <path id="about-curve" d="M 30,62 A 115,75 0 0,1 250,62" fill="transparent" />
-                <text textAnchor="middle" className="hero-curve-text" style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', letterSpacing: '0.04em' }}>
+            <div style={{ width: '240px', height: '52px', margin: '0 auto -6px', position: 'relative', zIndex: 2, overflow: 'visible' }}>
+              <svg viewBox="0 0 240 60" className="hero-curve-svg" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                <path id="about-curve" d="M 30,50 A 110,40 0 0,1 210,50" fill="transparent" />
+                <text textAnchor="middle" className="hero-curve-text" style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '36px', letterSpacing: '0' }}>
                   <textPath href="#about-curve" startOffset="50%">
                     Who am i?
                   </textPath>
