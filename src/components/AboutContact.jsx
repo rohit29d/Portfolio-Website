@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Github, Linkedin, Mail, ArrowUpRight, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 
 export default function AboutContact({ viewMode = 'all' }) {
   const [avatarHover, setAvatarHover] = useState(false);
@@ -229,28 +229,6 @@ export default function AboutContact({ viewMode = 'all' }) {
             >
               <Mail size={16} />
               <span>rohitdubbaka29@gmail.com</span>
-            </a>
-
-            <a
-              href="tel:+919908422253"
-              className="font-mono"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 18px',
-                borderRadius: 'var(--radius-sm)',
-                background: '#000000',
-                border: '1px solid var(--border-subtle)',
-                color: '#ffffff',
-                textDecoration: 'none',
-                fontSize: '0.88rem'
-              }}
-              onMouseOver={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
-              onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
-            >
-              <Phone size={15} />
-              <span>+91 9908422253</span>
             </a>
           </div>
         </div>
