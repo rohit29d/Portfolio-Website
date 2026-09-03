@@ -508,7 +508,7 @@ body {
 }
 
 /* ----------------------------------------------------------------- */
-/* VERTICAL CATEGORY BAR (CONFIDENT SOLID MAROON PILLS)              */
+/* VERTICAL CATEGORY BAR & CERTIFICATIONS PILL                       */
 /* ----------------------------------------------------------------- */
 .vertical-category-nav {
   position: fixed;
@@ -519,6 +519,47 @@ body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  gap: 10px;
+  transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+}
+
+.vertical-category-nav.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(24px, -50%);
+}
+
+.certifications-capsule-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #6B1F2A;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(107, 31, 42, 0.45);
+  transition: all 0.22s var(--ease-smooth);
+  width: 100%;
+}
+
+.certifications-capsule-pill:hover {
+  background: #7f2532;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(107, 31, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.vertical-category-box {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   gap: 6px;
   padding: 10px 8px;
   background: rgba(0, 0, 0, 0.96);
@@ -526,14 +567,7 @@ body {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95);
-}
-
-.vertical-category-nav.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(24px, -50%);
 }
 
 .category-rail-item {

@@ -102,27 +102,27 @@ export default function AboutContact({ viewMode = 'all' }) {
           {/* Right Column: Scrollable Personal Narrative Write-up */}
           <div className="about-right-content">
             <p style={{ color: '#ffffff', fontSize: '1.08rem', fontWeight: 500 }}>
-              i am just another one of the human species walking this planet. As mundane or boring as that sounds, I think each one of us has their own flair, so here's mine:
+              i am just another one of the human being walking this planet. As mundane or boring as that sounds, I think each one of us has their own flair, so here's mine:
             </p>
 
             <p>
-              i am a hardware engineer and embedded builder (graduated in electronics &amp; communication engineering... you can probably get that from my resume). As for my professional path, i am an upcoming embedded hardware engineer at DeltaIOT after my 6-month internship there, during which i delivered some pretty cool PCBs. Prior to that, I had some pretty interesting builds during my bachelor's. I built—or rather, engineered—a complete wheelchair that runs on commands from your muscles; the sweet part? The entire thing was done from scratch in the lab. This one brought me close to hardware. Apart from this, there are a couple of other projects (head over to the projects tab to check them out).
+              i am a hardware engineer and embedded builder (graduated in electronics &amp; communication engineering... you can probably get all that from my resume). As for my professional path, i am an upcoming embedded hardware engineer at DeltaIOT after my 6-month internship there, during which i delivered some pretty cool PCBs. Prior to that, I had some interesting builds during my bachelor's. I built ... or rather, engineered a complete wheelchair that runs on commands from your vocal muscles and the sweet part? The entire thing was done from scratch in the lab. This one laid foundations for me interest in systems as a whole. Apart from this, there are a couple of other projects (head over to the projects tab to check them out).
             </p>
 
             <p>
-              i basically have an itch inside me to learn how things work... guess they call it curiosity. There is a new piece of tech? Sure, yes—how does it work? Your Alexa can do that... HOWWW? This intrigue drew me to electronics: from ripping apart appliances at home to laying out tight 4-layer boards capable of taking 3A bursts, writing bare-metal firmware that doesn't drop a single byte, or designing analog front-ends for speech-controlled wheelchairs.
+              i have an itch inside me to learn how things work... guess they call it curiosity. There is a new piece of tech? Sure, yess tell me how does it work? Your Alexa can do that... HOWWW? This intrigue drew me to electronics - from ripping apart appliances at home to laying out tight 4-layer boards capable of taking 3A bursts, writing bare-metal firmware that doesn't drop a byte, or designing analog front-ends for speech-controlled wheelchairs.
             </p>
 
             <p>
-              many of the projects didn't work as soon as i plugged them in. That's the beauty of electronics—you may spend an hour designing it, but it might take days to debug it. After months of fine-tuning, i had that wheelchair moving on commands; after days of probing every PCB pad, i had those boards transmitting data. So that's one side of me: i stick with things.
+              many of the projects didn't work as soon as i plugged them in. That's the beauty of electronics, you may spend an hour designing it, but it might take days to debug it. After months of fine-tuning, i had that wheelchair moving on real commands, after days of probing every PCB pad, i had those boards transmitting data. So that's one side of me: i stick with things.
             </p>
 
             <p>
-              I am not purely a techie; sometimes the closer you get to tech, the farther you want to step away from computers. For me, it's all about creativity and making things. You will find me in the gym building myself, in the garden taking care of my plants, photographing things i find beautiful, sketching up something, or writing random stories (which i intend to film sometime :), oh and movies—yes, i love watching movies, I'm a huge cinema geek).
+              I am not purely a techie. Sometimes the closer you get to tech, the farther you want to step away from computers. For me, it's all about creativity and making things. You will find me in the gym building myself, in the garden taking care of my plants, photographing things i find beautiful, sketching up something, or writing random stories (which i intend to film sometime :)), oh and movies—yes, i love watching movies, I'm a huge cinema geek).
             </p>
 
             <p>
-              i love being on the creative side of things and hope I never have to leave this side. Because creativity and engineering—god, what a combo. All those magnificent buildings, airplanes, ROCKETS!!, the boards that run our phones and computers, CHIPS!! (not the ones you eat, the ones that store our data). Engineering is no less than wizardry, and I'm glad that i get to be a wizard (an engineer of course, haha).
+              i love being on the creative side of things and hope I never have to leave this side. Because creativity and engineering - god, what a combo. All those magnificent buildings, airplanes, ROCKETS!!, the boards that run our phones and computers, CHIPS!! (not the ones you eat, the ones that store our data). Engineering is no less than wizardry, and I'm glad that i get to be a wizard.
             </p>
 
             <p>
@@ -134,7 +134,7 @@ export default function AboutContact({ viewMode = 'all' }) {
             </p>
 
             <p>
-              i'd like to think I'm a determined and ambitious person. I used to be a 96 kg kid—afraid and deeply self-conscious. But I grew out of it: burned off 20+ kilos by hitting the gym, running, and cycling. Although that journey is continuous, it gave me firsthand proof of what consistency and putting in the work can really do.
+              i'd like to think I'm a determined and ambitious person. I used to be a kid weighing 96kilos, afraid and deeply self-conscious. But I grew out of it, burned off 20+ kilos hitting the gym, running, and cycling and what not. Although that journey is continuous, it gave me firsthand proof of what consistency and putting in the work can really do.
             </p>
           </div>
         </div>

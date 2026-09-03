@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Zap, Briefcase, GraduationCap, Code, Award } from 'lucide-react';
+import { Zap, Briefcase, GraduationCap, Code } from 'lucide-react';
 
 export default function Hero({ onOpenTerminal }) {
   const [avatarHover, setAvatarHover] = useState(false);
@@ -21,12 +21,6 @@ export default function Hero({ onOpenTerminal }) {
       category: 'Programming & RTL',
       items: ['C', 'Embedded C', 'FreeRTOS', 'Verilog/VHDL']
     }
-  ];
-
-  const certifications = [
-    { name: 'PCB Design with KiCad', issuer: 'Peter Dalmaris (Udemy)', date: 'Aug 2026' },
-    { name: 'Machine Learning Techniques in MATLAB', issuer: 'MathWorks', date: 'Jun 2025' },
-    { name: 'SystemVerilog Fundamentals', issuer: 'Kumar Khandagle (Udemy)', date: 'Dec 2024' }
   ];
 
   return (
@@ -313,39 +307,6 @@ export default function Hero({ onOpenTerminal }) {
                     {item}
                   </span>
                 ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 7. Certifications Section */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-          <Award size={16} color="#ffffff" />
-          <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-            // Certifications
-          </h3>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
-          {certifications.map((cert, idx) => (
-            <div key={idx} className="corner-bracket-card" style={{ padding: '14px 18px' }}>
-              <h4 style={{ fontSize: '0.92rem', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
-                {cert.name}
-              </h4>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{cert.issuer}</span>
-                <span className="font-mono" style={{
-                  fontSize: '0.70rem',
-                  color: '#ffffff',
-                  background: '#6B1F2A',
-                  padding: '2px 7px',
-                  borderRadius: '3px',
-                  fontWeight: 600
-                }}>
-                  {cert.date}
-                </span>
               </div>
             </div>
           ))}
