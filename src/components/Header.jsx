@@ -35,19 +35,20 @@ export default function Header({
   };
 
   return (
-    <header 
-      className="site-header"
-      onMouseEnter={onNavMouseEnter}
-      onMouseLeave={onNavMouseLeave}
-      onMouseMove={handleMouseMove}
-      onWheel={handleWheel}
-    >
+    <header className="site-header">
       <div className="header-inner">
         {/* Left Spacer to keep the center nav capsule balanced */}
         <div className="nav-spacer" />
 
         {/* 1. Solid Maroon Encapsulated Navigation Capsule (abhijithjinnu.in style) */}
-        <nav className="header-capsule-nav" aria-label="Main Navigation">
+        <nav 
+          className="header-capsule-nav" 
+          aria-label="Main Navigation"
+          onMouseEnter={onNavMouseEnter}
+          onMouseLeave={onNavMouseLeave}
+          onMouseMove={handleMouseMove}
+          onWheel={handleWheel}
+        >
           {navItems.map(item => {
             const isFocused = currentFocused === item.id;
 
