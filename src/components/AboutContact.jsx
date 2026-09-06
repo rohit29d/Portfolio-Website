@@ -110,11 +110,11 @@ export default function AboutContact({ viewMode = 'all' }) {
             </p>
 
             <p>
-              i have an itch inside me to learn how things work... guess they call it curiosity. There is a new piece of tech? Sure, yess tell me how does it work? Your Alexa can do that... HOWWW? This intrigue drew me to electronics - from ripping apart appliances at home to laying out tight 4-layer boards capable of taking 3A bursts, writing bare-metal firmware that doesn't drop a byte, or designing analog front-ends for speech-controlled wheelchairs.
+              i have an itch inside me to learn how things work... guess they call it curiosity. There is a new piece of tech? Sure, yess tell me how does it work? Your Alexa can do that... HOWWW? This intrigue drew me to electronics - from ripping apart appliances at home to laying out tight PCB layouts, writing bare-metal firmware that doesn't drop a byte, or designing analog front-ends for speech-controlled wheelchairs.
             </p>
 
             <p>
-              many of the projects didn't work as soon as i plugged them in. That's the beauty of electronics, you may spend an hour designing it, but it might take days to debug it. After months of fine-tuning, i had that wheelchair moving on real commands, after days of probing every PCB pad, i had those boards transmitting data. So that's one side of me: i stick with things.
+              many of the projects didn't work as soon as i plugged them in. That's the beauty of electronics, you may spend an hour designing it, but it might take days to just get it up and running. After months of trial and error, tons of revisions, i had that wheelchair moving on real commands, after days of probing every PCB pad, i had those boards transmitting data. So that's one side of me: i stick with things.
             </p>
 
             <p>
@@ -130,11 +130,7 @@ export default function AboutContact({ viewMode = 'all' }) {
             </p>
 
             <p>
-              Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming, and I see my peers kind of feeling that way too. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop—so I'm learning to run, but on my own path and in my own direction.
-            </p>
-
-            <p>
-              i'd like to think I'm a determined and ambitious person. I used to be a kid weighing 96kilos, afraid and deeply self-conscious. But I grew out of it, burned off 20+ kilos hitting the gym, running, and cycling and what not. Although that journey is continuous, it gave me firsthand proof of what consistency and putting in the work can really do.
+              Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop—so I'm learning to run, but on my own path and in my own direction.Someday i plan on on designing chips and circuits for a living and keep learning new things and explore the world.
             </p>
           </div>
         </div>
