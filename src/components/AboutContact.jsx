@@ -157,7 +157,7 @@ export default function AboutContact({ viewMode = 'all' }) {
             feel free to reach out, im always curious for anything new :)
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '14px' }}>
+          <div className="contact-links-wrap" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '14px' }}>
             <a
               href="https://github.com/rohit29d"
               target="_blank"

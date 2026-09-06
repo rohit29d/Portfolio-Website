@@ -48,6 +48,7 @@ html {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   overflow-x: hidden;
   background-color: #000000;
@@ -72,13 +73,44 @@ body {
 /* ----------------------------------------------------------------- */
 /* SOLID ENCAPSULATED HEADER CAPSULE NAVIGATION (ABHIJITH STYLE)     */
 /* ----------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: padding 0.3s ease;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.nav-spacer {
+  width: 100px;
+}
+
+.header-resume-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+
 .header-capsule-nav {
   display: inline-flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   background: #6B1F2A;
   border-radius: 9999px;
-  padding: 8px 28px;
+  padding: 8px 26px;
   box-shadow: 0 4px 20px rgba(107, 31, 42, 0.45);
   transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
 }
@@ -132,19 +164,31 @@ body {
 }
 
 @media (max-width: 768px) {
+  .site-header {
+    padding: 10px 12px;
+  }
   .nav-spacer {
     display: none;
   }
+  .header-resume-wrapper {
+    width: auto;
+  }
+  .header-inner {
+    justify-content: space-between;
+    gap: 8px;
+  }
   .header-capsule-nav {
-    gap: 16px;
-    padding: 6px 18px;
+    gap: 8px;
+    padding: 6px 12px;
   }
   .header-capsule-item {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
+    padding: 2px 2px;
   }
   .header-resume-pill {
-    padding: 6px 14px;
-    font-size: 0.78rem;
+    padding: 6px 12px;
+    font-size: 0.74rem;
+    gap: 4px;
   }
 }
 
@@ -232,6 +276,45 @@ body {
   transform: translateX(0px) translateY(0px) translateZ(-550px) rotateY(180deg) scale(0.50);
   opacity: 0;
   pointer-events: none;
+}
+
+/* Mobile Phone View Overrides for Carousel Stage (Native Vertical Stack, Zero 3D Clipping) */
+@media (max-width: 768px) {
+  .carousel-stage {
+    perspective: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  .carousel-viewport {
+    min-height: calc(100vh - 60px);
+    min-height: calc(100dvh - 60px);
+    transform-style: flat;
+    overflow-x: hidden;
+  }
+
+  .carousel-card {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-left: 0;
+    padding: 16px 16px 88px 16px;
+    transform: none !important;
+    transform-style: flat;
+    transition: opacity 0.25s ease;
+  }
+
+  .carousel-card:not(.card-full) {
+    display: none !important;
+  }
+
+  .carousel-card.card-full {
+    display: block !important;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 /* ----------------------------------------------------------------- */
@@ -415,6 +498,53 @@ body {
   color: #ffffff;
 }
 
+/* Project Card Responsive Layout */
+.project-card-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 28px;
+  padding: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: #000000;
+}
+
+.project-card-media {
+  width: 320px;
+  min-width: 280px;
+  height: 190px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.project-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .project-card-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .project-card-media {
+    width: 100%;
+    min-width: 100%;
+    height: 190px;
+  }
+}
+
 /* ----------------------------------------------------------------- */
 /* SOLID #6B1F2A FILL TAGS & PILLS (CONFIDENT BLOCKS, NO TRANSPARENCY)*/
 /* ----------------------------------------------------------------- */
@@ -562,8 +692,8 @@ body {
   color: var(--text-secondary);
 }
 
-/* Responsive adjustment for vertical category bar on smaller screens */
-@media (max-width: 860px) {
+/* Responsive adjustment for category bar on tablets */
+@media (min-width: 769px) and (max-width: 900px) {
   .vertical-category-nav {
     right: 12px;
     padding: 6px 4px;
@@ -571,6 +701,45 @@ body {
   .category-rail-item {
     font-size: 0.72rem;
     padding: 5px 10px;
+  }
+}
+
+/* Phone View: Floating Bottom Thumb Dock */
+@media (max-width: 768px) {
+  .vertical-category-nav {
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 9999px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.92);
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 120;
+  }
+
+  .vertical-category-nav.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 20px);
+  }
+
+  .vertical-category-nav .category-rail-header {
+    display: none;
+  }
+
+  .category-rail-item {
+    font-size: 0.72rem;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    gap: 6px;
+    white-space: nowrap;
   }
 }
 
@@ -664,5 +833,34 @@ body {
   }
   .about-right-content {
     text-align: left;
+  }
+}
+
+/* ----------------------------------------------------------------- */
+/* MOBILE PHONE UTILITIES & TOUCH OPTIMIZATIONS                      */
+/* ----------------------------------------------------------------- */
+.hero-role-badge {
+  text-align: center;
+  max-width: 100%;
+}
+
+@media (max-width: 520px) {
+  .hero-role-badge {
+    font-size: 0.74rem !important;
+    padding: 6px 14px !important;
+    white-space: normal !important;
+    text-align: center;
+    border-radius: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  .contact-links-wrap {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .contact-links-wrap a {
+    justify-content: center !important;
+    width: 100% !important;
   }
 }

@@ -36,31 +36,15 @@ export default function Header({
 
   return (
     <header 
+      className="site-header"
       onMouseEnter={onNavMouseEnter}
       onMouseLeave={onNavMouseLeave}
       onMouseMove={handleMouseMove}
       onWheel={handleWheel}
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 90,
-        background: 'rgba(0, 0, 0, 0.95)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        padding: '16px 32px',
-        borderBottom: '1px solid var(--border-subtle)'
-      }}
     >
-      <div style={{
-        maxWidth: '1100px',
-        margin: '0 auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        position: 'relative'
-      }}>
+      <div className="header-inner">
         {/* Left Spacer to keep the center nav capsule balanced */}
-        <div style={{ width: '100px' }} className="nav-spacer" />
+        <div className="nav-spacer" />
 
         {/* 1. Solid Maroon Encapsulated Navigation Capsule (abhijithjinnu.in style) */}
         <nav className="header-capsule-nav" aria-label="Main Navigation">
@@ -82,7 +66,7 @@ export default function Header({
 
         {/* 2. Solid Maroon Resume Pill Button on Extreme Right */}
         {/* swap this file to update the resume, filename must stay resume.pdf */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100px' }}>
+        <div className="header-resume-wrapper">
           <a
             href="/resume.pdf"
             target="_blank"

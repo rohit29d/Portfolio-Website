@@ -84,6 +84,62 @@ export default function App() {
     };
   }, []);
 
+  // Touch Swipe Gesture Navigation for iOS and Android
+  useEffect(() => {
+    let touchStartX = null;
+    let touchStartY = null;
+
+    const handleTouchStart = (e) => {
+      if (e.touches && e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchEnd = (e) => {
+      if (touchStartX === null || touchStartY === null) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+
+      // Dominant horizontal swipe with 60px minimum displacement
+      if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.4) {
+        if (diffX > 0) {
+          // Swiped Left -> Move forward to next section
+          setActiveSection((prev) => {
+            const currentIdx = SECTIONS.indexOf(prev);
+            const nextIdx = (currentIdx + 1) % SECTIONS.length;
+            const nextSection = SECTIONS[nextIdx];
+            setScrubbedSection(nextSection);
+            return nextSection;
+          });
+        } else {
+          // Swiped Right -> Move back to previous section
+          setActiveSection((prev) => {
+            const currentIdx = SECTIONS.indexOf(prev);
+            const prevIdx = (currentIdx - 1 + SECTIONS.length) % SECTIONS.length;
+            const prevSection = SECTIONS[prevIdx];
+            setScrubbedSection(prevSection);
+            return prevSection;
+          });
+        }
+      }
+
+      touchStartX = null;
+      touchStartY = null;
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   // Menu-Scoped Wheel Scrolling (Only rotates menu when mouse cursor is on header menu)
   const handleNavWheel = (e) => {
     if (Math.abs(e.deltaY) > 20 || Math.abs(e.deltaX) > 20) {

@@ -33,7 +33,7 @@ export default function BottomNav({
       onMouseLeave={onBottomNavMouseLeave}
     >
       {/* Rail Header Title */}
-      <div style={{
+      <div className="category-rail-header" style={{
         display: 'flex',
         alignItems: 'center',
         gap: '6px',

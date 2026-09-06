@@ -115,7 +115,7 @@ export default function Hero() {
 
         {/* 3. Solid Maroon Role Badge Line */}
         <div style={{ marginBottom: '20px' }}>
-          <span className="font-mono" style={{
+          <span className="font-mono hero-role-badge" style={{
             fontSize: '0.84rem',
             color: '#ffffff',
             fontWeight: 600,
@@ -152,9 +152,9 @@ export default function Hero() {
       <div className="pcb-divider" style={{ margin: '48px auto' }}></div>
 
       {/* 5. Experience & Education Section (Directly on Home Page) */}
-      <div style={{
+      <div className="hero-experience-grid" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
         gap: '24px',
         marginBottom: '48px'
       }}>

@@ -267,19 +267,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="corner-bracket-card"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: '28px',
-                  padding: '24px',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s var(--ease-smooth)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-md)'
-                }}
+                className="corner-bracket-card project-card-item"
                 onMouseOver={e => {
                   e.currentTarget.style.borderColor = '#6B1F2A';
                   e.currentTarget.style.transform = 'translateY(-2px)';
@@ -290,17 +278,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                 }}
               >
                 {/* Left Side: Featured Media Preview Photo */}
-                <div style={{
-                  width: '320px',
-                  minWidth: '280px',
-                  height: '190px',
-                  borderRadius: 'var(--radius-sm)',
-                  overflow: 'hidden',
-                  background: '#000000',
-                  border: '1px solid var(--border-subtle)',
-                  position: 'relative',
-                  flexShrink: 0
-                }}>
+                <div className="project-card-media">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -381,7 +359,7 @@ export default function Projects({ activeCategory = 'technical', scrubbedCategor
                 </div>
 
                 {/* Right Side: Title, Description, & Stack Tags */}
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div className="project-card-info">
                   <h3 style={{
                     fontSize: '1.25rem',
                     fontWeight: 600,
