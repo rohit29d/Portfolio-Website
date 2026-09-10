@@ -137,7 +137,7 @@ export default function AboutContact({ viewMode = 'all' }) {
               <span className="font-mono" style={{
                 fontSize: '0.72rem',
                 color: 'var(--text-muted)',
-                opacity: 0.20,
+                opacity: 0.7,
                 display: 'inline-block',
                 letterSpacing: '0.02em'
               }}>
