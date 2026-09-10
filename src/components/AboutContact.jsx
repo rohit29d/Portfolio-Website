@@ -137,11 +137,11 @@ export default function AboutContact({ viewMode = 'all' }) {
               <span className="font-mono" style={{
                 fontSize: '0.72rem',
                 color: 'var(--text-muted)',
-                opacity: 0.55,
+                opacity: 0.20,
                 display: 'inline-block',
                 letterSpacing: '0.02em'
               }}>
-                all hyphens in this write up are typed out by a human
+                all hyphens in this write up are typed out by a human :D
               </span>
             </div>
           </div>
