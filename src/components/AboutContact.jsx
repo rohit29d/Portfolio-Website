@@ -118,7 +118,7 @@ export default function AboutContact({ viewMode = 'all' }) {
             </p>
 
             <p>
-              I am not purely a techie. Sometimes the closer you get to tech, the farther you want to step away from computers. For me, it's all about creativity and making things. You will find me in the gym building myself, in the garden taking care of my plants, photographing things i find beautiful, sketching up something, or writing random stories (which i intend to film sometime :)), oh and movies—yes, i love watching movies, I'm a huge cinema geek).
+              I am not purely a techie. Sometimes the closer you get to tech, the farther you want to step away from computers. For me, it's all about creativity and making things. You will find me in the gym building myself, in the garden taking care of my plants, photographing things i find beautiful, sketching up something, or writing random stories (which i intend to film sometime :)), oh and movies - yes, i love watching movies, I'm a huge cinema geek.
             </p>
 
             <p>
@@ -130,8 +130,20 @@ export default function AboutContact({ viewMode = 'all' }) {
             </p>
 
             <p>
-              Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop—so I'm learning to run, but on my own path and in my own direction.Someday i plan on on designing chips and circuits for a living and keep learning new things and explore the world.
+              Now that i've just stepped out into the world, everything feels really fast-paced and overwhelming. It feels like just yesterday i was worrying about turning in an assignment at 11:59 PM, and today I'm thinking about how to build skills and diversify my path so that 5 years down the lane, I can afford and build the things I'm dreaming of right now. Things keep changing and moving, and i've come to realize that it's not going to stop - so I'm learning to run, but on my own path and in my own direction. Someday i plan on on designing chips and circuits for a living and keep learning new things and explore the world.
             </p>
+
+            <div style={{ marginTop: '24px', textAlign: 'left' }}>
+              <span className="font-mono" style={{
+                fontSize: '0.72rem',
+                color: 'var(--text-muted)',
+                opacity: 0.55,
+                display: 'inline-block',
+                letterSpacing: '0.02em'
+              }}>
+                all hyphens in this write up are typed out by a human
+              </span>
+            </div>
           </div>
         </div>
       )}
