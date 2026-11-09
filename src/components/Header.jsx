@@ -69,7 +69,7 @@ export default function Header({
         {/* swap this file to update the resume, filename must stay resume.pdf */}
         <div className="header-resume-wrapper">
           <a
-            href="/resume.pdf?v=20260909"
+            href="/resume.pdf?v=academic2026"
             target="_blank"
             rel="noopener noreferrer"
             className="header-resume-pill"

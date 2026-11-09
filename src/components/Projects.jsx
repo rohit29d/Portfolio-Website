@@ -7,8 +7,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'aeromesh',
     tier: 'major',
     title: 'Aeromesh — Edge AI Turbulence Detection Mesh Network',
-    hook: 'Rapid-prototyped edge firmware on bare ESP32 + MPU6050 during CraftifAI Buildathon. In-situ Edge-AI detects turbulence on-device and transmits decentralized telemetry across adjacent mesh nodes without cloud lag.',
-    tags: ['ESP32', 'ESP-IDF', 'Firmgen', 'Edge AI', 'IMU'],
+    hook: 'CraftifAI Buildathon — Organizer Spotlight. Trained and deployed an in-situ TinyML motion classifier for sub-10ms flight turbulence detection on ESP32 from live inertial data from the 6-axis MPU6050 IMU. Used CraftifAI\'s FirmGen tool to build a complete product within the stipulated build time. Project was featured on CraftifAI\'s official LinkedIn.',
+    tags: ['ESP32', 'ESP-IDF', 'TinyML', 'FirmGen', 'Edge AI', 'MPU6050 IMU'],
     link: 'https://github.com/rohit29d/CraftifAI_Hackathon_Aeromesh',
     image: '/aeromesh.png'
   },
@@ -16,31 +16,40 @@ export const TECHNICAL_PROJECTS = [
     id: 'wheelchair',
     tier: 'major',
     title: 'Hands-Free sEMG Based Speech-Controlled Wheelchair',
-    hook: 'Engineered a complete sEMG controlled wheelchair from scratch as a part of my bachelors final year thesis. This project covered a complete end-to-product. The custom AFE realized on a PCB for signal acquisition from the laryngeal region, followed by the ML model rigorusly trained and tuned for command recognition and finally the hardware level processing and motor actuation on an STM32-H7 board',
-    tags: ['PCB-Design', 'STM32', 'Python ML', 'LTspice', 'Embedded-System', 'BioMed-Healthcare'],
-    link: 'https://github.com/rohit29d/Hands-Free-sEMG-based-speech-controlled-wheelchair-',
+    hook: 'B.Tech thesis project — engineered a complete end-to-product sEMG-controlled wheelchair from scratch. Custom 3-stage discrete AFE PCB (INA → 6th-order Bessel BPF → 50Hz KRC notch) in KiCad for laryngeal sEMG acquisition. 40-subject / 6-command dataset (14,598 samples × 32 features) fed a tuned Random Forest (88% accuracy, F1=0.88). Real-time USART3 pipeline to STM32-H753ZI running bare-metal C for differential PWM motor control via dual BTS7960 43A H-bridges.',
+    tags: ['PCB-Design', 'KiCad', 'STM32', 'Bare-metal C', 'Python', 'Random Forest', 'LTspice', 'sEMG AFE', 'BioMed-Healthcare'],
+    link: 'https://github.com/rohit29d/silent-speech-controlled-wheelchair-using-sEMG-signals-from-the-laryngeal-region',
     image: '/Wheelchair.png'
   },
   {
     id: 'semg-afe-v2',
     tier: 'major',
     title: 'Analog Front-End for sEMG Signal Acquisition V2',
-    hook: 'In-house analog front-end circuit designed from scratch for acquiring microvolt sEMG signals featuring low-noise instrumentation amplifiers, multi-stage active filtering, and high CMRR.',
-    tags: ['Custom AFE PCB', 'KiCAD', 'Analog Filtering', 'LTspice', 'Bio-Sensors'],
+    hook: 'In-house analog front-end circuit designed from scratch for acquiring microvolt sEMG signals. Features a 3-op-amp INA, 6th-order Bessel BPF (20–300Hz), and 50Hz KRC notch filter. Bench-validated: ~70dB gain, ~90dB CMRR, and noise floor measured via DSO/FFT. Wavelet denoising lifted SNR from 2.43dB to 10.63dB. Compact 2-layer PCB (60×25mm) laid out in KiCad with SMD 0805 passives.',
+    tags: ['Custom AFE PCB', 'KiCad', 'Bessel BPF', 'KRC Notch Filter', 'LTspice', 'Wavelet Denoising', 'Bio-Sensors'],
     link: 'https://github.com/rohit29d/Analog-Front-End-for-sEMG-signals-Acquisition-V2',
     image: '/sEMG_AFE.png'
   },
   {
     id: 'fpga-arbiter',
     tier: 'major',
-    title: 'Priority Arbiter for Multi-Channel Bus',
-    hook: 'Designed and validated a deterministic multi-channel bus priority arbiter from RTL to FPGA using encoder and sequencer-based arbitration logic. Verified timing correctness through RTL simulation on Xilinx Vivado and Basys-3 FPGA.',
-    tags: ['VHDL', 'Basys-3 FPGA', 'Vivado RTL', 'Digital Logic'],
-    link: 'https://github.com/rohit29d',
+    title: 'Deterministic Priority Arbiter for Multi-Channel Bus',
+    hook: 'Architected a 4-channel bus priority arbiter in VHDL combining a 4-to-2 priority encoder, 4-bit cyclic barrel shifter, and structural 4-stage D-FF ring counter with parallel loading — achieving deterministic, starvation-free token circulation. Synthesized on Artix-7 XC7A35T; verified single-cycle deterministic grant latency and 7.96ns data path delay; occupied 8 Slice LUTs (0.04%), 5 slices, and 8 registers.',
+    tags: ['VHDL', 'Artix-7 FPGA', 'Xilinx Vivado', 'RTL Synthesis', 'Digital Logic'],
+    link: 'https://github.com/rohit29d/4-Bit-Deterministic-Priority-Arbiter',
     image: '/arbiter.png'
   },
 
   // --- MINOR BUILDS ---
+  {
+    id: 'pebo',
+    tier: 'minor',
+    title: 'Pebo — ESP32-C3 Desktop Companion Robot',
+    hook: 'Open-source desktop companion robot built around the ESP32-C3 SuperMini using ESP-IDF. Features expressive OLED animations, capacitive touch interaction, BLE HID, motion sensing, and modular custom firmware behavior.',
+    tags: ['ESP32-C3', 'ESP-IDF', 'Robotics', 'BLE HID', 'OLED UI', 'C/C++'],
+    link: 'https://github.com/rohit29d/Pebo',
+    image: '/wine_circuits.gif'
+  },
   {
     id: 'alexa-tv',
     tier: 'minor',
@@ -85,8 +94,8 @@ export const TECHNICAL_PROJECTS = [
     id: 'speech-rec-ml',
     tier: 'minor',
     title: 'Speech Recognition Using Laryngeal sEMG Signals',
-    hook: 'A trained and bench-tested Random Forest ML classification pipeline translating laryngeal sEMG biosignals into discrete directional wheelchair motion commands.',
-    tags: ['Python', 'ML-Models', 'Biosignal Processing'],
+    hook: 'A trained and bench-tested Random Forest ML classification pipeline translating laryngeal sEMG biosignals into discrete directional wheelchair motion commands. 40-subject, 6-command in-house dataset with 14,598 samples × 32 time/frequency features; BayesSearchCV-tuned RF achieving 88% test accuracy (F1=0.88).',
+    tags: ['Python', 'Random Forest', 'BayesSearchCV', 'Biosignal Processing', 'Wavelet Denoising'],
     link: 'https://github.com/rohit29d/Speech-recognition-using-Laryngeal-sEMG-signals',
     image: '/sEMG.png'
   },

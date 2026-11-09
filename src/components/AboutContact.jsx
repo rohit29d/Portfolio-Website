@@ -106,7 +106,7 @@ export default function AboutContact({ viewMode = 'all' }) {
             </p>
 
             <p>
-              i am a hardware engineer and embedded builder (graduated in electronics &amp; communication engineering... you can probably get all that from my resume). As for my professional path, i am an upcoming embedded hardware engineer at DeltaIOT after my 6-month internship there, during which i delivered some pretty cool PCBs. Prior to that, I had some interesting builds during my bachelor's. I built ... or rather, engineered a complete wheelchair that runs on commands from your vocal muscles and the sweet part? The entire thing was done from scratch in the lab. This one laid foundations for me interest in systems as a whole. Apart from this, there are a couple of other projects (head over to the projects tab to check them out).
+              i am a hardware engineer and embedded builder (graduated in electronics &amp; communication engineering... you can probably get all that from my resume). As for my professional path, i am now a full-time Embedded Systems Engineer at Delta IoT Solutions — following a 6-month internship there during which i delivered some pretty cool PCBs. Prior to that, I had some interesting builds during my bachelor's. I built ... or rather, engineered a complete wheelchair that runs on commands from your vocal muscles and the sweet part? The entire thing was done from scratch in the lab. This one laid foundations for my interest in systems as a whole. Apart from this, there are a couple of other projects (head over to the projects tab to check them out).
             </p>
 
             <p>
