@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Zap, Briefcase, GraduationCap, Code, BookOpen } from 'lucide-react';
+import { Zap, Briefcase, GraduationCap, Code, BookOpen, Award } from 'lucide-react';
 
 export default function Hero() {
   const [avatarHover, setAvatarHover] = useState(false);
@@ -7,19 +7,19 @@ export default function Hero() {
   const skills = [
     {
       category: 'Analog & PCB Design',
-      items: ['KiCad (Multi-Layer, RF)', 'LTspice', 'AFE Architecture', 'Bessel/Butterworth/KRC Filters', 'CMRR & Noise Optimization', 'Mixed-Signal Layout']
+      items: ['KiCad (Multi-Layer, RF)', 'Altium Designer', 'LTspice', 'AFE Architecture', 'Bessel/Butterworth/KRC Filters', 'CMRR & Noise Optimization', 'Mixed-Signal Layout']
     },
     {
       category: 'Digital & RTL',
-      items: ['VHDL', 'Verilog', 'RTL Synthesis', 'Xilinx Vivado', 'Artix-7 FPGA', 'Basys-3 FPGA']
+      items: ['VHDL', 'Verilog', 'SystemVerilog', 'RTL Synthesis', 'Xilinx Vivado', 'Artix-7 FPGA', 'Basys-3 FPGA', 'ModelSim']
     },
     {
       category: 'Embedded & Firmware',
-      items: ['Embedded C', 'STM32CubeIDE', 'ESP-IDF', 'I2C / SPI / UART / RS-485', 'Bare-Metal C', 'TinyML']
+      items: ['Embedded C', 'STM32CubeIDE (HAL)', 'ESP-IDF', 'I2C / SPI / UART / RS-485', 'Bare-Metal C', 'TinyML', 'Bash']
     },
     {
       category: 'Test & Bench',
-      items: ['DSO', 'Logic Analyzer', 'FFT Spectrum Analysis', 'SMT Rework', 'Python', 'Random Forest / ML']
+      items: ['DSO', 'Logic Analyzer', 'FFT Spectrum Analysis', 'SMD Rework', 'Charmhigh SMT PnP', 'Python ML', 'MATLAB']
     }
   ];
 
@@ -354,7 +354,6 @@ export default function Hero() {
                 'Analog & Mixed-Signal IC Design',
                 'Bio-Potential Analog Front-Ends (AFEs)',
                 'Low-Noise Sensor Interfaces',
-                'Neuromorphic & Biomedical Circuits',
                 'Hardware-Software Co-Design'
               ].map((interest, idx) => (
                 <span key={idx} className="tech-tag" style={{ fontSize: '0.78rem', color: '#ffffff', background: 'rgba(107, 31, 42, 0.25)', border: '1px solid rgba(107, 31, 42, 0.5)' }}>
@@ -385,6 +384,68 @@ export default function Hero() {
             </p>
             <p className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
               R. K. Dubbaka, A. Isukapalli, S. Harshath, and L. Vidhya • Amrita Vishwa Vidyapeetham
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* 8. Certifications Section (Consistent with GitHub) */}
+      <div style={{ marginBottom: '48px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px', justifyContent: 'flex-start' }}>
+          <Award size={16} color="#ffffff" />
+          <h3 className="font-mono" style={{ fontSize: '0.85rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
+            // Certifications
+          </h3>
+        </div>
+
+        <div className="corner-bracket-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+              <a
+                href="https://www.udemy.com/certificate/UC-0fc10863-10c9-44f7-9250-5c2836f6288a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '0.94rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}
+                onMouseOver={e => e.currentTarget.style.color = '#e07a86'}
+                onMouseOut={e => e.currentTarget.style.color = '#ffffff'}
+              >
+                PCB Design with KiCad (Updated for KiCad 9) ↗
+              </a>
+              <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Aug 2026</span>
+            </div>
+            <p className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
+              Udemy • Dr. Peter Dalmaris (32 hrs)
+            </p>
+          </div>
+
+          <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+              <span style={{ fontSize: '0.94rem', fontWeight: 600, color: '#ffffff' }}>
+                Machine Learning Techniques in MATLAB
+              </span>
+              <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Jun 2025</span>
+            </div>
+            <p className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
+              MathWorks Training Services • Classification, Regression, Clustering
+            </p>
+          </div>
+
+          <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+              <a
+                href="https://www.udemy.com/certificate/UC-25b24238-b221-426a-874c-8f043a3646df/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '0.94rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}
+                onMouseOver={e => e.currentTarget.style.color = '#e07a86'}
+                onMouseOut={e => e.currentTarget.style.color = '#ffffff'}
+              >
+                SystemVerilog Fundamentals (Verification Series) ↗
+              </a>
+              <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Dec 2024</span>
+            </div>
+            <p className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
+              Udemy • Kumar Khandagle (14.5 hrs)
             </p>
           </div>
         </div>

@@ -16,7 +16,7 @@ export const TECHNICAL_PROJECTS = [
     id: 'wheelchair',
     tier: 'major',
     title: 'Hands-Free sEMG Based Speech-Controlled Wheelchair',
-    hook: 'B.Tech thesis project — engineered a complete end-to-product sEMG-controlled wheelchair from scratch. Custom 3-stage discrete AFE PCB (INA → 6th-order Bessel BPF → 50Hz KRC notch) in KiCad for laryngeal sEMG acquisition. 40-subject / 6-command dataset (14,598 samples × 32 features) fed a tuned Random Forest (88% accuracy, F1=0.88). Real-time USART3 pipeline to STM32-H753ZI running bare-metal C for differential PWM motor control via dual BTS7960 43A H-bridges.',
+    hook: 'B.Tech thesis project — engineered a complete end-to-product sEMG-controlled wheelchair from scratch. Custom 3-stage discrete AFE PCB (INA → 8th-order Bessel BPF 20-300Hz → 50Hz KRC notch) in KiCad for laryngeal sEMG acquisition. 60-subject / 6-command dataset (14,598 samples × 32 features) fed a tuned Random Forest (88% accuracy, F1=0.88). Real-time USART3 pipeline to STM32-H753ZI running bare-metal C for differential PWM motor control via dual BTS7960 43A H-bridges.',
     tags: ['PCB-Design', 'KiCad', 'STM32', 'Bare-metal C', 'Python', 'Random Forest', 'LTspice', 'sEMG AFE', 'BioMed-Healthcare'],
     link: 'https://github.com/rohit29d/silent-speech-controlled-wheelchair-using-sEMG-signals-from-the-laryngeal-region',
     image: '/Wheelchair.png'
@@ -94,7 +94,7 @@ export const TECHNICAL_PROJECTS = [
     id: 'speech-rec-ml',
     tier: 'minor',
     title: 'Speech Recognition Using Laryngeal sEMG Signals',
-    hook: 'A trained and bench-tested Random Forest ML classification pipeline translating laryngeal sEMG biosignals into discrete directional wheelchair motion commands. 40-subject, 6-command in-house dataset with 14,598 samples × 32 time/frequency features; BayesSearchCV-tuned RF achieving 88% test accuracy (F1=0.88).',
+    hook: 'A trained and bench-tested Random Forest ML classification pipeline translating laryngeal sEMG biosignals into discrete directional wheelchair motion commands. 60-subject, 6-command in-house dataset with 14,598 samples × 32 time/frequency features; BayesSearchCV-tuned RF achieving 88% test accuracy (F1=0.88).',
     tags: ['Python', 'Random Forest', 'BayesSearchCV', 'Biosignal Processing', 'Wavelet Denoising'],
     link: 'https://github.com/rohit29d/Speech-recognition-using-Laryngeal-sEMG-signals',
     image: '/sEMG.png'
